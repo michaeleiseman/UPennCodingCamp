@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let height = 200;
+        let width = 200;
+        for(let L = 0.05; L < 1; L = L + 0.05) {
+            let canvasElement = document.createElement("canvas");
+            canvasElement.setAttribute("height", height);
+            canvasElement.setAttribute("width", width);
+            document.body.appendChild(canvasElement);
+            let ctx = canvasElement.getContext("2d");
+            for(let S = 0.01; S <= 1; S = S + 0.01) {
+                for(let H = 0; H < 360; H = H + 1/S) {
+                    let x = (width) * (1 + S * Math.cos(H * Math.PI/180)) / 2
+                    let y = (height) * (1 + S * Math.sin(H * Math.PI / 180)) / 2;
+                    let C = (1 - Math.abs(2 * L - 1)) * S;
+                    let HPrime = H / 60;
+                    let X = C *(1 - Math.abs(HPrime % 2 - 1));
+                    let R1 = 0;
+                    let G1 = 0;
+                    let B1 = 0;
+                    if(HPrime <= 1) {
+                        R1 = C;
+                        G1 = X;
+                    } else if(HPrime <= 2) {
+                        R1 = X;
+                        G1 = C;
+                    } else if(HPrime <= 3) {
+                        G1 = C;
+                        B1 = X;
+                    } else if(HPrime <= 4) {
+                        G1 = X;
+                        B1 = C;
+                    } else if(HPrime <=5) {
+                        R1 = X;
+                        B1 = C;
+                    } else {
+                        R1 = C;
+                        B1 = X;
+                    }
+                    let m = L - C / 2;
+                    let R = (R1 + m) * 255;
+                    let G = (G1 + m) * 255;
+                    let B = (B1 + m) * 255;
+                    ctx.beginPath();
+                    ctx.arc(x, y, 1, 0, 2 * Math.PI);
+                    ctx.fillStyle = `rgb(${R}, ${G}, ${B})`;
+                    ctx.fill();
+                }
+            }
+        }
+        
+    </script>
+</body>
+</html>
