@@ -28,6 +28,10 @@
             flex-direction: column;
             padding: 10px;
         }
+        .comment {
+            color: green;
+            font-size: 18px
+        }
         .indent {
             display: inline-flex;
             flex-direction: column;
@@ -46,30 +50,8 @@
             max-width: 800px;
             position: relative;
         }
-        .box {
-            width: 75px;
-            height: 75px;
-            background-color: green;
-            border: 1px solid black;
-            color: white;
-            font-size: 36px;
-            text-align: center;
-        }
-        #one {
-            top: 0px;
-            left: 0px;
-        }
-        #two {
-            bottom: 0px;
-            left: 0px;
-        }
-        #three {
-            bottom: 0px;
-            right: 0px;
-        }
-        #four {
-            top: 0px;
-            right: 0px;
+        #target {
+            border-color: black
         }
     </style>
 </head>
@@ -168,14 +150,16 @@
                     <option value="2em">2em</option>
                     <option value="48px">48px</option>
                 </select>;
+                <span class="comment">//Creates space OUTSIDE of border.</span>
             </code>
             <code><span class="property">margin-left</span>: 
                 <select class="margin-left">
-                    <option value="1em" selected>1em</option>
-                    <option value="0em">0em</option>
+                    <option value="0em" selected>0em</option>
+                    <option value="1em">1em</option>
                     <option value="2em">2em</option>
                     <option value="48px">48px</option>
                 </select>;
+                <span class="comment">//Creates space OUTSIDE of border.</span>
             </code>
             <code><span class="property">margin-bottom</span>: 
                 <select class="margin-bottom">
@@ -184,6 +168,7 @@
                     <option value="2em">2em</option>
                     <option value="48px">48px</option>
                 </select>;
+                <span class="comment">//Creates space OUTSIDE of border.</span>
             </code>
             <code><span class="property">padding</span>:
                 <select class="padding">
@@ -192,6 +177,7 @@
                     <option value="1em">1em</option>
                     <option value="2em">2em</option>
                 </select>;
+                <span class="comment">//Creates space INSIDE of border.</span>
             </code>
         </div>
         <code>}</code>
