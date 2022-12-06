@@ -1,0 +1,20 @@
+#siteContainer{
+    max-width: 1000px;
+    margin: auto;
+}
+#grid {
+    text-align: center;
+    /* use CSS grid properties to set up the grid here */
+}
+p {
+    /* Note the use of OUTLINE properties here instead of BORDER properties.  This prevents adjacent borders from "doubling up" and makeing the borders appear twice as wide. */
+    outline-width: 2px;
+    outline-color: black;
+    outline-style: solid;
+    background-color: bisque;
+    /* Adjust the margin and padding for each cell here */
+     
+}
+h1, h3 {
+    margin-bottom: 0px
+}

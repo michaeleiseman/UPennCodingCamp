@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Box Model</title>
+    <style>
+        .bold {
+            font-weight: bold;
+        }
+        .tagName {
+            color: #8181ff
+        }
+        .attribute {
+            color: cyan
+        }
+        .value {
+            color: pink
+        }
+        code {
+            color: white;
+            font-size: 18px;
+        }
+        .background {
+            background-color: black;
+            display: inline-flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+        .indent {
+            display: inline-flex;
+            flex-direction: column;
+            margin-left: 20px
+        }
+        .selector {
+            color: #cbbc71
+        }
+        .property {
+            color: cyan
+        }
+        #boxContainer {
+            border-style: solid;
+            border-color: black;
+            border-width: 2px;
+            max-width: 800px;
+            position: relative;
+        }
+        .box {
+            width: 75px;
+            height: 75px;
+            background-color: green;
+            border: 1px solid black;
+            color: white;
+            font-size: 36px;
+            text-align: center;
+        }
+        #one {
+            top: 0px;
+            left: 0px;
+        }
+        #two {
+            bottom: 0px;
+            left: 0px;
+        }
+        #three {
+            bottom: 0px;
+            right: 0px;
+        }
+        #four {
+            top: 0px;
+            right: 0px;
+        }
+    </style>
+</head>
+<body>
+    <p>HTML:</p>
+    <div class="background">
+        <code>&lt;<span class="tagName">p</span>&gt;Let's take a look at the box model!&lt;<span class="tagName">/p</span>&gt;</code>
+    </div>
+    <p>CSS:</p>
+    <div class="background">
+        <code><span class="selector">p</span> {</code>
+        <div class="indent">
+            <code><span class="property">background-color</span>: 
+                <select class="background-color">
+                    <option value="black" selected>black</option>
+                    <option value="yellow">yellow</option>
+                    <option value="red">red</option>
+                    <option value="blue">blue</option>
+                    <option value="green">green</option>
+                    <option value="white">white</option>
+                </select>;
+            </code>
+            <code><span class="property">color</span>: 
+                <select class="color">
+                    <option value="black" selected>black</option>
+                    <option value="yellow">yellow</option>
+                    <option value="red">red</option>
+                    <option value="blue">blue</option>
+                    <option value="green">green</option>
+                    <option value="white">white</option>
+                </select>;
+            </code>
+            <code><span class="property">font-size</span>: 
+                <select class="font-size">
+                    <option value="1em" selected>1em</option>
+                    <option value="16px">16px</option>
+                    <option value="2em">2em</option>
+                    <option value="3em">3em</option>
+                    <option value="72px">48px</option>
+                </select>;
+            </code>
+            <code><span class="property">text-align</span>: 
+                <select class="text-align">
+                    <option value="left" selected>left</option>
+                    <option value="center">center</option>
+                    <option value="right">right</option>
+                </select>;
+            </code>
+            <code><span class="property">font-weight</span>: 
+                <select class="font-weight">
+                    <option value="normal" selected>normal</option>
+                    <option value="bold">bold</option>
+                </select>;
+            </code>
+            <code><span class="property">font-style</span>: 
+                <select class="font-style">
+                    <option value="normal" selected>normal</option>
+                    <option value="italic">italic</option>
+                </select>;
+            </code>
+            <code><span class="property">border-style</span>: 
+                <select class="border-style">
+                    <option value="none" selected>none</option>
+                    <option value="solid">solid</option>
+                    <option value="dashed">dashed</option>
+                    <option value="dotted">dotted</option>
+                    <option value="double">double</option>
+                    <option value="groove">groove</option>
+                    <option value="ridge">ridge</option>
+                    <option value="inset">inset</option>
+                    <option value="outset">outset</option>
+                </select>;
+            </code>
+            <code><span class="property">border-color</span>: 
+                <select class="border-color">
+                    <option value="black" selected>black</option>
+                    <option value="yellow">yellow</option>
+                    <option value="red">red</option>
+                    <option value="blue">blue</option>
+                    <option value="green">green</option>
+                </select>;
+            </code>
+            <code><span class="property">border-width</span>: 
+                <select class="border-width">
+                    <option value="2px" selected>3px</option>
+                    <option value="0px">0px</option>
+                    <option value="1px">1px</option>
+                    <option value="3px">4px</option>
+                    <option value="1em">1em</option>
+                </select>;
+            </code>
+            <code><span class="property">margin-top</span>: 
+                <select class="margin-top">
+                    <option value="1em" selected>1em</option>
+                    <option value="0em">0em</option>
+                    <option value="2em">2em</option>
+                    <option value="48px">48px</option>
+                </select>;
+            </code>
+            <code><span class="property">margin-left</span>: 
+                <select class="margin-left">
+                    <option value="1em" selected>1em</option>
+                    <option value="0em">0em</option>
+                    <option value="2em">2em</option>
+                    <option value="48px">48px</option>
+                </select>;
+            </code>
+            <code><span class="property">margin-bottom</span>: 
+                <select class="margin-bottom">
+                    <option value="1em" selected>1em</option>
+                    <option value="0em">0em</option>
+                    <option value="2em">2em</option>
+                    <option value="48px">48px</option>
+                </select>;
+            </code>
+            <code><span class="property">padding</span>:
+                <select class="padding">
+                    <option value="0px" selected>0px</option>
+                    <option value="10px">10px</option>
+                    <option value="1em">1em</option>
+                    <option value="2em">2em</option>
+                </select>;
+            </code>
+        </div>
+        <code>}</code>
+    </div>
+    <p>Browser Display</p>
+    <div id="boxContainer">
+        <p id="target">Let's take a look at the box model!</p>
+    </div>
+    <script>
+        const target = document.getElementById("target");
+        const selects = document.getElementsByTagName("select");
+            for(const select of selects){
+                select.addEventListener("change", function() {
+                    target.style.setProperty(this.className, this.value);
+                }, false);
+            }
+    </script>
+</body>
+</html>

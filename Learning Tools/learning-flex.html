@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Flex</title>
+    <style>
+        body {
+            font-family: sans-serif
+        }
+        .bold {
+            font-weight: bold;
+        }
+        .showHide {
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer
+        }
+        .cloak {
+            display:none;
+            margin-left: 30px
+        }
+        .tagName {
+            color: #8181ff
+        }
+        .attribute {
+            color: cyan
+        }
+        .value {
+            color: pink
+        }
+        code {
+            color: white;
+            font-size: 18px;
+        }
+        .background {
+            background-color: black;
+            display: inline-flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+        .indent {
+            display: inline-flex;
+            flex-direction: column;
+            margin-left: 20px
+        }
+        .flex {
+            display: flex;
+            background-color: gray;
+            align-items: flex-start;
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        #first1 {
+            background-color: red;
+            width: 100px;
+            height: 100px;
+        }
+        #second1 {
+            background-color: goldenrod;
+            width: 150px;
+            height: 100px;
+        }
+        #third1 {
+            background-color: blue;
+            width: 150px;
+            height: 150px;
+        }
+        #fourth1 {
+            background-color: green;
+            width: 100px;
+            height: 150px;
+        }
+        #fifth1 {
+            background-color: red;
+            width: 100px;
+            height: 100px;
+        }
+        #sixth1 {
+            background-color: goldenrod;
+            width: 100px;
+            height: 150px;
+        }
+        #seventh1 {
+            background-color: blue;
+            width: 150px;
+            height: 100px;
+        }
+        #eighth1 {
+            background-color: green;
+            width: 150px;
+            height: 150px;
+        }
+        #ninth1 {
+            background-color: goldenrod;
+            width: 100px;
+            height: 100px;
+        }
+        #first2 {
+            background-color: red;
+            padding: 10px
+        }
+        #second2 {
+            background-color: goldenrod;
+            padding: 10px;
+        }
+        #third2 {
+            background-color: blue;
+            padding: 10px
+        }
+        #fourth2 {
+            background-color: green;
+            padding: 10px
+        }
+        #fifth2 {
+            background-color: red;
+            padding: 10px;
+        }
+        #sixth2 {
+            background-color: goldenrod;
+            padding: 10px
+        }
+        #second3 {
+            background-color: goldenrod;
+            padding: 10px;
+            flex: 1
+        }
+        #fifth3 {
+            background-color: red;
+            padding: 10px;
+            flex: 1
+        }
+        #sixth3 {
+            background-color: goldenrod;
+            padding: 10px;
+            flex: 4
+        }
+        #second4 {
+            background-color: goldenrod;
+            padding: 10px;
+            flex: 1 100px
+        }
+        #fifth4 {
+            background-color: red;
+            padding: 10px;
+            flex: 1 content
+        }
+        #sixth4 {
+            background-color: goldenrod;
+            padding: 10px;
+            flex: 4 200px;
+        }
+        .border {
+            border-color: red;
+            border-style: solid;
+            border-width: 2px;
+            width: fit-content
+        }
+        .selector {
+            color: #cbbc71
+        }
+        .property {
+            color: cyan
+        }
+    </style>
+</head>
+<body>
+    <h1>Learning Flexbox</h1>
+    <p>An html flexbox element typically contains elements that need to be precisely positioned in either horizontal rows or vertical columns. For the purposes of this tutorial, we will only focus on using flexbox to align items in rows. Properties given to the style attribute of the flexbox control how the nested elements are positioned. In the following examples, we'll see what these properties are and what they do.</p>
+
+    <p>There are three main ways to work with flexbox:(Click on the triangles on the left to see the examples.)</p>
+    <p></p>
+    <div>
+        <h3><span class="showHide">▸</span>Have a flex box contain items whose height and width are fixed</h3>
+        <div class="cloak">
+            <p>HTML:</p>
+            <div class="background">
+                <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"flex"</span>&gt;</code>
+                <div class="indent">
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"first"</span>&gt;first&lt;<span class="tagName">/div</span>&gt;</code>
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"second"</span>&gt;second&lt;<span class="tagName">/div</span>&gt;</code>
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"third"</span>&gt;third&lt;<span class="tagName">/div</span>&gt;</code>
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"fourth"</span>&gt;fourth&lt;<span class="tagName">/div</span>&gt;</code>
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"fifth"</span>&gt;fifth&lt;<span class="tagName">/div</span>&gt;</code>
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"sixth"</span>&gt;sixth&lt;<span class="tagName">/div</span>&gt;</code>
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"seventh"</span>&gt;seventh&lt;<span class="tagName">/div</span>&gt;</code>
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"eighth"</span>&gt;eighth&lt;<span class="tagName">/div</span>&gt;</code>
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"ninth"</span>&gt;ninth&lt;<span class="tagName">/div</span>&gt;</code>
+                </div>
+                <code>&lt;<span class="tagName">/div</span>&gt;</code>
+            </div>
+            <p>CSS:</p>
+            <div>
+                <div class="background">
+                    <code><span class="selector">#first</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">red</span>;</code>
+                        <code><span class="property">width</span>: <span class="value">100px</span>;</code>
+                        <code><span class="property">height</span>: <span class="value">100px</span>;</code>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#second</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">goldenrod</span>;</code>
+                        <code><span class="property">width</span>: <span class="value">150px</span>;</code>
+                        <code><span class="property">height</span>: <span class="value">100px</span>;</code>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#third</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">blue</span>;</code>
+                        <code><span class="property">width</span>: <span class="value">150px</span>;</code>
+                        <code><span class="property">height</span>: <span class="value">150px</span>;</code>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#fourth</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">green</span>;</code>
+                        <code><span class="property">width</span>: <span class="value">100px</span>;</code>
+                        <code><span class="property">height</span>: <span class="value">150px</span>;</code>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#fifth</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">red</span>;</code>
+                        <code><span class="property">width</span>: <span class="value">100px</span>;</code>
+                        <code><span class="property">height</span>: <span class="value">100px</span>;</code>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#sixth</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">goldenrod</span>;</code>
+                        <code><span class="property">width</span>: <span class="value">100px</span>;</code>
+                        <code><span class="property">height</span>: <span class="value">150px</span>;</code>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#seventh</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">blue</span>;</code>
+                        <code><span class="property">width</span>: <span class="value">150px</span>;</code>
+                        <code><span class="property">height</span>: <span class="value">100px</span>;</code>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#eighth</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">green</span>;</code>
+                        <code><span class="property">width</span>: <span class="value">150px</span>;</code>
+                        <code><span class="property">height</span>: <span class="value">150px</span>;</code>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#ninth</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">goldenrod</span>;</code>
+                        <code><span class="property">width</span>: <span class="value">100px</span>;</code>
+                        <code><span class="property">height</span>: <span class="value">100px</span>;</code>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#flex</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">gray</span>;</code>
+                        <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                        <code><span class="property">display</span>: <span class="value">flex</span>;</code>
+                        <code><span class="property">flex-wrap</span>:
+                            <select class="flex-wrap">
+                                <option value="wrap">wrap</option>
+                                <option value="nowrap" selected>nowrap (default)</option>
+                            </select>;
+                        </code>
+                        <code><span class="property">gap</span>:
+                            <select class="gap">
+                                <option value="0px" selected>0px (default)</option>
+                                <option value="10px">10px</option>
+                                <option value="20px">20px</option>
+                            </select>;
+                        </code>
+                        <code><span class="property">justify-content</span>:
+                            <select class="justify-content">
+                                <option value="flex-start" selected>flex-start (default)</option>
+                                <option value="flex-end">flex-end</option>
+                                <option value="center">center</option>
+                                <option value="space-between">space-between</option>
+                                <option value="space-around">space-around</option>
+                                <option value="space-evenly">space-evenly</option>
+                            </select>;
+                        </code>
+                        <code><span class="property">align-items</span>:
+                            <select class="align-items">
+                                <option value="flex-start" selected>flex-start</option>
+                                <option value="flex-end">flex-end</option>
+                                <option value="center">center</option>
+                            </select>;
+                        </code>
+                    </div>
+                    <code>}</code>
+                </div>
+                <p>Note that each one of the items in the flexbox has its height and width defined in the CSS.Try changing the "<span class="bold">flex-wrap</span>", "<span class="bold">gap</span>", "<span class="bold">justify-content</span>", and "<span class="bold">align-items</span>" properties above. For each setting, observe what happens when you make the browser very wide and very narrow. This should give you a feeling for what each setting does. Note that these "fixed" items will never grow bigger than the dimensions specified in the CSS. However, if you set the flex-wrap property to "<span class="bold">nowrap</span>" and make the browser window narrow enough, the boxes will shrink to remain within the flexbox but never more narrow than their content.</p>
+                <div class="flex">
+                    <div id="first1">first</div>
+                    <div id="second1">second</div>
+                    <div id="third1">third</div>
+                    <div id="fourth1">fourth</div>
+                    <div id="fifth1">fifth</div>
+                    <div id="sixth1">sixth</div>
+                    <div id="seventh1">seventh</div>
+                    <div id="eighth1">eighth</div>
+                    <div id="ninth1">ninth</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h3><span class="showHide">▸</span>Have a flex box contain items whose height and width are determined by their content.</h3>
+        <div class="cloak">
+            <p>HTML:</p>
+            <div class="background">
+                <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"flex"</span>&gt;</code>
+                <div class="indent">
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"first"</span>&gt;This first box is pretty wide.&lt;<span class="tagName">/div</span>&gt;</code>
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"second"</span>&gt;second&lt;<span class="tagName">/div</span>&gt;</code>
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"third"</span>&gt;</code>
+                    <div class="indent">
+                        <code>&lt;<span class="tagName">p</span>&gt;third&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;third&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;third&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;third&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;third&lt;<span class="tagName">/p</span>&gt;</code>
+                    </div>
+                    <code>&lt;<span class="tagName">/div</span>&gt;</code>
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"fourth"</span>&gt;</code>
+                    <div class="indent">
+                        <code>&lt;<span class="tagName">p</span>&gt;fourth&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;fourth&lt;<span class="tagName">/p</span>&gt;</code>
+                    </div>
+                    <code>&lt;<span class="tagName">/div</span>&gt;</code>
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"fifth"</span>&gt;</code>
+                    <div class="indent">
+                        <code>&lt;<span class="tagName">p</span>&gt;This fifth box is a big box.&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;This fifth box is a big box.&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;This fifth box is a big box.&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;This fifth box is a big box.&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;This fifth box is a big box.&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;This fifth box is a big box.&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;This fifth box is a big box.&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;This fifth box is a big box.&lt;<span class="tagName">/p</span>&gt;</code>
+                    </div>
+                    <code>&lt;<span class="tagName">/div</span>&gt;</code>
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"sixth"</span>&gt;sixth&lt;<span class="tagName">/div</span>&gt;</code>
+                </div>
+                <code>&lt;<span class="tagName">/div</span>&gt;</code>
+            </div>
+            <p>CSS:</p>
+            <div>
+                <div class="background">
+                    <code><span class="selector">#first</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">red</span>;</code>
+                        <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#second</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">goldenrod</span>;</code>
+                        <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#third</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">blue</span>;</code>
+                        <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#fourth </span>{</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">green</span>;</code>
+                        <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#fifth</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">red</span>;</code>
+                        <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#sixth</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">goldenrod</span>;</code>
+                        <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#flex</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">gray</span>;</code>
+                        <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                        <code><span class="property">display</span>: <span class="value">flex</span>;</code>
+                        <code><span class="property">flex-wrap</span>:
+                            <select class="flex-wrap">
+                                <option value="wrap">wrap</option>
+                                <option value="nowrap" selected>nowrap (default)</option>
+                            </select>;
+                        </code>
+                        <code><span class="property">gap</span>:
+                            <select class="gap">
+                                <option value="0px" selected>0px (default)</option>
+                                <option value="10px">10px</option>
+                                <option value="20px">20px</option>
+                            </select>;
+                        </code>
+                        <code><span class="property">justify-content</span>:
+                            <select class="justify-content">
+                                <option value="flex-start" selected>flex-start (default)</option>
+                                <option value="flex-end">flex-end</option>
+                                <option value="center">center</option>
+                                <option value="space-between">space-between</option>
+                                <option value="space-around">space-around</option>
+                                <option value="space-evenly">space-evenly</option>
+                            </select>;
+                        </code>
+                        <code><span class="property">align-items</span>:
+                            <select class="align-items">
+                                <option value="flex-start" selected>flex-start</option>
+                                <option value="flex-end">flex-end</option>
+                                <option value="center">center</option>
+                                <option value="stretch">stretch (default)</option>
+                            </select>;
+                        </code>
+                    </div>
+                    <code>}</code>
+                </div>
+                <p>Note that we no longer set the dimensions of each box in the CSS.  Instead, we have placed <span class="bold">content</span> in each box to dictate the dimensions of the box. You'll find the flex settings work similar to the first example, but now each of the items in the flexbox is only as large as it needs to be to fit its content <span class="bold">unless</span> you set "align-items" to "<span class="bold">stretch</span>". "Stretch" adjusts the vertical dimension of items whose height is not explicitly specified so that all of these items in the same row have the same height. Note also that this is the default value for "align-items".</p>
+                <div class="flex">
+                    <div id="first2">This first box is pretty wide.</div>
+                    <div id="second2">second</div>
+                    <div id="third2">
+                        <p>third</p>
+                        <p>third</p>
+                        <p>third</p>
+                        <p>third</p>
+                        <p>third</p>
+                    </div>
+                    <div id="fourth2">
+                        <p>fourth</p>
+                        <p>fourth</p>
+                    </div>
+                    <div id="fifth2">
+                        <p>This fifth box is a big box.</p>
+                        <p>This fifth box is a big box.</p>
+                        <p>This fifth box is a big box.</p>
+                        <p>This fifth box is a big box.</p>
+                        <p>This fifth box is a big box.</p>
+                        <p>This fifth box is a big box.</p>
+                        <p>This fifth box is a big box.</p>
+                        <p>This fifth box is a big box.</p>
+                    </div>
+                    <div id="sixth2">sixth</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h3><span class="showHide">▸</span>Include a flex setting for items in the flex box</h3>
+        <div class="cloak">
+            <p>In this example, we give three of the items a <span class="bold">flex</span> property value.</p>
+            <p>HTML:</p>
+            <div class="background">
+                <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"flex"</span>&gt;</code>
+                <div class="indent">
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"first"</span>&gt;This first box is pretty wide.&lt;<span class="tagName">/div</span>&gt;</code>
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"second"</span>&gt;second&lt;<span class="tagName">/div</span>&gt;</code>
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"third"</span>&gt;</code>
+                    <div class="indent">
+                        <code>&lt;<span class="tagName">p</span>&gt;third&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;third&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;third&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;third&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;third&lt;<span class="tagName">/p</span>&gt;</code>
+                    </div>
+                    <code>&lt;<span class="tagName">/div</span>&gt;</code>
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"fourth"</span>&gt;</code>
+                    <div class="indent">
+                        <code>&lt;<span class="tagName">p</span>&gt;fourth&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;fourth&lt;<span class="tagName">/p</span>&gt;</code>
+                    </div>
+                    <code>&lt;<span class="tagName">/div</span>&gt;</code>
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"fifth"</span>&gt;</code>
+                    <div class="indent">
+                        <code>&lt;<span class="tagName">p</span>&gt;This fifth box is a big box.&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;This fifth box is a big box.&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;This fifth box is a big box.&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;This fifth box is a big box.&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;This fifth box is a big box.&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;This fifth box is a big box.&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;This fifth box is a big box.&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;This fifth box is a big box.&lt;<span class="tagName">/p</span>&gt;</code>
+                    </div>
+                    <code>&lt;<span class="tagName">/div</span>&gt;</code>
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"sixth"</span>&gt;sixth&lt;<span class="tagName">/div</span>&gt;</code>
+                </div>
+                <code>&lt;<span class="tagName">/div</span>&gt;</code>
+            </div>
+            <p>CSS:</p>
+            <div>
+                <div class="background">
+                    <code><span class="selector">#first</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">red</span>;</code>
+                        <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#second</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">goldenrod</span>;</code>
+                        <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                        <span class="border"><code><span class="property">flex</span>: <span class="value">1</span>;</code></span>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#third</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">blue</span>;</code>
+                        <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#fourth </span>{</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">green</span>;</code>
+                        <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#fifth</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">red</span>;</code>
+                        <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                        <span class="border"><code><span class="property">flex</span>: <span class="value">1</span>;</code></span>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#sixth</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">goldenrod</span>;</code>
+                        <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                        <span class="border"><code><span class="property">flex</span>: <span class="value">4</span>;</code></span>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#flex</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">gray</span>;</code>
+                        <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                        <code><span class="property">display</span>: <span class="value">flex</span>;</code>
+                        <code><span class="property">flex-wrap</span>:
+                            <select class="flex-wrap">
+                                <option value="wrap">wrap</option>
+                                <option value="nowrap" selected>nowrap (default)</option>
+                            </select>;
+                        </code>
+                        <code><span class="property">gap</span>:
+                            <select class="gap">
+                                <option value="0px" selected>0px (default)</option>
+                                <option value="10px">10px</option>
+                                <option value="20px">20px</option>
+                            </select>;
+                        </code>
+                        <code><span class="property">justify-content</span>:
+                            <select class="justify-content">
+                                <option value="flex-start" selected>flex-start (default)</option>
+                                <option value="flex-end">flex-end</option>
+                                <option value="center">center</option>
+                                <option value="space-between">space-between</option>
+                                <option value="space-around">space-around</option>
+                                <option value="space-evenly">space-evenly</option>
+                            </select>;
+                        </code>
+                        <code><span class="property">align-items</span>:
+                            <select class="align-items">
+                                <option value="flex-start" selected>flex-start</option>
+                                <option value="flex-end">flex-end</option>
+                                <option value="center">center</option>
+                                <option value="stretch">stretch (default)</option>
+                            </select>;
+                        </code>
+                    </div>
+                    <code>}</code>
+                </div>
+                <p>Here we have given three of the boxes their own <span class="bold">flex</span> property. The second and fifth box have a flex value of <span class="bold">1</span> while the sixth box has a flex value of <span class="bold">4</span>.  Note that when you widen the browser window, only the boxes to which we have given flex values widens past the width of their content. Furthermore, because we have given the sixth box a flex value that is 4 times the value for the second and fifth boxes, the sixth box accumulates 4 times of the available free space in its row than the second and fifth boxes.</p>
+                <div class="flex">
+                    <div id="first2">This first box is pretty wide.</div>
+                    <div id="second3">second</div>
+                    <div id="third2">
+                        <p>third</p>
+                        <p>third</p>
+                        <p>third</p>
+                        <p>third</p>
+                        <p>third</p>
+                    </div>
+                    <div id="fourth2">
+                        <p>fourth</p>
+                        <p>fourth</p>
+                    </div>
+                    <div id="fifth3">
+                        <p>This fifth box is a big box.</p>
+                        <p>This fifth box is a big box.</p>
+                        <p>This fifth box is a big box.</p>
+                        <p>This fifth box is a big box.</p>
+                        <p>This fifth box is a big box.</p>
+                        <p>This fifth box is a big box.</p>
+                        <p>This fifth box is a big box.</p>
+                        <p>This fifth box is a big box.</p>
+                    </div>
+                    <div id="sixth3">sixth</div>
+                </div>
+            </div>
+            <p>In this next example, we give our flex items a <span class="bold">flex basis</span> by including a second parameter for its flex property</p>
+            <p>HTML:</p>
+            <div class="background">
+                <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"flex"</span>&gt;</code>
+                <div class="indent">
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"first"</span>&gt;This first box is pretty wide.&lt;<span class="tagName">/div</span>&gt;</code>
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"second"</span>&gt;second&lt;<span class="tagName">/div</span>&gt;</code>
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"third"</span>&gt;</code>
+                    <div class="indent">
+                        <code>&lt;<span class="tagName">p</span>&gt;third&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;third&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;third&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;third&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;third&lt;<span class="tagName">/p</span>&gt;</code>
+                    </div>
+                    <code>&lt;<span class="tagName">/div</span>&gt;</code>
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"fourth"</span>&gt;</code>
+                    <div class="indent">
+                        <code>&lt;<span class="tagName">p</span>&gt;fourth&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;fourth&lt;<span class="tagName">/p</span>&gt;</code>
+                    </div>
+                    <code>&lt;<span class="tagName">/div</span>&gt;</code>
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"fifth"</span>&gt;</code>
+                    <div class="indent">
+                        <code>&lt;<span class="tagName">p</span>&gt;This fifth box is a big box.&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;This fifth box is a big box.&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;This fifth box is a big box.&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;This fifth box is a big box.&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;This fifth box is a big box.&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;This fifth box is a big box.&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;This fifth box is a big box.&lt;<span class="tagName">/p</span>&gt;</code>
+                        <code>&lt;<span class="tagName">p</span>&gt;This fifth box is a big box.&lt;<span class="tagName">/p</span>&gt;</code>
+                    </div>
+                    <code>&lt;<span class="tagName">/div</span>&gt;</code>
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"sixth"</span>&gt;sixth&lt;<span class="tagName">/div</span>&gt;</code>
+                </div>
+                <code>&lt;<span class="tagName">/div</span>&gt;</code>
+            </div>
+            <p>CSS:</p>
+            <div>
+                <div class="background">
+                    <code><span class="selector">#first</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">red</span>;</code>
+                        <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#second</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">goldenrod</span>;</code>
+                        <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                        <code><span class="property">flex</span>: <span class="value">1 <span class="border">100px</span></span>;</code>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#third</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">blue</span>;</code>
+                        <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#fourth </span>{</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">green</span>;</code>
+                        <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#fifth</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">red</span>;</code>
+                        <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                        <code><span class="property">flex</span>: <span class="value">1 <span class="border">content</span></span>;</code>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#sixth</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">goldenrod</span>;</code>
+                        <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                        <code><span class="property">flex</span>: <span class="value">4 <span class="border">200px</span></span>;</code>
+                    </div>
+                    <code>}</code>
+                    <code><span class="selector">#flex</span> {</code>
+                    <div class="indent">
+                        <code><span class="property">background-color</span>: <span class="value">gray</span>;</code>
+                        <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                        <code><span class="property">display</span>: <span class="value">flex</span>;</code>
+                        <code><span class="property">flex-wrap</span>:
+                            <select class="flex-wrap">
+                                <option value="wrap">wrap</option>
+                                <option value="nowrap" selected>nowrap (default)</option>
+                            </select>;
+                        </code>
+                        <code><span class="property">gap</span>:
+                            <select class="gap">
+                                <option value="0px" selected>0px (default)</option>
+                                <option value="10px">10px</option>
+                                <option value="20px">20px</option>
+                            </select>;
+                        </code>
+                        <code><span class="property">justify-content</span>:
+                            <select class="justify-content">
+                                <option value="flex-start" selected>flex-start (default)</option>
+                                <option value="flex-end">flex-end</option>
+                                <option value="center">center</option>
+                                <option value="space-between">space-between</option>
+                                <option value="space-around">space-around</option>
+                                <option value="space-evenly">space-evenly</option>
+                            </select>;
+                        </code>
+                        <code><span class="property">align-items</span>:
+                            <select class="align-items">
+                                <option value="flex-start" selected>flex-start</option>
+                                <option value="flex-end">flex-end</option>
+                                <option value="center">center</option>
+                                <option value="stretch">stretch (default)</option>
+                            </select>;
+                        </code>
+                    </div>
+                    <code>}</code>
+                </div>
+                <p>The addition of a <span class="bold">basis</span> effectively gives the item a type of minimum width. It's easiest to see the effect of the basis if you set the flexbox to "wrap" and then narrow the browser window.  Under these conditions, once any item in a row reaches its basis width, any further reduction in width of the browsing window results in making the last item in the row wrap to the next row. Note that you can make the basis an <span class="bold">absolute</span> width (ex. px, em) or you can indicate that the item should use the width of its <span class="bold">content</span> to determine its basis by using the word "<span class="bold">content</span>" for its basis.</p>
+                <div class="flex">
+                    <div id="first2">This first box is pretty wide.</div>
+                    <div id="second4">second</div>
+                    <div id="third2">
+                        <p>third</p>
+                        <p>third</p>
+                        <p>third</p>
+                        <p>third</p>
+                        <p>third</p>
+                    </div>
+                    <div id="fourth2">
+                        <p>fourth</p>
+                        <p>fourth</p>
+                    </div>
+                    <div id="fifth4">
+                        <p>This fifth box is a big box.</p>
+                        <p>This fifth box is a big box.</p>
+                        <p>This fifth box is a big box.</p>
+                        <p>This fifth box is a big box.</p>
+                        <p>This fifth box is a big box.</p>
+                        <p>This fifth box is a big box.</p>
+                        <p>This fifth box is a big box.</p>
+                        <p>This fifth box is a big box.</p>
+                    </div>
+                    <div id="sixth4">sixth</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        for(const triangle of document.getElementsByClassName("showHide")){
+            triangle.addEventListener("click", toggleCloak, false);
+        }
+        const properties = ["flex-wrap", "gap", "justify-content", "align-items"]
+        for(const property of properties) {
+            for(const select of document.getElementsByClassName(property)) {
+                select.addEventListener("change", onChange, false);
+            }
+        }
+        function toggleCloak(event) {
+            const exercise = this.parentNode.parentNode.getElementsByClassName("cloak")[0];
+            if(exercise.style.display === "block") {
+                exercise.style.setProperty("display", "none");
+                this.textContent = '▸';
+            } else {
+                exercise.style.setProperty("display", "block");
+                this.textContent = '▾';
+            }
+        }
+        function onChange(event) {
+            const flex = this.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("flex")[0];
+            flex.style.setProperty(this.className, this.value);
+        }
+    </script>
+</body>
+</html>
