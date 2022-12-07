@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Div Demo</title>
+    <style>
+        .bold {
+            font-weight: bold;
+        }
+        .tagName {
+            color: dodgerblue
+        }
+        .attribute {
+            color: lightskyblue
+        }
+        .value {
+            color: orange
+        }
+        .green {
+            color: lightgreen
+        }
+        code {
+            color: white;
+            font-size: 18px;
+        }
+        .background {
+            background-color: black;
+            display: inline-flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+        .comment {
+            color: green;
+            font-size: 18px
+        }
+        .indent {
+            display: inline-flex;
+            flex-direction: column;
+            margin-left: 20px
+        }
+        .selector {
+            color: #cbbc71
+        }
+        .property {
+            color: lightskyblue
+        }
+        #boxContainer {
+            border-style: solid;
+            border-color: black;
+            border-width: 2px;
+            max-width: 800px;
+            position: relative;
+        }
+        #target {
+            border-color: black;
+            border-style: solid;
+            border-width: 4px;
+            width: 100%
+        }
+        img {
+            width: 200px
+        }
+    </style>
+</head>
+<body>
+    <p>HTML:</p>
+    <div class="background">
+        <code>&lt;<span class="tagName">div</span>&gt;</code>
+            <div class="indent">
+                <code>&lt;<span class="tagName">p</span>&gt;The div element allows you to...&lt;/<span class="tagName">p</span>&gt;</code>
+                <code>&lt;<span class="tagName">img</span> <span class="attribute">src</span>=<span class="value">"lasso.png"</span> <span class="attribute">alt</span>=<span class="value">"Mr. Mike with a lasso."</span>&gt;</code>
+                <code>&lt;<span class="tagName">p</span> <span class="attribute">style</span>=<span class="value">"text-align: right"</span>&gt;... rope a number of elements together.&lt;/<span class="tagName">p</span>&gt;</code>
+            </div>
+        <code>&lt;/<span class="tagName">div</span>&gt;</code>
+    </div>
+    <p>CSS:</p>
+    <div class="background">
+        <code><span class="selector">div</span> {</code>
+        <div class="indent">
+            <code><span class="property">border-style</span>:<span class="value"> solid</span>;</code>
+            <code><span class="property">border-color</span>:<span class="value"> black</span>;</code>
+            <code><span class="property">border-width</span>:<span class="green"> 4px</span>;</code>
+            <code><span class="property">width</span>:
+                <select class="width">
+                    <option value="100%" selected> 100%</option>
+                    <option value="50%"> 50%</option>
+                    <option value="200px"> 200px</option>
+                </select>;
+            </code>
+            <code><span class="property">margin-top</span>:
+                <select class="margin-top">
+                    <option value="0px" selected> 0px</option>
+                    <option value="20px"> 20px</option>
+                    <option value="40px"> 40px</option>
+                </select>;
+            </code>
+            <code><span class="property">margin-left</span>:
+                <select class="margin-left">
+                    <option value="0px" selected> 0px</option>
+                    <option value="20px"> 20px</option>
+                    <option value="25%"> 25%</option>
+                </select>;
+            </code>
+            <code><span class="property">padding</span>:
+                <select class="padding">
+                    <option value="0px" selected> 0px</option>
+                    <option value="20px"> 20px</option>
+                    <option value="40px"> 40px</option>
+                </select>;
+            </code>
+            <code><span class="property">font-size</span>:
+                <select class="font-size">
+                    <option value="16px" selected> 16px</option>
+                    <option value="32px"> 32px</option>
+                    <option value="8px"> 8px</option>
+                </select>;
+            </code>
+            <code><span class="property">font-family</span>:
+                <select class="font-family">
+                    <option value="serif" selected> serif</option>
+                    <option value="sans-serif"> sans-serif</option>
+                </select>
+            </code>
+        </div>
+        <code><span class="selector">img</span> {</code>
+        <div class="indent">
+            <code><span class="property">width</span>: <span class="green">200px</span></code>
+        </div>
+        <code>}</code>
+    </div>
+    <p>Browser Display</p>
+    <div id="target">
+        <p>The div element allows you to &#8230;</p>
+        <img src="lasso.png" alt="Mr. Mike with a lasso.">
+        <p style="text-align: right">&#8230; rope a number of elements together.</p>
+    </div>
+    <script>
+        const target = document.getElementById("target");
+        const selects = document.getElementsByTagName("select");
+            for(const select of selects){
+                select.addEventListener("change", function() {
+                    target.style.setProperty(this.className, this.value);
+                }, false);
+            }
+    </script>
+</body>
+</html>
