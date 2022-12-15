@@ -1,0 +1,15 @@
+#board {
+    width: 432px;
+    margin:auto
+}
+.square {
+    display: inline-block;
+    width: 50px;
+    height: 50px
+}
+.red {
+    background-color: red;
+}
+.black{
+    background-color: black;
+}

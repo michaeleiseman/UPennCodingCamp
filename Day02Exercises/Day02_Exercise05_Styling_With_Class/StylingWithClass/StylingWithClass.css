@@ -1,0 +1,8 @@
+#board {
+    width: 432px;
+}
+.square {
+    display: inline-block;
+    /* give squares a width of 50px and a height of 50px */
+
+}

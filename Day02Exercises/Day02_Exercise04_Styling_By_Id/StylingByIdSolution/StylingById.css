@@ -1,0 +1,44 @@
+header {
+    background-color: lightgray;
+}
+body {
+    margin: 0px;
+}
+#logo {
+    width: 200px;
+    border-style: solid;
+    border-color: black;
+    border-width: 2px
+}
+button {
+    border-radius: 20px;
+    font-size:18px;
+    cursor: pointer;
+    padding: 5px;
+}
+#loginButton {
+    background-color: yellow;
+    
+}
+#createAccount {
+    color: white;
+    background-color: purple;
+}
+h1 {
+    font-family: sans-serif;
+    text-align: center;
+}
+#navigation {
+    width: 100%;
+    background-color: purple;
+}
+span {
+    color: white;
+    margin-left: 40px;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: sans-serif;
+}
+#background {
+    background-color: lightgray;
+}
