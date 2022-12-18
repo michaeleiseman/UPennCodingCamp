@@ -37,7 +37,7 @@ a, a:visited{
 .artWorkContainer {
     float: left;
     width: 400px;
-    margin: 20px
+    margin: 20px;
 }
 .artWork {
     width: 100%
