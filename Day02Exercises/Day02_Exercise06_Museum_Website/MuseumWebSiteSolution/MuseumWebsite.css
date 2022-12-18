@@ -1,0 +1,30 @@
+body {
+    margin: 0px;
+}
+.container {
+    width: 1000px;
+    margin: auto;
+    background-color: beige;
+}
+#logo {
+    width: 200px;
+}
+#navBar {
+    height: 40px;
+    width: 100%;
+    background-color: darkslategray;
+}
+.center {
+    margin: auto
+}
+#spacer {
+    height: 10px;
+    width: 100%;
+}
+.navItem {
+    color: white;
+    font-family: sans-serif;
+    font-size: 20px;
+    margin-left: 20px;
+    cursor: pointer
+}
