@@ -5,6 +5,8 @@ body {
     width: 1000px;
     margin: auto;
     background-color: beige;
+    font-family: sans-serif;
+    font-weight: bold;
 }
 #logo {
     width: 200px;
@@ -26,5 +28,25 @@ body {
     font-family: sans-serif;
     font-size: 20px;
     margin-left: 20px;
-    cursor: pointer
+    cursor: pointer;
+}
+a, a:visited{
+    text-decoration: none;
+    color:white
+}
+.artWorkContainer {
+    float: left;
+    width: 400px;
+    margin: 20px
+}
+.artWork {
+    width: 100%
+}
+.caption {
+
+    font-size: 24px;
+}
+.input {
+    margin: 20px;
+    font-size: 20px
 }
