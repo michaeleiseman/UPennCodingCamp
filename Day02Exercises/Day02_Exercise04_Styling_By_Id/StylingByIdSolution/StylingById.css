@@ -31,6 +31,7 @@ h1 {
 #navigation {
     width: 100%;
     background-color: purple;
+    padding: 20px
 }
 span {
     color: white;

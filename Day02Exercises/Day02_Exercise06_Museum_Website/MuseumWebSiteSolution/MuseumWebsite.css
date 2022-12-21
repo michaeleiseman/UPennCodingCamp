@@ -12,16 +12,13 @@ body {
     width: 200px;
 }
 #navBar {
-    height: 40px;
     width: 100%;
     background-color: darkslategray;
+    padding-top: 20px;
+    padding-bottom: 20px
 }
 .center {
     margin: auto
-}
-#spacer {
-    height: 10px;
-    width: 100%;
 }
 .navItem {
     color: white;
@@ -43,7 +40,6 @@ a, a:visited{
     width: 100%
 }
 .caption {
-
     font-size: 24px;
 }
 .input {

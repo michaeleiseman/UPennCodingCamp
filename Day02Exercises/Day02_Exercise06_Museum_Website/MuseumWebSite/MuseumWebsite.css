@@ -2,13 +2,7 @@ body {
     margin: 0px;
 }
 
-#spacer {
-    height: 10px;
-    width: 100%;
-}
-
 a, a:visited{
-    text-decoration: none;
     color:white
 }
 .artWorkContainer {
