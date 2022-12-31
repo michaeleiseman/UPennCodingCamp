@@ -1,0 +1,9 @@
+label {
+    font-weight: bold
+}
+div {
+    font-size: small;
+    float: right;
+    background-color: beige;
+    padding: 20px;
+}
