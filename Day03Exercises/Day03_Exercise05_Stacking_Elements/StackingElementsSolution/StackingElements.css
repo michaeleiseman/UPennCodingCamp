@@ -1,0 +1,15 @@
+.card {
+    float: left;
+    width: 200px;
+    height: 300px
+}
+h2 {
+    text-align: center
+}
+img {
+    display: block;
+    margin:auto
+}
+p {
+    clear: left
+}
