@@ -43,13 +43,6 @@
         .property {
             color: cyan
         }
-        #boxContainer {
-            border-style: solid;
-            border-color: black;
-            border-width: 2px;
-            max-width: 800px;
-            position: relative;
-        }
         #target {
             border-color: black
         }
@@ -80,11 +73,11 @@
     <script>
         const target = document.getElementById("target");
         const selects = document.getElementsByTagName("select");
-            for(const select of selects){
-                select.addEventListener("change", function() {
-                    target.style.setProperty(this.className, this.value);
-                }, false);
-            }
+        for(const select of selects){
+            select.addEventListener("change", function() {
+                target.style.setProperty(this.className, this.value);
+            }, false);
+        }
     </script>
 </body>
 </html>

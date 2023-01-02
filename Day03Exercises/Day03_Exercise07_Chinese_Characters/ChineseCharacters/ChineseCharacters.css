@@ -1,0 +1,16 @@
+#translation {
+    /* this element contains the items to arrange so it should be a flex box */
+}
+.chineseItem {
+    max-width: 150px;
+    
+}
+.character {
+    
+}
+.pinyin {
+    font-weight: bold;
+}
+.english {
+    font-style: italic;
+}

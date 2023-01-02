@@ -2,7 +2,6 @@
     display:flex;
     flex-wrap: wrap;
 }
-/* Note that we don't really need to set the width and height of the card class */
 .card {
     width: 200px;
     height: 300px;
@@ -12,5 +11,5 @@ h1, h3 {
 }
 img {
     display: block;
-    margin: auto
+    margin: auto;
 }

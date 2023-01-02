@@ -1,0 +1,21 @@
+#siteContainer{
+    max-width: 1000px;
+    margin: auto;
+}
+#grid {
+    text-align: center;
+    display: grid;
+    grid-template-columns: 75px 1fr 1fr 1fr;
+}
+p {
+    outline-width: 2px;
+    outline-color: black;
+    outline-style: solid;
+    background-color: bisque;
+    margin: 0px;
+    padding: 20px;
+
+}
+h1, h3 {
+    margin-bottom: 0px
+}

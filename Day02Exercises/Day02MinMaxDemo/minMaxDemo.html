@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Min/Max Demo</title>
+    <style>
+        .bold {
+            font-weight: bold;
+        }
+        .tagName {
+            color: #8181ff
+        }
+        .attribute {
+            color: cyan
+        }
+        .value {
+            color: pink
+        }
+        code {
+            color: white;
+            font-size: 18px;
+        }
+        .background {
+            background-color: black;
+            display: inline-flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+        .comment {
+            color: green;
+            font-size: 18px
+        }
+        .indent {
+            display: inline-flex;
+            flex-direction: column;
+            margin-left: 20px
+        }
+        .selector {
+            color: #cbbc71
+        }
+        .property {
+            color: cyan
+        }
+        #target {
+            width: 70%;
+            height: 100px;
+            background-color: black;
+            max-width: 600px;
+            min-width: 400px;
+        }
+        #ruler {
+            position: relative
+        }
+        .label, .tick {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <p>HTML:</p>
+    <div class="background">
+        <code>&lt;<span class="tagName">div</span>&gt;&lt;/<span class="tagName">div</span>&gt;</code>
+    </div>
+    <p>CSS:</p>
+    <div class="background">
+        <code><span class="selector">div</span> {</code>
+        <div class="indent">
+            <code><span class="property">width</span>: <span class="value">70%</span></code>
+            <code><span class="property">height</span>: <span class="value">100px</span></code>
+            <code><span class="property">background-color</span>: <span class="value">black</span></code>
+            <code><span class="property">min-width</span>:
+                <select class="min-width">
+                    <option value="400px" selected>400px</option>
+                    <option value="500px">500px</option>
+                    <option value="600px">600px</option>
+                </select>;
+            </code>
+            <code><span class="property">max-width</span>:
+                <select class="max-width">
+                    <option value="600px" selected>600px</option>
+                    <option value="700px">700px</option>
+                    <option value="800px">800px</option>
+                </select>;
+            </code>
+        </div>
+        <code>}</code>
+    </div>
+    <p>Browser Display</p>
+    <div id="target"></div>
+    <div id="ruler"></div>
+    <script>
+        const target = document.getElementById("target");
+        const ruler = document.getElementById("ruler");
+        const selects = document.getElementsByTagName("select");
+        for(const select of selects){
+            select.addEventListener("change", function() {
+                target.style.setProperty(this.className, this.value);
+            }, false);
+        }
+        for(let x = 400; x < 900; x = x + 100) {
+            const tick = document.createElement("span");
+            tick.className = "tick";
+            tick.textContent = "|";
+            ruler.appendChild(tick);
+            const tickBox = tick.getBoundingClientRect();
+            tick.style.setProperty("left", (x - tickBox.width / 2).toString() + "px");
+            const label = document.createElement("span");
+            label.className = "label";
+            label.textContent = x.toString();
+            ruler.appendChild(label);
+            const width = label.getBoundingClientRect().width;
+            label.style.setProperty("left", (x - width / 2).toString() + "px");
+            label.style.setProperty("top", tickBox.height.toString() + "px");
+        }
+    </script>
+</body>
+</html>
