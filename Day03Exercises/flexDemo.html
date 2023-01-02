@@ -262,6 +262,12 @@
                         <code><span class="property">background-color</span>: <span class="value">gray</span>;</code>
                         <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
                         <code><span class="property">display</span>: <span class="value">flex</span>;</code>
+                        <code><span class="property">flex-direction</span>:
+                            <select class="flex-direction">
+                                <option value="row" selected>row (default)</option>
+                                <option value="column">column</option>
+                            </select>;
+                        </code>
                         <code><span class="property">flex-wrap</span>:
                             <select class="flex-wrap">
                                 <option value="wrap">wrap</option>
@@ -394,6 +400,12 @@
                         <code><span class="property">background-color</span>: <span class="value">gray</span>;</code>
                         <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
                         <code><span class="property">display</span>: <span class="value">flex</span>;</code>
+                        <code><span class="property">flex-direction</span>:
+                            <select class="flex-direction">
+                                <option value="row" selected>row (default)</option>
+                                <option value="column">column</option>
+                            </select>;
+                        </code>
                         <code><span class="property">flex-wrap</span>:
                             <select class="flex-wrap">
                                 <option value="wrap">wrap</option>
@@ -546,6 +558,12 @@
                         <code><span class="property">background-color</span>: <span class="value">gray</span>;</code>
                         <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
                         <code><span class="property">display</span>: <span class="value">flex</span>;</code>
+                        <code><span class="property">flex-direction</span>:
+                            <select class="flex-direction">
+                                <option value="row" selected>row (default)</option>
+                                <option value="column">column</option>
+                            </select>;
+                        </code>
                         <code><span class="property">flex-wrap</span>:
                             <select class="flex-wrap">
                                 <option value="wrap">wrap</option>
@@ -693,6 +711,12 @@
                         <code><span class="property">background-color</span>: <span class="value">gray</span>;</code>
                         <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
                         <code><span class="property">display</span>: <span class="value">flex</span>;</code>
+                        <code><span class="property">flex-direction</span>:
+                            <select class="flex-direction">
+                                <option value="row" selected>row (default)</option>
+                                <option value="column">column</option>
+                            </select>;
+                        </code>
                         <code><span class="property">flex-wrap</span>:
                             <select class="flex-wrap">
                                 <option value="wrap">wrap</option>
@@ -761,7 +785,7 @@
         for(const triangle of document.getElementsByClassName("showHide")){
             triangle.addEventListener("click", toggleCloak, false);
         }
-        const properties = ["flex-wrap", "gap", "justify-content", "align-items"]
+        const properties = ["flex-direction","flex-wrap", "gap", "justify-content", "align-items"]
         for(const property of properties) {
             for(const select of document.getElementsByClassName(property)) {
                 select.addEventListener("change", onChange, false);
