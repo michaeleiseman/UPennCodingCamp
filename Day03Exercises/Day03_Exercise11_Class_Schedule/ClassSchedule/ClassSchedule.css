@@ -2,9 +2,13 @@
     max-width: 1000px;
     margin: auto;
 }
+
 #grid {
     text-align: center;
-    /* use CSS grid properties to set up the grid here */
+    /* use CSS grid properties to set up the grid here.
+    The first column should be a fixed width
+    The remaining columns should expand as space allows. */
+    
 }
 p {
     /* Note the use of OUTLINE properties here instead of BORDER properties.  This prevents adjacent borders from "doubling up" and makeing the borders appear twice as wide. */
