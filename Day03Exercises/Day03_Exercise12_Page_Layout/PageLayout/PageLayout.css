@@ -29,3 +29,6 @@ nav {
 #realEstate {
     grid-area: re
 }
+footer {
+    grid-area: ft
+}

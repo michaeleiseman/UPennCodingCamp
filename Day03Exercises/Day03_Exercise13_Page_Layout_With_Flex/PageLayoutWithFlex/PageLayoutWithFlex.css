@@ -1,3 +1,7 @@
+body {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: azure;
+}
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -12,10 +16,20 @@ img {
     width: 100%
 }
 #logo {
-    grid-area: lo
+    grid-area: lo;
+    background-color: rgb(155, 224, 225);
 }
 nav {
-    grid-area: nv
+    grid-area: nv;
+    background-color: rgb(155, 224, 225);
+
+}
+.navLink {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+p {
+    margin: 0px;
 }
 #portrait {
     grid-area: po
@@ -39,5 +53,5 @@ nav {
     grid-area: re
 }
 footer {
-    grid-area: ft
+    grid-area: ft;
 }

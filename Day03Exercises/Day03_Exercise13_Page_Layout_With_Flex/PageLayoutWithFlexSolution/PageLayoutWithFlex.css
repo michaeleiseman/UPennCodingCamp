@@ -1,0 +1,75 @@
+body {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: azure;
+}
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas: 
+        "lo nv nv nv"
+        "pd pd pd po"
+        "ca cd cd cd"
+        "rr re re cr"
+        "ft ft ft ft";
+}
+img {
+    width: 100%
+}
+#logo {
+    grid-area: lo;
+    background-color: rgb(155, 224, 225);
+}
+nav {
+    grid-area: nv;
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(155, 224, 225);
+    align-items: center;
+}
+.navLink {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.description {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px
+}
+.horizontal {
+    align-items: center;
+}
+.vertical {
+    flex-direction: column;
+}
+p {
+    margin: 0px;
+    text-align: center;
+}
+#portrait {
+    grid-area: po
+}
+#portraitDescription {
+    grid-area: pd
+}
+#catalog {
+    grid-area: ca
+}
+#catalogDescription {
+    grid-area: cd
+}
+#residentialRealEstate {
+    grid-area: rr
+}
+#commercialRealEstate {
+    grid-area: cr
+}
+#realEstate {
+    grid-area: re
+}
+footer {
+    grid-area: ft;
+    text-align: center;
+    padding: 20px;
+    font-size: 10px;
+    font-weight: normal
+}
