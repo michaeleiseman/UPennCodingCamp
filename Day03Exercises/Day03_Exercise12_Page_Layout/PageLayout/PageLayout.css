@@ -1,0 +1,31 @@
+.container {
+    /* Your code goes in here */
+    
+}
+#logo {
+    grid-area: lo
+}
+nav {
+    grid-area: nv
+}
+#portrait {
+    grid-area: po
+}
+#portraitDescription {
+    grid-area: pd
+}
+#catalog {
+    grid-area: ca
+}
+#catalogDescription {
+    grid-area: cd
+}
+#residentialRealEstate {
+    grid-area: rr
+}
+#commercialRealEstate {
+    grid-area: cr
+}
+#realEstate {
+    grid-area: re
+}

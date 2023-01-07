@@ -1,0 +1,40 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas: 
+        "lo nv nv nv"
+        "pd pd pd po"
+        "ca cd cd cd"
+        "rr re re cr"
+        "ft ft ft ft";
+}
+img {
+    width: 100%
+}
+#logo {
+    grid-area: lo
+}
+nav {
+    grid-area: nv
+}
+#portrait {
+    grid-area: po
+}
+#portraitDescription {
+    grid-area: pd
+}
+#catalog {
+    grid-area: ca
+}
+#catalogDescription {
+    grid-area: cd
+}
+#residentialRealEstate {
+    grid-area: rr
+}
+#commercialRealEstate {
+    grid-area: cr
+}
+#realEstate {
+    grid-area: re
+}
