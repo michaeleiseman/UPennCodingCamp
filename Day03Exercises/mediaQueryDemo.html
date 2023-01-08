@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Query Demo</title>
+    <style>
+        body {
+            color: white;
+            text-align: center;
+            font-family: sans-serif;
+            font-size: 36px;
+        }
+        /* @media (min-width: 800px) {
+            #grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+                grid-template-areas: 
+                    "hd nv nv nv"
+                    "sb mn mn mn"
+                    "ft ft ft ft";
+            }
+        } */
+        #header {
+            background-color: darkblue;
+            grid-area: hd
+        }
+        #nav {
+            background-color: darkred;
+            grid-area:nv
+        }
+        #sideBar {
+            background-color: black;
+            grid-area: sb
+        }
+        #main {
+            background-color: darkgray;
+            grid-area: mn
+        }
+        #footer {
+            background-color: darkgreen;
+            grid-area: ft
+        }
+    </style>
+</head>
+<body>
+    <div id="grid">
+        <div id="header">Header</div>
+        <div id="nav">Navigation</div>
+        <div id="sideBar">SideBar</div>
+        <div id="main">Main</div>
+        <div id="footer">Footer</div>
+    </div>
+</body>
+</html>
