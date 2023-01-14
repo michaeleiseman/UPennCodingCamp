@@ -1,0 +1,13 @@
+#container {
+    position: relative;
+    max-width: 1000px;
+}
+img {
+    width: 100%
+}
+#heresWaldo {
+    position: absolute;
+    width: 20%;
+    top: 46%;
+    right: 23%;
+}

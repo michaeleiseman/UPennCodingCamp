@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Positioning</title>
+    <style>
+        .bold {
+            font-weight: bold;
+        }
+        .tagName {
+            color: #8181ff
+        }
+        .attribute {
+            color: cyan
+        }
+        .value {
+            color: pink
+        }
+        code {
+            color: white;
+            font-size: 18px;
+        }
+        .background {
+            background-color: black;
+            display: inline-flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+        .indent {
+            display: flex;
+            flex-direction: column;
+            margin-left: 20px
+        }
+        .selector {
+            color: #cbbc71
+        }
+        .property {
+            color: cyan
+        }
+        #boxContainer {
+            height: 400px;
+            max-width: 800px;
+            border: 2px dotted black;
+            position: relative;
+        }
+        .box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border: 1px solid black;
+            color: white;
+            font-size: 36px;
+            text-align: center;
+        }
+        #one {
+            width: 50px;
+            height: 50px;
+            background-color: black;
+            top: 0px;
+            left: 0px;
+        }
+        #two {
+            width: 75px;
+            height: 75px;
+            background-color: darkblue;
+            bottom: 0px;
+            left: 0px;
+        }
+        #three {
+            width: 100px;
+            height: 100px;
+            background-color: darkred;
+            bottom: 0px;
+            right: 0px;
+        }
+        #four {
+            width: 125px;
+            height: 125px;
+            background-color: darkgreen;
+            top: 0px;
+            right: 0px;
+        }
+        .label {
+            margin: 0px
+        }
+    </style>
+</head>
+<body>
+    <p>HTML:</p>
+    <div class="background">
+        <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"boxContainer"</span>&gt;</code>
+        <div class="indent">
+            <code>&lt;<span class="tagName">div </span><span class="attribute">class</span>=<span class="value">"box"</span> <span class="attribute">id</span>=<span class="value">"one"</span>&gt;1&lt;<span class="tagName">/div</span>&gt;</code>
+            <code>&lt;<span class="tagName">div </span><span class="attribute">class</span>=<span class="value">"box"</span> <span class="attribute">id</span>=<span class="value">"two"</span>&gt;2&lt;<span class="tagName">/div</span>&gt;</code>
+            <code>&lt;<span class="tagName">div </span><span class="attribute">class</span>=<span class="value">"box"</span> <span class="attribute">id</span>=<span class="value">"three"</span>&gt;3&lt;<span class="tagName">/div</span>&gt;</code>
+            <code>&lt;<span class="tagName">div </span><span class="attribute">class</span>=<span class="value">"box"</span> <span class="attribute">id</span>=<span class="value">"four"</span>&gt;4&lt;<span class="tagName">/div</span>&gt;</code>
+        </div>
+        <code>&lt;<span class="tagName">/div</span>&gt;</code>
+    </div>
+    <p>CSS:</p>
+    <div class="background">
+        <code><span class="selector">#boxContainer</span> {</code>
+        <div class="indent">
+            <code><span class="property">border</span>: <span class="value">2px dotted black</span>;</code>
+            <code><span class="property">height</span>: <span class="value">400px</span>;</code>
+            <code><span class="property">max-width</span>: <span class="value">800px</span>;</code>
+            <code><span class="property">position</span>: <span class="value">static</span>;</code>
+        </div>
+        <code>}</code>
+        <code><span class="selector">.box</span> {</code>
+        <div class="indent">
+            <code><span class="property">height</span>: <span class="value">75px</span>;</code>
+            <code><span class="property">width</span>: <span class="value">75px</span>;</code>
+            <code><span class="property">color</span>: <span class="value">white</span>;</code>
+            <code><span class="property">font-size</span>: <span class="value">36px</span>;</code>
+            <code><span class="property">text-align</span>: <span class="value">center</span>;</code>
+        </div>
+        <code>}</code>
+        <div class="CSSBox">
+            <code><span class="selector">#one</span> {</code>
+                <div class="indent">
+                    <code><span class="property">background-color</span>: <span class="value">black</span>;</code>
+                    <code><span class="property">position</span>:
+                        <select class="position">
+                            <option value="static" selected>static (default)</option>
+                            <option value="relative">relative</option>
+                            <option value="absolute">absolute</option>
+                            <option value="fixed">fixed</option>
+                        </select>;
+                    </code>
+                    <code><span class="property">top</span>:
+                        <select class="top" id=topOne>
+                            <option value="0px" selected>0px</option>
+                            <option value="20px">20px</option>
+                            <option value="-20px">-20px</option>
+                            <option value="30%">30%</option>
+                        </select>;
+                    </code>
+                    <code><span class="property">left</span>:
+                        <select class="left" id=leftOne>
+                            <option value="0px" selected>0px</option>
+                            <option value="20px">20px</option>
+                            <option value="-20px">-20px</option>
+                            <option value="30%">30%</option>
+                        </select>;
+                    </code>
+                    <code><span class="property">z-index</span>:
+                        <select class="z-index" id=z-indexOne>
+                            <option value="1" selected>1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>;
+                    </code>
+                    <code><span class="property">visibility</span>:
+                        <select class="visibility" id=visibilityOne>
+                            <option value="visible" selected>visible (default)</option>
+                            <option value="hidden">hidden</option>
+                        </select>;
+                    </code>
+                    <code><span class="property">display</span>:
+                        <select class="display" id=visibilityOne>
+                            <option value="block" selected>block (default)</option>
+                            <option value="none">none</option>
+                        </select>;
+                    </code>
+                </div>
+            <code>}</code>
+        </div>
+        
+        <div class="CSSBox">
+            <code><span class="selector">#two</span> {</code>
+                <div class="indent">
+                    <code><span class="property">background-color</span>: <span class="value">darkblue</span>;</code>
+                    <code><span class="property">position</span>:
+                        <select class="position">
+                            <option value="static" selected>static (default)</option>
+                            <option value="relative">relative</option>
+                            <option value="absolute">absolute</option>
+                            <option value="fixed">fixed</option>
+                        </select>;
+                    </code>
+                    <code><span class="property">bottom</span>:
+                        <select class="bottom" id=bottomTwo>
+                            <option value="0px" selected>0px</option>
+                            <option value="20px">20px</option>
+                            <option value="-20px">-20px</option>
+                            <option value="30%">30%</option>
+                        </select>;
+                    </code>
+                    <code><span class="property">left</span>:
+                        <select class="left" id=leftTwo>
+                            <option value="0px" selected>0px</option>
+                            <option value="20px">20px</option>
+                            <option value="-20px">-20px</option>
+                            <option value="30%">30%</option>
+                        </select>;
+                    </code>
+                    <code><span class="property">z-index</span>:
+                        <select class="z-index" id=z-indexTwo>
+                            <option value="1" selected>1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>;
+                    </code>
+                </div>
+            <code>}</code>
+        </div>
+        
+        <div class="CSSBox">
+            <code><span class="selector">#three</span> {</code>
+                <div class="indent">
+                    <code><span class="property">background-color</span>: <span class="value">darkred</span>;</code>
+                    <code><span class="property">position</span>:
+                        <select class="position">
+                            <option value="static" selected>static (default)</option>
+                            <option value="relative">relative</option>
+                            <option value="absolute">absolute</option>
+                            <option value="fixed">fixed</option>
+                        </select>;
+                    </code>
+                    <code><span class="property">bottom</span>:
+                        <select class="bottom" id=bottomThree>
+                            <option value="0px" selected>0px</option>
+                            <option value="20px">20px</option>
+                            <option value="-20px">-20px</option>
+                            <option value="30%">30%</option>
+                        </select>;
+                    </code>
+                    <code><span class="property">right</span>:
+                        <select class="right" id=rightThree>
+                            <option value="0px" selected>0px</option>
+                            <option value="20px">20px</option>
+                            <option value="-20px">-20px</option>
+                            <option value="30%">30%</option>
+                        </select>;
+                    </code>
+                    <code><span class="property">z-index</span>:
+                        <select class="z-index" id=z-indexThree>
+                            <option value="1" selected>1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>;
+                    </code>
+                </div>
+            <code>}</code>
+        </div>
+        <div class="CSSBox">
+            <code><span class="selector">#four</span> {</code>
+                <div class="indent">
+                    <code><span class="property">background-color</span>: <span class="value">darkgreen</span>;</code>
+                    <code><span class="property">position</span>:
+                        <select class="position">
+                            <option value="static" selected>static (default)</option>
+                            <option value="relative">relative</option>
+                            <option value="absolute">absolute</option>
+                            <option value="fixed">fixed</option>
+                        </select>;
+                    </code>
+                    <code><span class="property">top</span>:
+                        <select class="top" id=topFour>
+                            <option value="0px" selected>0px</option>
+                            <option value="20px">20px</option>
+                            <option value="-20px">-20px</option>
+                            <option value="30%">30%</option>
+                        </select>;
+                    </code>
+                    <code><span class="property">right</span>:
+                        <select class="right" id=rightFour>
+                            <option value="0px" selected>0px</option>
+                            <option value="20px">20px</option>
+                            <option value="-20px">-20px</option>
+                            <option value="30%">30%</option>
+                        </select>;
+                    </code>
+                    <code><span class="property">z-index</span>:
+                        <select class="z-index" id=z-indexFour>
+                            <option value="1" selected>1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>;
+                    </code>
+                </div>
+            <code>}</code>
+        </div>
+    </div>
+    <p>Parent Element</p>
+    <div id="boxContainer">
+        <div class="box" id="one"><p class="label">1</p></div>
+        <div class="box" id="two"><p class="label">2</p></div>
+        <div class="box" id="three"><p class="label">3</p></div>
+        <div class="box" id="four"><p class="label">4</p></div>
+    </div>
+    <script>
+        const changeObjects = [];
+        const boxes = document.getElementsByClassName("box");
+        const CSSBoxes = document.getElementsByClassName("CSSBox");
+        for(let i = 0; i < CSSBoxes.length; i++) {
+            const CSSBox = CSSBoxes[i];
+            const selects = CSSBox.getElementsByTagName("select");
+            for(const select of selects) {
+                select.addEventListener("change", function() {
+                    boxes[i].style.setProperty(select.className, select.value);
+                }, false);
+            }
+        }
+        // const changeObjects = [
+        //     {
+        //         selector: document.getElementsByClassName("position")[0],
+        //         target: document.getElementById("one")
+        //     },
+        //     {
+        //         selector: document.getElementById("topOne"),
+        //         target: document.getElementById("one")
+        //     },
+        //     {
+        //         selector: document.getElementById("leftOne"),
+        //         target: document.getElementById("one")
+        //     },
+        //     {
+        //         selector: document.getElementById("z-indexOne"),
+        //         target: document.getElementById("one")
+        //     },
+        //     {
+        //         selector: document.getElementById("visibilityOne"),
+        //         target: document.getElementById("one")
+        //     },
+        //     {
+        //         selector: document.getElementsByClassName("position")[1],
+        //         target: document.getElementById("two")
+        //     },
+        //     {
+        //         selector: document.getElementById("leftTwo"),
+        //         target: document.getElementById("two")
+        //     },
+        //     {
+        //         selector: document.getElementById("bottomTwo"),
+        //         target: document.getElementById("two")
+        //     },
+        //     {
+        //         selector: document.getElementById("z-indexTwo"),
+        //         target: document.getElementById("two")
+        //     },
+        //     {
+        //         selector: document.getElementsByClassName("position")[2],
+        //         target: document.getElementById("three")
+        //     },
+        //     {
+        //         selector: document.getElementById("rightThree"),
+        //         target: document.getElementById("three")
+        //     },
+        //     {
+        //         selector: document.getElementById("bottomThree"),
+        //         target: document.getElementById("three")
+        //     },
+        //     {
+        //         selector: document.getElementById("z-indexThree"),
+        //         target: document.getElementById("three")
+        //     },
+        //     {
+        //         selector: document.getElementsByClassName("position")[3],
+        //         target: document.getElementById("four")
+        //     },
+        //     {
+        //         selector: document.getElementById("rightFour"),
+        //         target: document.getElementById("four")
+        //     },
+        //     {
+        //         selector: document.getElementById("topFour"),
+        //         target: document.getElementById("four")
+        //     },
+        //     {
+        //         selector: document.getElementById("z-indexFour"),
+        //         target: document.getElementById("four")
+        //     },
+        // ]
+        // for(const changeObject of changeObjects) {
+        //         changeObject.selector.addEventListener("change", function() {
+        //             changeObject.target.style.setProperty(changeObject.selector.className, changeObject.selector.value);
+        //     }, false);
+        // }
+    </script>
+</body>
+</html>

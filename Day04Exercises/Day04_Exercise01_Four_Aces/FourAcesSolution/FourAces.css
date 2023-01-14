@@ -1,0 +1,21 @@
+.playingCard {
+    position: relative
+}
+#club {
+    width: 150px;
+    
+}
+#heart {
+    width: 125px;
+    left: -100px;
+    bottom: 10px;
+}
+#spade {
+    width: 125px;
+    left: -180px;
+}
+#diamond {
+    width: 150px;
+    left: -270px;
+    top: 20px
+}

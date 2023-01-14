@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        #parent {
+            border: 1px solid black;
+            width: 200px;
+            height: 50px;
+        }
+        .relative {
+            position: fixed;
+            background-color: yellow;
+        }
+        #child {
+            /* bottom: 10px; */
+            right: -10px
+        }
+    </style>
+</head>
+<body>
+    <div id="parent">
+        <span class="relative" id="child">This is some text</span>
+    </div>
+</body>
+</html>

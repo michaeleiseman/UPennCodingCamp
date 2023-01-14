@@ -1,0 +1,16 @@
+.playingCard {
+    /*set the type of positioning here*/
+    
+}
+#club {
+    width: 150px;
+}
+#heart {
+    width: 125px;
+}
+#spade {
+    width: 125px;
+}
+#diamond {
+    width: 150px;
+}
