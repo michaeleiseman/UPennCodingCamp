@@ -1,0 +1,62 @@
+.wrapper {
+    background-color: black;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    min-width: 650px
+}
+#players {
+    display: flex;
+    background-color: blue;
+    color: white;
+    flex-wrap: wrap;
+    padding: 10px;
+    gap: 10px
+}
+.player {
+    display: flex;
+    flex: 1;
+    align-items: center;
+}
+input{
+    flex: 1
+}
+label {
+    text-align: center;
+    padding: 10px
+}
+button {
+    background-color: darkgreen;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-weight: bold;
+    margin: 5px;
+}
+button:hover {
+    background-color: rgb(0, 49, 0);
+}
+#gameBoard {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    padding: 10px;
+}
+.catHeading {
+    color: white;
+    background-color: blue;
+    padding: 10px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+p {
+    text-align: center;
+    margin: 0px;
+}
+.answer {
+    text-align: center;
+    color: gold;
+    background-color: blue;
+    padding: 10px;
+}
