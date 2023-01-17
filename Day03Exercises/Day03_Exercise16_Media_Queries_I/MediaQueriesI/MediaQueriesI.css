@@ -2,7 +2,7 @@ body {
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     background-color: azure;
 }
-.container {
+/* .container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-areas: 
@@ -14,7 +14,7 @@ body {
 }
 .vertical {
     flex-direction: column;
-}
+} */
 img {
     width: 100%
 }
