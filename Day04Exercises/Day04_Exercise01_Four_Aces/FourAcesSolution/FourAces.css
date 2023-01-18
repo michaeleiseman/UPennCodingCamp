@@ -1,21 +1,24 @@
+#hand {
+    margin: 50px
+}
 .playingCard {
-    position: relative
+    position: relative;
+    width: 150px;
 }
 #club {
-    width: 150px;
-    
+    transform: rotate(-15deg);
 }
 #heart {
-    width: 125px;
     left: -100px;
     bottom: 10px;
+    transform: rotate(-5deg);
 }
 #spade {
-    width: 125px;
     left: -180px;
+    bottom: 10px;
+    transform: rotate(5deg);
 }
 #diamond {
-    width: 150px;
     left: -270px;
-    top: 20px
+    transform: rotate(15deg);
 }
