@@ -1,0 +1,9 @@
+p {
+    font-family: "garamond";
+}
+.indent {
+    margin-left: 20px;
+}
+.doubleIndent {
+    margin-left: 40px;
+}
