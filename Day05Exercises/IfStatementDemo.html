@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>If Statement Demo</title>
+    <style>
+        .normal {
+            font-size: 14px
+        }
+        .large {
+            font-size: 24px
+        }
+    </style>
+</head>
+<body>
+    <input id="checkBox" type="checkbox"><label>Please make this bigger.</label>
+    <p id="text">The size of this text depends on the value of the above checkbox.</p>
+    <script>
+        let checkbox = document.getElementById('checkBox');
+        checkbox.addEventListener('change', changeSize, false);
+        function changeSize() {
+            //make the class name normal
+            let className = "normal";
+            //If the checkbox is checked,
+            if(checkbox.checked) {
+                //change the class name to "large"
+                className = "large";
+            }
+            //make the value of className attribute of the paragraph equal to the value of the variable called className
+            document.getElementById("text").className = className;
+        }
+    </script>
+</body>
+</html>
