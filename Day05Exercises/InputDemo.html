@@ -8,10 +8,13 @@
 </head>
 <body>
     <input type="number" id="num">
-    <div id="output"></div>
+    <button id="double">Double it.</button>
+    <span id="output"></span>
     <script>
         let numField = document.getElementById("num");
-        numField.addEventListener('input', multiplyBy2, false);
+        let double = document.getElementById("double");
+        double.addEventListener('click', multiplyBy2, false);
+        //doubles whatever is in the input field and displays the result in the output
         function multiplyBy2() {
             document.getElementById("output").textContent = 2 * numField.value;
         }
