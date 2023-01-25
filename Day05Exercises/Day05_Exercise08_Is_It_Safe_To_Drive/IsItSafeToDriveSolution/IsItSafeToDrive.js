@@ -12,7 +12,7 @@ function advise() {
     let text = " not";
     let className = "red";
     let roadsAreSalted = saltInput.value == "yes";
-    let temperature = tempInput.value;
+    let temperature = Number(tempInput.value);
     if(temperature > 32 || (temperature >= 15 && roadsAreSalted)) {
         text = "";
         className = "black"
