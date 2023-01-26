@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Loop Demo</title>
+</head>
+<body>
+    <div>
+        <label>Text to Add: </label>
+        <input id="textToAdd" type="text">
+    </div>
+    <div>
+        <label>Number of Times to Add the Text: </label>
+        <input id="times" type="number">
+    </div>
+    <div>
+        <button id="addText">Add text.</button>
+    </div>
+    <script>
+        document.getElementById("addText").addEventListener("click", addText, false);
+        function addText() {
+            let numberOfTimes = Number(document.getElementById("times").value);
+            for(let i = 0; i < numberOfTimes; i++) {
+                let newParagraph = document.createElement("p");
+                newParagraph.textContent = document.getElementById("textToAdd").value;
+                document.body.appendChild(newParagraph);
+            }
+        }
+        
+    </script>
+</body>
+</html>
