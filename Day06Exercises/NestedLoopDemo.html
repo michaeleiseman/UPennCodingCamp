@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Another Checkerboard</title>
+    <style>
+        #container {
+            width: 800px;
+            border: 2px solid black;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .square {
+            width: 100px;
+            height: 100px;
+        }
+        .black {
+            background-color: black;
+        }
+        .red {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <button id="build">Build Checkerboard</button>
+    <div id="container"></div>
+    <script>
+        document.getElementById("build").addEventListener('click', build, false);
+        function build() {
+            // This single-loop code doesn't work.
+            // for(let i = 0; i < 64; i++) {
+            //     let newSquare = document.createElement("div");
+            //     let color = "black";
+            //     if(i % 2 == 0) {
+            //         color = "red";
+            //     }
+            //     newSquare.className = color + " square";
+            //     document.getElementById("container").appendChild(newSquare);
+            // }
+            //This nested loop code works.
+            for(let row = 0; row < 8; row++) {
+                for(let col = 0; col < 8; col++) {
+                    let newSquare = document.createElement("div");
+                    let color = "black";
+                    if((row + col) % 2 == 0) {
+                        color = "red";
+                    }
+                    newSquare.className = color + " square";
+                    document.getElementById("container").appendChild(newSquare);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
