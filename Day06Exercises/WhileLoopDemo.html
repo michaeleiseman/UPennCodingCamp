@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>While Loop Demo</title>
+</head>
+<body>
+    <button id="roll">Roll dice to get a 12.</button>
+    <span>It took <span id="output">?</span> rolls to get a 12.</span>
+    <script>
+        document.getElementById("roll").addEventListener('click', roll, false);
+        function roll() {
+            let count = 0;
+            let roll1 = 0;
+            let roll2 = 0;
+            while(roll1 + roll2 != 12) {
+                roll1 = Math.floor(6 * Math.random()) + 1;
+                roll2 = Math.floor(6 * Math.random()) + 1;
+                count = count + 1
+            }
+            document.getElementById("output").textContent = count.toString();
+        }
+    </script>
+</body>
+</html>
