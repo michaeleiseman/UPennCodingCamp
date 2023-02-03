@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assigning Items Demo</title>
+</head>
+<body>
+    <div id="output"></div>
+    <script>
+        //fibArray[0] = 1 and fibArray[1] = 1
+        let fibArray = [1, 1];
+        let i = 2;
+        //keep iterating as long as the next Fibonacci number is less than a million
+        while(fibArray[i - 1] + fibArray[i - 2] < 1000000) {
+            fibArray[i] = fibArray[i - 1] + fibArray[i - 2];
+            i = i + 1;
+        }
+        document.getElementById("output").textContent = fibArray;
+    </script>
+</body>
+</html>

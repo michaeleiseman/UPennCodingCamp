@@ -11,12 +11,17 @@
     <span>It took <span id="output">?</span> rolls to get a 12.</span>
     <script>
         document.getElementById("roll").addEventListener('click', roll, false);
+        //how many times must 2 dice be rolled until we obtain a 12?
         function roll() {
+            //count is the number of times we've rolled two dice
             let count = 0;
             let roll1 = 0;
             let roll2 = 0;
+            //stop rolling if we get a 12
             while(roll1 + roll2 != 12) {
+                //result for first die
                 roll1 = Math.floor(6 * Math.random()) + 1;
+                //result for second die
                 roll2 = Math.floor(6 * Math.random()) + 1;
                 count = count + 1
             }
