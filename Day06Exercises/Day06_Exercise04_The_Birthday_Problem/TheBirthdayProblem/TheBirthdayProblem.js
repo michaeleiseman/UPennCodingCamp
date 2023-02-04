@@ -13,10 +13,10 @@ function pickBirthdays() {
 
     let index = 1;
     let duplicateFound = false;
-    //repeat the indented steps while there has not been a duplicate found
-    //and index is not equal to the number of items in the dates array
+    //repeat the indented steps WHILE there has not been a duplicate found
+    //AND index is not equal to the number of items in the dates array
     
-        //if the item at index is identical to the item at index - 1
+        //if the item in the dates array at index is identical to the item at index - 1
 
             //set the duplicateFound Boolean to true
 
