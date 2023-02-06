@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this Demo</title>
+    <style>
+        #flex {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .card {
+            height: 200px;
+            width: 100px;
+            border-radius: 10px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="flex"></div>
+    <script>
+        let flex = document.getElementById("flex");
+        //fill the flex div with 10 cards
+        for(let i = 0; i < 10; i++) {
+            let card = document.createElement("div");
+            card.className = "card";
+            //put an event listener on each card to make it turn blue when clicked
+            card.addEventListener('click', turnBlue, false);
+            flex.appendChild(card);
+        }
+        function turnBlue() {
+            //note that using "this" avoids having to give a different id to each card!
+            this.style.setProperty("background-color", "blue");
+            this.removeEventListener("click", turnBlue, false);
+            this.addEventListener("click", turnRed, false);
+        }
+        function turnRed() {
+            this.style.setProperty("background-color", "red");
+            this.removeEventListener("click", turnRed, false);
+            this.addEventListener("click", turnBlue, false);
+        }
+    </script>
+</body>
+</html>
