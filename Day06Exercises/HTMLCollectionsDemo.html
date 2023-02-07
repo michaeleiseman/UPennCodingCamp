@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Collections Demo</title>
+    <style>
+        select {
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 16px;
+            margin: 20px
+        }
+        #flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px
+        }
+        .month {
+            width: 200px;
+            border: 1px solid black;
+            border-radius: 5px
+        }
+        .name {
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+        }
+        .dates {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+        .date {
+            border: 1px solid black;
+            height: 20px;
+            font-size: 10px;
+            font-family: sans-serif;
+            font-weight: bold
+        }
+        .blank {
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <select>
+        <option value="2023" selected>2023</option>
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+        <option value="2027">2027</option>
+    </select>
+    <div id="flex">
+        <div class="month">
+            <p class="name"></p>
+        </div>
+        <div class="month">
+            <p class="name"></p>
+        </div>
+        <div class="month">
+            <p class="name"></p>
+        </div>
+        <div class="month">
+            <p class="name"></p>
+        </div>
+        <div class="month">
+            <p class="name"></p>
+        </div>
+        <div class="month">
+            <p class="name"></p>
+        </div>
+        <div class="month">
+            <p class="name"></p>
+        </div>
+        <div class="month">
+            <p class="name"></p>
+        </div>
+        <div class="month">
+            <p class="name"></p>
+        </div>
+        <div class="month">
+            <p class="name"></p>
+        </div>
+        <div class="month">
+            <p class="name"></p>
+        </div>
+        <div class="month">
+            <p class="name"></p>
+        </div>
+    </div>
+    <script>
+        let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        let names = document.getElementsByClassName("name");
+        for(let i = 0; i < names.length; i++) {
+            names[i].textContent = months[i];
+        }
+        months = document.getElementsByClassName("month");
+        //insert a grid to hold the dates for each month
+        for(let month of months){
+            let dates = document.createElement("div");
+            dates.className = "dates";
+            month.appendChild(dates);
+        }
+        let dates = document.getElementsByClassName("dates");
+        document.addEventListener("input", insertDates, false);
+        let oneDay = 24 * 60 * 60 * 1000; //The number of miliseconds in one day
+        insertDates();
+        function insertDates() {
+            //first clear out all blanks and dates for each month
+            for(let datesElement of dates){
+                let blanksForMonth = datesElement.getElementsByClassName("blank")
+                for(let i = blanksForMonth.length - 1; i > -1; i--) {
+                    datesElement.removeChild(blanksForMonth[i]);
+                }
+                let datesForMonth = datesElement.getElementsByClassName("date");
+                for(let i = datesForMonth.length - 1; i > -1; i--) {
+                    datesElement.removeChild(datesForMonth[i]);
+                }
+            }
+            //get the year from the select tag
+            let year = document.getElementsByTagName("select")[0].value;
+            //get a numeric value for the first day of that year
+            let firstDay = Date.parse(new Date(year + '-01-01T00:00:00.000'));
+            //get a numeric value for the first day of the next year
+            let nextYear = Date.parse(new Date((Number(year) + 1).toString() + '-01-01T00:00:00.000'));
+            //repeat day insertion for each day of the year requested
+            for(let day = firstDay; day < nextYear; day = day + oneDay) {
+                //create a JavaScript date object from the numeric primative
+                let currentDay = new Date(day);
+                //This div will be the box holding this date
+                let date = document.createElement("div");
+                date.className = "date";
+                //get the date from the date object and put it in the newly created div
+                date.textContent = currentDay.getDate();
+                //if this is the first day of the month
+                if(date.textContent == "1") {
+                    //fill the month with blank days
+                    //until we get to the correct day
+                    //Note that currentDay.getDay() returns the day of the week
+                    //where 0 is Sunday and 6 is Saturday
+                    for(let dayOfWeek = 0; dayOfWeek < currentDay.getDay(); dayOfWeek++) {
+                        //This div will be invisible, but it will push the
+                        //other dates over in the grid
+                        let blank = document.createElement("div");
+                        blank.className = "blank";
+                        dates[currentDay.getMonth()].appendChild(blank);
+                    }
+                }
+                //put the date in the correct box by getting the month from the date object
+                dates[currentDay.getMonth()].appendChild(date);
+            }
+        }
+    </script>
+</body>
+</html>
