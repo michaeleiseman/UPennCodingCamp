@@ -26,8 +26,10 @@ function turnOffBit() {
 
     calculate();
 }
-//a function that looks at the current state of the bits
-//and calculates the decimal number equivalent
+//a function that looks at the current state of the bits,
+//calculates the decimal number equivalent while
+//creating a text string showing the calculation.
+//It then reports this calculation to the user.
 function calculate() {
     let sum = 0;
     let text = "";
