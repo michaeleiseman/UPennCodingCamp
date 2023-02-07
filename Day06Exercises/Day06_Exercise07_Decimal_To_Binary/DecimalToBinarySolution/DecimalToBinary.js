@@ -30,11 +30,11 @@ function calculate() {
     let sum = 0;
     let text = "";
     for(let bit of bits) {
-        sum = sum + Number(bit.textContent) * Number(bit.id);
+        sum = sum + Number(bit.textContent) * Number(bit.getAttribute("value"));
         if(bit != bits[0]) {
             text = text + " + "
         }
-        text = text + "(" +bit.textContent + "×" + bit.id + ")";
+        text = text + "(" +bit.textContent + "×" + bit.getAttribute("value") + ")";
     }
     text = text + " = " + sum.toString();
     document.getElementById("output").textContent = text;
