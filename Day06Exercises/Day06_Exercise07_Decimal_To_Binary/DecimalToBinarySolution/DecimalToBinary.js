@@ -1,6 +1,7 @@
 //create a collection of HTML elements with the class name "bit"
 let bits = document.getElementsByClassName("bit");
 //loop through each element of this collection
+calculate();
 for(let bit of bits) {
     //attach a click event listener that turns on the bit 
     bit.addEventListener('click', turnOnBit, false);
@@ -24,8 +25,10 @@ function turnOffBit() {
     this.addEventListener('click', turnOnBit, false);
     calculate();
 }
-//a function that looks at the current state of the bits
-//and calculates the decimal number equivalent
+//a function that looks at the current state of the bits,
+//calculates the decimal number equivalent while
+//creating a text string showing the calculation.
+//It then reports this calculation to the user.
 function calculate() {
     let sum = 0;
     let text = "";
