@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parameters Demo</title>
+    <style>
+        #grid {
+            display: grid;
+            grid-template-columns: 130px 250px;
+        }
+        #box {
+            height: 50px;
+            width: 50px;
+            background-color: blue;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        p, #output {
+            color: white;
+            text-align: center;
+        }
+        #vert {
+            appearance: slider-vertical;
+            orient: vertical;
+        }
+        #boxHolder {
+            display: flex;
+            align-items: end;
+        }
+    </style>
+</head>
+<body>
+    <div id="grid">
+        <div id="vRange">
+            <input id="vert" type="range" value="50" min="50" max="130" step="5">
+        </div>
+        <div id="boxHolder">
+            <div id="box">
+                <p>Area = <span id="output"></span></p>
+            </div>
+        </div>
+        <div></div>
+        <div id="hRange">
+            <input id="horiz" type="range" value="50" min="50" max="130" step="5">
+        </div>
+    </div>
+    <script>
+        let box = document.getElementById("box");
+        let vertical = document.getElementById("vert");
+        let horizontal = document.getElementById("horiz");
+        let output = document.getElementById("output");
+        output.textContent = reportArea(horizontal.value, vertical.value);
+        vertical.addEventListener('input', changeDimension, false);
+        horizontal.addEventListener('input', changeDimension, false);
+        //change the dimensions of the blue box
+        function changeDimension() {
+            let height = vertical.value;
+            let width = horizontal.value;
+            box.style.setProperty("height", height + "px");
+            box.style.setProperty("width", width + "px");
+            output.textContent = reportArea(width, height);
+        }
+        //report the width times the height in the blue box
+        function reportArea(width, height) {
+             return (Number(width) * Number(height)).toString();
+        }
+    </script>
+</body>
+</html>
