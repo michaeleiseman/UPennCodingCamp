@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decimal To Binary</title>
+    <style>
+        #container {
+            max-width: 800px;
+            margin: auto
+        }
+        #grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 20px
+        }
+        p {
+            text-align: center;
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+        .bitContainer {
+            background-color: cornflowerblue;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+        }
+        .bit {
+            font-size: 36px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+        }
+        #output {
+            text-align: center;
+            font-family: sans-serif;
+            font-size: 24px;
+            margin-top: 30px
+        }
+
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="grid">
+            <p>128</p>
+            <p>64</p>
+            <p>32</p>
+            <p>16</p>
+            <p>8</p>
+            <p>4</p>
+            <p>2</p>
+            <p>1</p>
+            <div class="bitContainer">
+                <div class="bit" value="128">0</div>
+            </div>
+            <div class="bitContainer">
+                <div class="bit" value="64">0</div>
+            </div>
+            <div class="bitContainer">
+                <div class="bit" value="32">0</div>
+            </div>
+            <div class="bitContainer">
+                <div class="bit" value="16">0</div>
+            </div>
+            <div class="bitContainer">
+                <div class="bit" value="8">0</div>
+            </div>
+            <div class="bitContainer">
+                <div class="bit" value="4">0</div>
+            </div>
+            <div class="bitContainer">
+                <div class="bit" value="2">0</div>
+            </div>
+            <div class="bitContainer">
+                <div class="bit" value="1">0</div>
+            </div>
+        </div>
+        <div id="output"></div>
+    </div>
+    <script>
+        //create a collection of HTML elements with the class name "bit"
+        let bits = document.getElementsByClassName("bit");
+        //loop through each element of this collection
+        for(let bit of bits) {
+            //attach a click event listener that turns on the bit 
+            bit.addEventListener('click', turnOnBit, false);
+        }
+        //a function that turns on a bit
+        function turnOnBit() {
+            //change the text content of the bit that was clicked on to "1"
+            this.textContent = "1";
+            //remove the turnOnBit event listener from this bit
+            this.removeEventListener('click', turnOnBit, false);
+            //attach a click event listener that turns off this bit 
+            this.addEventListener('click', turnOffBit, false);
+            calculate();
+        }
+        function turnOffBit() {
+            //change the text content of the bit that was clicked on to "0"
+            this.textContent = "0";
+            //remove the turnOffBit event listener from this bit
+            this.removeEventListener('click', turnOffBit, false);
+            //reattach the click event listener that turns on this bit 
+            this.addEventListener('click', turnOnBit, false);
+            calculate();
+        }
+        //a function that looks at the current state of the bits,
+        //calculates the decimal number equivalent while
+        //creating a text string showing the calculation.
+        //It then reports this calculation to the user.
+        function calculate() {
+            let sum = 0;
+            let text = "";
+            for(let bit of bits) {
+                sum = sum + Number(bit.textContent) * Number(bit.getAttribute("value"));
+                if(bit != bits[0]) {
+                    text = text + " + "
+                }
+                text = text + "(" + bit.textContent + "×" + bit.getAttribute("value") + ")";
+            }
+            text = text + " = " + sum.toString();
+            document.getElementById("output").textContent = text;
+        }
+    </script>
+</body>
+</html>

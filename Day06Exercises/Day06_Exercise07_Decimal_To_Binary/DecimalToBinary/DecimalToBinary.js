@@ -38,7 +38,7 @@ function calculate() {
         if(bit != bits[0]) {
             text = text + " + "
         }
-        text = text + "(" +bit.textContent + "×" + bit.getAttribute("value") + ")";
+        text = text + "(" + bit.textContent + "×" + bit.getAttribute("value") + ")";
     }
     text = text + " = " + sum.toString();
     document.getElementById("output").textContent = text;

@@ -1,0 +1,31 @@
+#gameBoard {
+    width:fit-content;
+    margin: auto;
+    margin-top: 20px
+}
+#reset {
+    margin-bottom: 20px
+}
+.mmRow {
+    display: flex;
+    flex-wrap: nowrap;
+}
+.red {
+    color: red
+}
+.blue {
+    color: blue
+}
+.yellow {
+    background-color: black;
+    color: yellow
+}
+.green {
+    color: green
+}
+.orange {
+    color: orange
+}
+.purple {
+    color: purple
+}
