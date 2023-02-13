@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghost Animation</title>
+</head>
+<body>
+    <svg id="canvas" viewbox="0 0 2000 1000">
+        <use id="ghost1" x="200" y="200" href="#ghost" fill="blue"/>
+        <use x="500" y="200" href="#ghost" fill="red"/>
+        <use x="500" y="500" href="#ghost" fill="yellow"/>
+        <use x="200" y="500" href="#ghost" fill="green"/>
+        <image id="mrMike" href="Yes.png" width="400" height="400" x="600" y="200"></image>
+        <defs>
+            <g id="ghost">
+                <circle cx="60" cy="60" r="60"/>
+                <rect  x="0" y="60" width="120" height="100"/>
+                <circle cx="20" cy="160" r="20"/>
+                <circle cx="60" cy="160" r="20"/>
+                <circle cx="100" cy="160" r="20"/>
+                <circle cx="35" cy="60" r="10" fill="white" />
+                <circle cx="85" cy="60" r="10" fill="white" />
+                <circle cx="40" cy="60" r="5" fill="blue" />
+                <circle cx="90" cy="60" r="5" fill="blue" />
+            </g>
+        </defs>
+    </svg>
+    <script>
+        let purpleGhostElement = document.createElementNS('http://www.w3.org/2000/svg',"use");
+        purpleGhostElement.setAttribute("x", "600");
+        purpleGhostElement.setAttribute("y", "600");
+        purpleGhostElement.setAttribute("href", "#ghost");
+        purpleGhostElement.setAttribute("fill", "purple");
+        document.getElementById("canvas").appendChild(purpleGhostElement);
+        let blueGhost = document.getElementById("ghost1");
+        let mrMike = document.getElementById("mrMike");
+        let time = setInterval(moveBlue, 30);
+        function moveBlue() {
+            mrMike.setAttribute("x", (Number(mrMike.getAttribute("x")) + 10).toString());
+            if(Number(mrMike.getAttribute("x")) > 1870) {
+                clearInterval(time);
+            }
+        }
+    </script>
+</body>
+</html>

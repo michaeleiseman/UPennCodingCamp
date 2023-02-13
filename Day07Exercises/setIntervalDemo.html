@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Timeout Demo</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 48px
+        }
+        div {
+            margin: 20px
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <label>Time Left:</label>
+        <span></span>
+    </div>
+    
+    <script>
+        let timeLeft = 5
+        document.getElementsByTagName("span")[0].textContent = timeLeft.toString();
+        //run decrementTime ever 1 second
+        let timer = setInterval(decrementTime, 1000);
+        function decrementTime() {
+            //subtract 1 second from the time left
+            timeLeft = timeLeft - 1;
+            //If there's less than 1 second left
+            if(timeLeft < 1) {
+                //Say time's up
+                timeLeft = "Time's Up!"
+                //stop the timer
+                clearInterval(timer);
+            }
+            document.getElementsByTagName("span")[0].textContent = timeLeft.toString();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Timeout Demo</title>
+</head>
+<body>
+    <svg viewbox="0 0 40 25">
+        <text id="boo" x="0" y="15" fill="white">BOO!</text>
+        <text id="wait" x="10" y="10" fill="black" font-size="2">Wait for it...</text>
+    </svg>
+    <script>
+        //run boo 2 seconds after loading
+        setTimeout(boo, 2000);
+        function boo() {
+            //remove the wait text
+            document.getElementsByTagName("svg")[0].removeChild(document.getElementById("wait"));
+            //make the boo text black
+            document.getElementById("boo").setAttribute("fill", "black");
+        }
+    </script>
+</body>
+</html>
