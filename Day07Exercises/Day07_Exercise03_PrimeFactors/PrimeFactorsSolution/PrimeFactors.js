@@ -55,14 +55,27 @@ function getOutputText(primeFactors) {
     //For example, if the primeFactors array is [2, 3, 7], the output
     //should be "The prime factors of 42 are 2, 3, and 7."
     for(let i = 0; i < primeFactors.length; i++) {
-        let factor = primeFactors[i];
+        //if this is the last factor,
         if(i == primeFactors.length - 1) {
-            text = text + "and " + factor + ".";
-        } else if (i == primeFactors.length - 2 && primeFactors.length == 2){
-            text = text + factor + " ";
-        } else {
-            text = text + factor + ", ";
+            //preceed it with the word "and"
+            text = text + "and ";
         }
+        //append the factor to the sentence
+        text = text + primeFactors[i];
+        //in most cases, we will add a comma after the factor
+        let punctuation = ", ";
+        //but if this is the last factor, 
+        if(i == primeFactors.length - 1) {
+            //we should add a period after the factor
+            punctuation = ".";
+        }
+        //or if it is the penultimate factor and there are only two factors
+        if(i == primeFactors.length - 2 && primeFactors.length == 2) {
+            //simply add a space after the factor
+            punctuation = " ";
+        }
+        //append the punctuation to the sentence
+        text = text + punctuation;
     }
     return text;
 }
