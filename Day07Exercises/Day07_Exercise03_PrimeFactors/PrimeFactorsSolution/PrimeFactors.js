@@ -34,9 +34,8 @@ function smallestPrimeFactor(number, divisor) {
     while(divisor <= max) {
         if(number % divisor == 0) {
             return divisor;
-        } else {
-            divisor++;
         }
+        divisor++;
     }
     return number;
 }
