@@ -3,21 +3,18 @@ let numberElement = document.getElementsByTagName("input")[0];
 let output = document.getElementById("output");
 function primeFactorize() {
     let number = Number(numberElement.value);
-    let primeNumber = smallestPrimeFactor(number, 2);
+    let primeNumber = 2;
     let primeFactors = [];
     //Keep dividing the number by prime factors
-    //until all that is left is a single prime factor.
-    while(primeNumber !== number) {
+    //until all that is left is 1.
+    while(number !== 1) {
+        //find the smallest prime factor of number greater than or equal to primeNumber
+        primeNumber = smallestPrimeFactor(number, primeNumber);
         //append the divisor to the prime factors array
         primeFactors.push(primeNumber);
         //divide the number by the prime number
         number = number / primeNumber;
-        //find the next smallest prime factor
-        primeNumber = smallestPrimeFactor(number, primeNumber);            
     }
-    //put the last remaining factor in the factors array. If the original
-    //number was a prime number, this will be the original number.
-    primeFactors.push(number);
     //change the text content of output by calling the getOutputText function
     //and provide the primeFactors array as a parameter.
     output.textContent = getOutputText(primeFactors);
@@ -27,7 +24,7 @@ function primeFactorize() {
 //provided must be less than or equal to the lowest prime factor of the number
 //if the number is a prime number, it returns the number unchanged.
 function smallestPrimeFactor(number, divisor) {
-    //we must try to divide our number by divisors from 2 up to the 
+    //we must try to divide our number by divisors from divisor up to the 
     //square root of the number.
     //Note that we only want to take the square root ONCE, because
     //taking square roots can be computationally intensive. We don't
