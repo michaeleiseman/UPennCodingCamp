@@ -27,17 +27,15 @@
         let ghost = document.getElementById("redGhost");
         //set an Interval timer to move the ghost. You'll need to reference a callback
         //function here.
-        let time = setInterval(moveGhost, 30);
+        
         //create a call back function that changes the "x" attribute of the ghost every
         //time it is called. You should be able to get the "x" attribute of the ghost by
         //using ghost.getAttribute("x"), and you should be able to set the "x" attribute
         //of the ghost to a value using ghost.setAttribute("x", value).
-        function moveGhost() {
-            ghost.setAttribute("x", (Number(ghost.getAttribute("x")) + 10).toString());
-            if(Number(ghost.getAttribute("x")) > 1870) {
-                clearInterval(time);
-            }
-        }
+        
+
+
+        
     </script>
 </body>
 </html>
