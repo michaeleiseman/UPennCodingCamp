@@ -3,29 +3,21 @@ let numberElement = document.getElementsByTagName("input")[0];
 let output = document.getElementById("output");
 function primeFactorize() {
     let number = Number(numberElement.value);
-    let numberIsComposite = false;
     let primeNumber = smallestPrimeFactor(number, 2);
-    if(primeNumber) {
-        numberIsComposite = true;
-    }
     let primeFactors = [];
     //Keep dividing the number by prime factors
     //until all that is left is a single prime factor.
-    while(numberIsComposite) {
+    while(primeNumber !== number) {
         //append the divisor to the prime factors array
         primeFactors.push(primeNumber);
         //divide the number by the prime number
         number = number / primeNumber;
         //find the next smallest prime factor
-        primeNumber = smallestPrimeFactor(number, primeNumber);
-        //if there was no smallest prime factor except for the number itself
-        if(!primeNumber) {
-            //stop this while loop
-            numberIsComposite = false;
-            //append the number to the prime factors array (it must now be prime)
-            primeFactors.push(number);
-        }
+        primeNumber = smallestPrimeFactor(number, primeNumber);            
     }
+    //put the last remaining factor in the factors array. If the original
+    //number was a prime number, this will be the original number.
+    primeFactors.push(number);
     //change the text content of output by calling the getOutputText function
     //and provide the primeFactors array as a parameter.
     output.textContent = getOutputText(primeFactors);
@@ -33,7 +25,7 @@ function primeFactorize() {
 //This function returns the smallest prime factor of number that is greater
 //or equal to the divisor provided. If the number is composite, the divisor
 //provided must be less than or equal to the lowest prime factor of the number
-//if the number is a prime number, it returns false.
+//if the number is a prime number, it returns the number unchanged.
 function smallestPrimeFactor(number, divisor) {
     //we must try to divide our number by divisors from 2 up to the 
     //square root of the number.
@@ -44,19 +36,19 @@ function smallestPrimeFactor(number, divisor) {
     let max = Math.sqrt(number);
     while(divisor <= max) {
         if(number % divisor == 0) {
-            return divisor; 
+            return divisor;
         } else {
             divisor++;
         }
     }
-    return false;
+    return number;
 }
 //create a function here called getOutputText that takes an array
 //as a parameter and constructs a sentence that describes what 
 //the prime factors of the number are.
 function getOutputText(primeFactors) {
-    //if there are no prime factors
-    if(primeFactors.length == 0) {
+    //if there is only 1 element in the primeFactors array
+    if(primeFactors.length == 1) {
         //return text indicating this number is a prime number
         return numberElement.value + " is a prime number.";
     }
