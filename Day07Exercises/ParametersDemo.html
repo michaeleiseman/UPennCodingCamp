@@ -53,7 +53,7 @@
         let vertical = document.getElementById("vert");
         let horizontal = document.getElementById("horiz");
         let output = document.getElementById("output");
-        output.textContent = reportArea(horizontal.value, vertical.value);
+        output.textContent = reportArea(Number(horizontal.value), Number(vertical.value));
         vertical.addEventListener('input', changeDimension, false);
         horizontal.addEventListener('input', changeDimension, false);
         //change the dimensions of the blue box
@@ -62,11 +62,13 @@
             let width = horizontal.value;
             box.style.setProperty("height", height + "px");
             box.style.setProperty("width", width + "px");
+            height = Number(height);
+            width = Number(width);
             output.textContent = reportArea(width, height);
         }
         //report the width times the height in the blue box
         function reportArea(width, height) {
-             return (Number(width) * Number(height)).toString();
+             return (width * height).toString();
         }
     </script>
 </body>
