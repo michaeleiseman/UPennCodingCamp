@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse and Keyboard Events Demo</title>
+    <style>
+        svg {
+            border: 1px solid black;
+            margin: 20px
+        }
+    </style>
+</head>
+<body>
+    <svg width="800" height="600"></svg>
+
+    <script>
+        let svg = document.getElementsByTagName("svg")[0]
+        svg.addEventListener('click', addCircle, false);
+        document.addEventListener('keyup', move, false);
+        //create a circle
+        let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        //set its radius to 10 pixels
+        circle.setAttribute("r", "10");
+        //put the circle in the middle of this drawing area
+        circle.setAttribute("cx", "400");
+        circle.setAttribute("cy", "300");
+        //make the circle red
+        circle.setAttribute("fill", "red");
+        //add the circle to the drawing area
+        svg.appendChild(circle);
+        //move the circle center to coincide with the position of a mouse click
+        function addCircle(event) {
+            circle.setAttribute("cx", event.offsetX.toString());
+            circle.setAttribute("cy", event.offsetY.toString());
+        }
+        //move the circle in the direction indicated by the arrow key that was pressed
+        function move(event) {
+            let key = event.key;
+            let x = Number(circle.getAttribute("cx"));
+            let y = Number(circle.getAttribute("cy"));
+            if(key === "ArrowUp") {
+                y = y - 5;
+            }
+            if(key === "ArrowDown") {
+                y = y + 5;
+            }
+            if(key === "ArrowRight") {
+                x = x + 5;
+            }
+            if(key === "ArrowLeft") {
+                x = x - 5;
+            }
+            circle.setAttribute("cx", x.toString());
+            circle.setAttribute("cy", y.toString());
+        }
+    </script>
+</body>
+</html>
