@@ -1,0 +1,14 @@
+body {
+    font-family: sans-serif;
+    font-size: 24px
+}
+p {
+    text-align: center;
+}
+h1, button {
+    margin: 20px
+}
+#letter {
+    font-size: 128px;
+    font-weight: bold;
+}
