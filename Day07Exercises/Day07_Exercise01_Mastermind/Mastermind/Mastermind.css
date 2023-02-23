@@ -10,22 +10,25 @@
     display: flex;
     flex-wrap: nowrap;
 }
+option {
+    color: white
+}
 .red {
-    color: red
+    background-color: red
 }
 .blue {
-    color: blue
+    background-color: blue
 }
 .yellow {
-    background-color: black;
-    color: yellow
+    background-color: yellow;
+    color: black
 }
 .green {
-    color: green
+    background-color: green
 }
 .orange {
-    color: orange
+    background-color: orange
 }
 .purple {
-    color: purple
+    background-color: purple
 }
