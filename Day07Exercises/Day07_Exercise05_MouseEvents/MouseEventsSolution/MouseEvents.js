@@ -1,5 +1,11 @@
 let image = document.getElementsByTagName("img")[0];
+//attach a click event listener to the image
 image.addEventListener('click', identifyObject, false);
+//The callback function uses the mouse coordinates
+//from the event to determine if the user clicked on any of the rectangles.
+//This function reports in the output element if the user clicked
+//on the red, green, or blue rectangle or if the user clicked on
+//empty space.
 function identifyObject(event) {
     let text = "empty space.";
     let x = event.offsetX;
