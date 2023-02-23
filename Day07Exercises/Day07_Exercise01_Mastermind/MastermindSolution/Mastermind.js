@@ -2,8 +2,8 @@ let reset = document.getElementById("reset");
 reset.addEventListener('click', resetGame, false);
 let secretCode = null;
 let colors = ["red", "blue", "yellow", "green", "orange", "purple"];
-//pick a random code when initially loading the game
-pickRandomCode();
+//reset the game
+resetGame();
 function resetGame() {
     //pick a random code when resetting the game
     pickRandomCode();
