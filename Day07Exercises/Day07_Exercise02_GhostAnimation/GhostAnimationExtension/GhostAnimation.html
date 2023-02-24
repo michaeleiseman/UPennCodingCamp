@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghost Animation</title>
+    <style>
+        svg {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <svg id="canvas" width="1000" height="600" viewbox="0 0 1000 600">
+        <use id="redGhost" x="200" y="200" href="#ghost" fill="red"/>
+        <defs>
+            <g id="ghost">
+                <circle cx="60" cy="60" r="60"/>
+                <rect  x="0" y="60" width="120" height="100"/>
+                <circle cx="20" cy="160" r="20"/>
+                <circle cx="60" cy="160" r="20"/>
+                <circle cx="100" cy="160" r="20"/>
+                <circle cx="35" cy="60" r="10" fill="white" />
+                <circle cx="85" cy="60" r="10" fill="white" />
+                <circle cx="40" cy="60" r="5" fill="blue" />
+                <circle cx="90" cy="60" r="5" fill="blue" />
+            </g>
+        </defs>
+    </svg>
+    <script>
+        let ghost = document.getElementById("redGhost");
+        let x = 260;
+        let y = 260;
+        let v = 0.2;
+        let dt = 30;
+        let vdt = v * dt;
+        document.getElementsByTagName("svg")[0].addEventListener('mousemove', globalizeMouseCoordinates, false);
+        function globalizeMouseCoordinates(event) {
+            x = event.offsetX;
+            y = event.offsetY;
+        }
+        //set an Interval timer to move the ghost. You'll need to reference a callback
+        //function here.
+        let time = setInterval(moveGhost, dt);
+        //create a call back function that changes the "x" attribute of the ghost every
+        //time it is called. You should be able to get the "x" attribute of the ghost by
+        //using ghost.getAttribute("x"), and you should be able to set the "x" attribute
+        //of the ghost to a value using ghost.setAttribute("x", value).
+        function moveGhost() {
+            let xGhost = Number(ghost.getAttribute("x")) + 60;
+            let yGhost = Number(ghost.getAttribute("y")) + 60;
+            let dXGhost = 0;
+            let dYGhost = 0;
+            if(Math.abs(x - xGhost) > vdt) {
+                let m = (y - yGhost) / (x - xGhost);
+                dXGhost = Math.sign(x - xGhost) * Math.sqrt(vdt/(1 + m * m));
+                dYGhost = m * dXGhost;
+            } else {
+                if(Math.abs(y - yGhost) > vdt) {
+                    dYGhost = Math.sign(y - yGhost) * vdt;
+                }
+            }
+            newXGhost = dXGhost + xGhost - 60;
+            newYGhost = dYGhost + yGhost - 60;
+            ghost.setAttribute("x", newXGhost.toString());
+            ghost.setAttribute("y", newYGhost.toString());
+        }
+    </script>
+</body>
+</html>
