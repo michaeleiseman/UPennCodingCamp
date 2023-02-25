@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghost Animation</title>
+    <style>
+        svg {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <svg id="canvas" width="1000" height="600" viewbox="0 0 1000 600"></svg>
+    <script>
+        let canvas = document.getElementsByTagName("svg")[0];
+        canvas.addEventListener('click', addRandomGhost, false)
+        canvas.addEventListener('mousemove', moveEyes, false)
+        let ghosts = [];
+        let x;
+        let y;
+        let colors = ["red", "green", "blue", "yellow", "cyan", "magenta", "black", "purple", "orange"];
+        
+        function addRandomGhost(event) {
+            let cx = event.offsetX;
+            let cy = event.offsetY;
+            let color = colors[Math.floor(colors.length * Math.random())];
+            let ghost = document.createElementNS("http://www.w3.org/2000/svg", "g");
+            //add the head
+            ghost.appendChild(createCircle(cx, cy, 60, color));
+            //add the body
+            let body = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            body.setAttribute("x", (cx - 60).toString());
+            body.setAttribute("y", cy.toString());
+            body.setAttribute("width", "120");
+            body.setAttribute("height", "100");
+            body.setAttribute("fill", color);
+            ghost.appendChild(body);
+            //add the left eye
+            ghost.appendChild(createCircle(cx - 25, cy, 10, "white"));
+            //add the right eye
+            ghost.appendChild(createCircle(cx + 25, cy, 10, "white"));
+            //add the left pupil
+            ghost.appendChild(createCircle(cx - 25, cy, 5, "blue"));
+            //add the right pupil
+            ghost.appendChild(createCircle(cx + 25, cy, 5, "blue"));
+            //add the feet
+            ghost.appendChild(createCircle(cx - 40, cy + 100, 20, color));
+            ghost.appendChild(createCircle(cx, cy + 100, 20, color));
+            ghost.appendChild(createCircle(cx + 40, cy + 100, 20, color));
+            canvas.appendChild(ghost);
+            ghosts.push(ghost);
+
+        }
+        function createCircle(cx, cy, r, color) {
+            let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            circle.setAttribute("cx", cx.toString());
+            circle.setAttribute("cy", cy.toString());
+            circle.setAttribute("r", r.toString());
+            circle.setAttribute("fill", color);
+            return circle;
+        }
+        function moveEyes(event) {
+            let xMouse = event.offsetX;
+            let yMouse = event.offsetY;
+            for(ghost of ghosts) {
+                for(let i = 1; i < 3; i++) {
+                    let eye = ghost.getElementsByTagName("circle")[i];
+                    let pupil = ghost.getElementsByTagName("circle")[i + 2];
+                    let cx = Number(eye.getAttribute("cx"));
+                    let cy = Number(eye.getAttribute("cy"));
+                    let dxPupil = 0;
+                    let dyPupil = 0;
+                    if(cx == xMouse) {
+                        dyPupil = Math.sign(yMouse - cy) * 5;
+                    } else {
+                        let m = (yMouse - cy) / (xMouse - cx);
+                        dxPupil = Math.sign(xMouse - cx) * Math.sqrt(15 / (1 + m * m));
+                        dyPupil = m * dxPupil;
+                    }
+                    let newXPupil = dxPupil + cx;
+                    let newYPupil = dyPupil + cy;
+                    pupil.setAttribute("cx", newXPupil.toString());
+                    pupil.setAttribute("cy", newYPupil.toString())
+                }
+            }
+            // let xGhost = Number(ghost.getAttribute("x")) + 60;
+            // let yGhost = Number(ghost.getAttribute("y")) + 60;
+            // let mouseToGhostDistance = Math.sqrt((x - xGhost)**2 + (y - yGhost)**2);
+            // let v = vMax;
+            // if(mouseToGhostDistance < 60) {
+            //     v = vMax * mouseToGhostDistance / 60;
+            // }
+            // let dXGhost = 0;
+            // let dYGhost = 0;
+            // if(Math.abs(x - xGhost) > 2) {
+            //     let m = (y - yGhost) / (x - xGhost);
+            //     dXGhost = Math.sign(x - xGhost) * Math.sqrt(v * dt/(1 + m * m));
+            //     dYGhost = m * dXGhost;
+            // } else {
+            //     if(Math.abs(y - yGhost) >= v * dt) {
+            //         dYGhost = Math.sign(y - yGhost) * v * dt;
+            //     }
+            // }
+            // newXGhost = dXGhost + xGhost - 60;
+            // newYGhost = dYGhost + yGhost - 60;
+            // ghost.setAttribute("x", newXGhost.toString());
+            // ghost.setAttribute("y", newYGhost.toString());
+        }
+    </script>
+</body>
+</html>
