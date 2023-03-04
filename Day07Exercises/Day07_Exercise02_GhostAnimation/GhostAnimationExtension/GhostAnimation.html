@@ -32,7 +32,7 @@
         let ghost = document.getElementById("redGhost");
         let x = 260;
         let y = 260;
-        let vMax = 5;
+        let vMax = 0.4;
         let dt = 30;
         document.getElementsByTagName("svg")[0].addEventListener('mousemove', globalizeMouseCoordinates, false);
         function globalizeMouseCoordinates(event) {
@@ -49,21 +49,19 @@
         function moveGhost() {
             let xGhost = Number(ghost.getAttribute("x")) + 60;
             let yGhost = Number(ghost.getAttribute("y")) + 60;
-            let mouseToGhostDistance = Math.sqrt((x - xGhost)**2 + (y - yGhost)**2);
+            let mouseToGhostDistanceSquared = (x - xGhost)**2 + (y - yGhost)**2;
             let v = vMax;
-            if(mouseToGhostDistance < 60) {
-                v = vMax * mouseToGhostDistance / 60;
+            if(mouseToGhostDistanceSquared < 3600) {
+                v = vMax * mouseToGhostDistanceSquared / 3600;
             }
             let dXGhost = 0;
             let dYGhost = 0;
-            if(Math.abs(x - xGhost) > 2) {
+            if(x != xGhost) {
                 let m = (y - yGhost) / (x - xGhost);
-                dXGhost = Math.sign(x - xGhost) * Math.sqrt(v * dt/(1 + m * m));
+                dXGhost = Math.sign(x - xGhost) * v * dt / Math.sqrt(1 + m * m);
                 dYGhost = m * dXGhost;
             } else {
-                if(Math.abs(y - yGhost) >= v * dt) {
-                    dYGhost = Math.sign(y - yGhost) * v * dt;
-                }
+                dYGhost = Math.sign(y - yGhost) * v * dt;
             }
             newXGhost = dXGhost + xGhost - 60;
             newYGhost = dYGhost + yGhost - 60;

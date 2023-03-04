@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Properties</title>
+    <style>
+        img {
+            width: 200px;
+            height: 315px
+        }
+    </style>
+</head>
+<body>
+    <img src="AceOfHearts.png" alt="The ace of hearts">
+    <img src="FiveOfSpades.png" alt="The five of spades">
+    <img src="FourOfClubs.png" alt="The four of clubs">
+    <img src="NineOfDiamonds.png" alt="The nine of diamonds">
+    <h1 id="output"></h1>
+    <script>
+        let cards = document.getElementsByTagName("img");
+        cards[0].number = "ace";
+        cards[0].suit = "hearts";
+        //Now give number and suit properties to the other three cards
+        //ENTER YOUR CODE HERE
+        
+        
+
+
+
+
+        //for each card
+        for(let card of cards) {
+            //define a method for this card that returns text identifying this card's number and suit
+            //using the properties of this card
+            //ENTER YOUR CODE HERE
+            
+
+
+        }
+        //for each card
+        for (let card of cards) {
+            //add a click event listener whose callback modifies the text content of the output div
+            card.addEventListener('click', identifyCard, false);
+        }
+        //perform this function when the user clicks on a card
+        function identifyCard() {
+            //put in a line of code here that changes the text content of the OUTPUT to the text that
+            //identifies this card's number and suit by calling the method on this card that does that.
+            //ENTER YOUR CODE HERE
+
+        }
+    </script>
+    
+</body>
+</html>

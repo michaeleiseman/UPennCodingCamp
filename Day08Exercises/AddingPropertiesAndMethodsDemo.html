@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adding Properties and Methods Demo</title>
+    <style>
+        li {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>What color is the Whitehouse?</p>
+        <ol type="A">
+            <li>ebony</li>
+            <li>black</li>
+            <li>charcoal</li>
+            <li>white</li>
+        </ol>
+        <h1></h1>
+        <input type="number">
+        <h1></h1>
+    </div>
+    <script>
+        let answers = document.getElementsByTagName("li");
+        //DEFINE an isCorrect PROPERTY to each of these list elements
+        answers[0].isCorrect = false;
+        answers[1].isCorrect = false;
+        answers[2].isCorrect = false;
+        answers[3].isCorrect = true;
+        for(let answer of answers) {
+            answer.addEventListener('click', giveFeedback, false);
+        }
+        function giveFeedback() {
+            let text = " wrong.";
+            //RETRIVE the isCorrect PROPERTY here to find out if the user clicked in the right answer
+            if(this.isCorrect) {
+                text = " right.";
+            }
+            document.getElementsByTagName("h1")[0].textContent = "You got it" + text;
+        }
+        let input = document.getElementsByTagName("input")[0];
+        //DEFINE an isEven METHOD for this input element
+        /* note that when we define the method for the input element,*/ this /* is the input element */
+        input.isEven = function() {
+            return Number(this.value) % 2 == 0;
+        }
+        input.addEventListener('input', reportEvenOrOdd, false);
+        function reportEvenOrOdd() {
+            let text = " odd.";
+            //CALL the isEven METHOD here on this element
+            if(this.isEven()) {
+                text= " even.";
+            }
+            document.getElementsByTagName("h1")[1].textContent = this.value + " is" + text;
+        }
+    </script>
+</body>
+</html>

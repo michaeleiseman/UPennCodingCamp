@@ -21,6 +21,9 @@
         let x;
         let y;
         let colors = ["red", "green", "blue", "yellow", "cyan", "magenta", "black", "purple", "orange"];
+        let eyeRadius = 20;
+        let pupilRadius = 10;
+
         
         function addRandomGhost(event) {
             let cx = event.offsetX;
@@ -38,13 +41,13 @@
             body.setAttribute("fill", color);
             ghost.appendChild(body);
             //add the left eye
-            ghost.appendChild(createCircle(cx - 25, cy, 10, "white"));
+            ghost.appendChild(createCircle(cx - 25, cy, eyeRadius, "white"));
             //add the right eye
-            ghost.appendChild(createCircle(cx + 25, cy, 10, "white"));
+            ghost.appendChild(createCircle(cx + 25, cy, eyeRadius, "white"));
             //add the left pupil
-            ghost.appendChild(createCircle(cx - 25, cy, 5, "blue"));
+            ghost.appendChild(createCircle(cx - 25, cy, pupilRadius, "blue"));
             //add the right pupil
-            ghost.appendChild(createCircle(cx + 25, cy, 5, "blue"));
+            ghost.appendChild(createCircle(cx + 25, cy, pupilRadius, "blue"));
             //add the feet
             ghost.appendChild(createCircle(cx - 40, cy + 100, 20, color));
             ghost.appendChild(createCircle(cx, cy + 100, 20, color));
@@ -73,10 +76,10 @@
                     let dxPupil = 0;
                     let dyPupil = 0;
                     if(cx == xMouse) {
-                        dyPupil = Math.sign(yMouse - cy) * 5;
+                        dyPupil = Math.sign(yMouse - cy) * (eyeRadius - pupilRadius);
                     } else {
                         let m = (yMouse - cy) / (xMouse - cx);
-                        dxPupil = Math.sign(xMouse - cx) * Math.sqrt(15 / (1 + m * m));
+                        dxPupil = Math.sign(xMouse - cx) * (eyeRadius - pupilRadius) / Math.sqrt(1 + m * m);
                         dyPupil = m * dxPupil;
                     }
                     let newXPupil = dxPupil + cx;
@@ -85,28 +88,6 @@
                     pupil.setAttribute("cy", newYPupil.toString())
                 }
             }
-            // let xGhost = Number(ghost.getAttribute("x")) + 60;
-            // let yGhost = Number(ghost.getAttribute("y")) + 60;
-            // let mouseToGhostDistance = Math.sqrt((x - xGhost)**2 + (y - yGhost)**2);
-            // let v = vMax;
-            // if(mouseToGhostDistance < 60) {
-            //     v = vMax * mouseToGhostDistance / 60;
-            // }
-            // let dXGhost = 0;
-            // let dYGhost = 0;
-            // if(Math.abs(x - xGhost) > 2) {
-            //     let m = (y - yGhost) / (x - xGhost);
-            //     dXGhost = Math.sign(x - xGhost) * Math.sqrt(v * dt/(1 + m * m));
-            //     dYGhost = m * dXGhost;
-            // } else {
-            //     if(Math.abs(y - yGhost) >= v * dt) {
-            //         dYGhost = Math.sign(y - yGhost) * v * dt;
-            //     }
-            // }
-            // newXGhost = dXGhost + xGhost - 60;
-            // newYGhost = dYGhost + yGhost - 60;
-            // ghost.setAttribute("x", newXGhost.toString());
-            // ghost.setAttribute("y", newYGhost.toString());
         }
     </script>
 </body>

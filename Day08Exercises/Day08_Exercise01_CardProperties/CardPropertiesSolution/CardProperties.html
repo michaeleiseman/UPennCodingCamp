@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Properties</title>
+    <style>
+        img {
+            width: 200px;
+            height: 315px
+        }
+    </style>
+</head>
+<body>
+    <img src="AceOfHearts.png" alt="The ace of hearts">
+    <img src="FiveOfSpades.png" alt="The five of spades">
+    <img src="FourOfClubs.png" alt="The four of clubs">
+    <img src="NineOfDiamonds.png" alt="The nine of diamonds">
+    <h1 id="output"></h1>
+    <script>
+        let cards = document.getElementsByTagName("img");
+        cards[0].number = "ace";
+        cards[0].suit = "hearts";
+        cards[1].number = "five";
+        cards[1].suit = "spades";
+        cards[2].number = "four";
+        cards[2].suit = "clubs";
+        cards[3].number = "nine";
+        cards[3].suit = "diamonds";
+        //for each card
+        for(let card of cards) {
+            //define a method that returns text identifying this card's number and suit
+            //using the properties of the card
+            card.idText = function() {
+                return "You clicked on the " + this.number + " of " + this.suit + ".";
+            }
+        }
+        //for each card
+        for (let card of cards) {
+            //add a click event listener whose callback modifies the text content of the output div
+            card.addEventListener('click', identifyCard, false);
+        }
+        //report the card's identity in the output element
+        function identifyCard() {
+            document.getElementById("output").textContent = this.idText();
+        }
+    </script>
+    
+</body>
+</html>
