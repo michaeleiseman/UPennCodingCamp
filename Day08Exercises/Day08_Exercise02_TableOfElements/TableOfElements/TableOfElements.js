@@ -34,34 +34,43 @@ let chemArray = [
     {name: "Germanium", atomicWeight: 72.64},
     {name: "Arsenic", atomicWeight: 74.92},
     {name: "Selenium", atomicWeight: 78.96},
-    {name: "Bromine", atomicWeight: 79.9},
-    {name: "Krypton", atomicWeight: 83.8}
-]
+    {name: "Bromine", atomicWeight: 79.9}
+
+    //OOPS!! we forgot Krypton which has an atomic weight of 83.80
+    //Please add Krypton below!! Don't forget to add a comma after
+    //the Bromine (previous) object.
+
+
+];
+
+//chemicalDivs are all of the divs that contain a chemical symbol
 let chemicalDivs = document.getElementsByClassName("element");
+
 //initialize this periodic table by filling in atomic numbers and symbols for our objects
 //and put an event listener on each element.
-for(let i = 0; i < chemicalDivs.length; i++) {
-    let chemicalObject = chemArray[i];
-    let chemicalDiv = chemicalDivs[i];
-    //add the atomic number as a property to each chemical object
-    chemicalObject.atomicNumber = i + 1;
-    //add the elemental symbol as a property to each chemical object
-    chemicalObject.symbol = chemicalDiv.textContent;
+//An INDEXED for loop is your best bet here.  For each div that contains a chemical symbol:
+
+    //add the atomic number as a property to its corresponding chemical object
+
+    //add the elemental symbol as a property to its corresponding chemical object
+
     //provide an easy way to access the chemical object that corresponds to the div
     //by making the object a PROPERTY of the div.
-    chemicalDiv.chemicalObject = chemicalObject;
-    //We won't use this here, but you can also make the div a property of the chemical object
-    chemicalObject.htmlElement = chemicalDiv;
+
+
     //add a 'mouseenter' listener to the div whose callback publishes the properties of the chemical element
-    chemicalDiv.addEventListener('mouseenter', showElement, false);
-}
-//a function that publishes the data for a chemical object
+
+
+//define a callback function here that publishes the data for a chemical object
 function showElement() {
-    //we initialized our divs so that we have access to the correct chemical object
-    let chemicalObject = this.chemicalObject;
-    //and our chemical object has all of the properties we need to publish
-    document.getElementById("atomicNumber").textContent = chemicalObject.atomicNumber.toString();
-    document.getElementById("atomicWeight").textContent = chemicalObject.atomicWeight.toFixed(2);
-    document.getElementById("symbol").textContent = chemicalObject.symbol;
-    document.getElementById("name").textContent = chemicalObject.name.toUpperCase();
+    // remember that 'this' is the div that the mouse is floating over and our page
+    // initialization process made it so the correct chemical object is now a property of 'this'.
+    // Therefore we can easily gain access to the correct chemical object
+
+    //We can use this chemical object as it has all of the properties we need to publish
+    //Namely, atomic number, atomic weight, symbol, and name
+    
+    
+
+    
 }

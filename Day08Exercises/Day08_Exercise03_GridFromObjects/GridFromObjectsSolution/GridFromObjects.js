@@ -32,16 +32,4 @@ for(let book of books) {
         div.textContent = book[property];
         grid.appendChild(div);
     }
-    // let year = document.createElement("div");
-    // year.className = "item";
-    // year.textContent = book.year;
-    // grid.appendChild(year);
-    // let title = document.createElement("div");
-    // title.className = "item";
-    // title.textContent = book.title;
-    // grid.appendChild(title);
-    // let author = document.createElement("div");
-    // author.className = "item";
-    // author.textContent = book.author;
-    // grid.appendChild(author);
 }
