@@ -1,0 +1,16 @@
+#grid{
+    display: grid;
+    grid-template-columns: 1fr 3fr 2fr;
+    font-family: sans-serif;
+    width: 450px;
+    margin: auto;
+    border: 1px solid lightgray;
+}
+.header {
+    font-weight: bold;
+}
+.item {
+    border: 1px solid lightgray;
+    padding: 5px;
+
+}

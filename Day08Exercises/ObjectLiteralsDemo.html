@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Literals Demo</title>
+</head>
+<body>
+    <h1>What type of animal am I?</h1>
+    <p>I have <span id="legs"></span> legs.</p>
+    <p>I weigh <span id="weight"></span> pounds.</p>
+    <p>I am <span id="color"></span>.</p>
+    <label>I am a </label><input type="text"><button>Enter</button>
+    <h2 id="output"><h2>
+    <script>
+        //We are creating a NEW object here using the brace notation
+        let animalObject = {legs: 4, weight: 10000, color: "gray", answer: "elephant"}
+        fillInClues(animalObject)
+        function fillInClues(animal) {
+            //We can access the properties of our new object using the dot notation
+            document.getElementById("legs").textContent = animal.legs.toString();
+            document.getElementById("weight").textContent = animal.weight.toString();
+            document.getElementById("color").textContent = animal.color;
+            //Set up event listeners so the user can guess the animal
+            document.getElementsByTagName("button")[0].addEventListener('click', checkAnswer, false);
+            document.addEventListener('keydown', enterAnimal, false);
+        }
+        function enterAnimal(event) {
+            if(event.key === "Enter") {
+                checkAnswer();
+            }
+        }
+        function checkAnswer() {
+            let text = "Try again.";
+            //Here we are using the properties of the animal to check the answer
+            if(animalObject.answer === document.getElementsByTagName("input")[0].value.toLowerCase()) {
+                text = "You're right!";
+            }
+            document.getElementById("output").textContent = text;
+        }
+    </script>
+    
+</html>

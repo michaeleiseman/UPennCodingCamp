@@ -1,0 +1,15 @@
+#grid {
+    display: grid;
+    grid-template-columns: repeat(18, 1fr);
+    width: 800px;
+    margin: auto;
+    font-family: sans-serif;
+    margin-top: 20px;
+}
+.element {
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid black;
+    padding: 5px;
+    background-color: lightblue
+}
