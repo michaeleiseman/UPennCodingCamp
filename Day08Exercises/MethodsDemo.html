@@ -46,14 +46,24 @@
                 this.bombCount = 0;
             }
             determineBombCount() {
+                //if this cell has a bomb
                 if(this.hasBomb) {
-                    return
+                    //don't do anything
+                    return;
                 }
                 let col = this.colIndex;
                 let row = this.rowIndex;
-                for(let neighborRow = Math.max(0, row - 1); neighborRow < Math.min(height, row + 2); neighborRow++) {
-                    for(let neighborCol = Math.max(0, col - 1); neighborCol < Math.min(width, col + 2); neighborCol++) {
-                        //If this cell does not have a bomb and the neighboring cell does
+                let minRow = Math.max(0, row - 1);
+                let maxRow = Math.min(height, row + 2);
+                let minCol = Math.max(0, col - 1);
+                let maxCol = Math.min(width, col + 2);
+                //check every cell that neighbors this cell
+                //the row indicies will be between row - 1 and row + 1 unless this cell is on the top or bottom row
+                for(let neighborRow = minRow; neighborRow < maxRow; neighborRow++) {
+                    //the column indicies will be between col - 1 and col + 1 unless this cell is in the first or last column
+                    for(let neighborCol = minCol; neighborCol < maxCol; neighborCol++) {
+                        //If the neighboring cell has a bomb (note we don't have to worry about this cell having a bomb
+                        //because the first condition of this method ensures it doesn't if we get to this point)
                         if(cells[neighborRow][neighborCol].hasBomb) {
                             //increase the bomb count for this cell
                             this.bombCount++;
@@ -74,7 +84,7 @@
         for(let rowIndex = 0; rowIndex < height; rowIndex++) {
             let row = [];
             for(let colIndex = 0; colIndex < width; colIndex++) {
-                row.push(new Cell(rowIndex, colIndex))
+                row.push(new Cell(rowIndex, colIndex));
             }
             cells.push(row);
         }
