@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Methods Demo</title>
+    <style>
+        #grid{
+            display: grid;
+            grid-template-columns: repeat(20, 30px);
+        }
+        .cell {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30px;
+            border: 1px solid black;
+        }
+        .bullet {
+            font-size: 36px;
+            margin: 0px
+        }
+    </style>
+</head>
+<body>
+    <div id="grid"></div>
+    <script>
+        let width = 20;
+        let height = 20;
+        class Cell {
+            constructor(rowIndex, colIndex) {
+                this.rowIndex = rowIndex;
+                this.colIndex = colIndex;
+                this.hasBomb = Math.random() < 0.1;
+                this.element = document.createElement("div");
+                this.element.className = "cell";
+                document.getElementById("grid").appendChild(this.element);
+                this.element.cell = this;
+                if(this.hasBomb) {
+                    let bullet = document.createElement("p");
+                    bullet.className = "bullet";
+                    bullet.textContent = "•";
+                    this.element.appendChild(bullet);
+                }
+                this.bombCount = 0;
+            }
+            determineBombCount() {
+                if(this.hasBomb) {
+                    return
+                }
+                let col = this.colIndex;
+                let row = this.rowIndex;
+                for(let neighborRow = Math.max(0, row - 1); neighborRow < Math.min(height, row + 2); neighborRow++) {
+                    for(let neighborCol = Math.max(0, col - 1); neighborCol < Math.min(width, col + 2); neighborCol++) {
+                        //If this cell does not have a bomb and the neighboring cell does
+                        if(cells[neighborRow][neighborCol].hasBomb) {
+                            //increase the bomb count for this cell
+                            this.bombCount++;
+                        }
+                    }
+                }
+                if(this.bombCount > 0) {
+                    let p = document.createElement("p");
+                    p.textContent = this.bombCount.toString();
+                    this.element.appendChild(p);
+                }
+            }
+
+        }
+        //construct the cell objects and put them in a 2-dimensional array
+        //that corresponds to their position on the grid
+        let cells = []
+        for(let rowIndex = 0; rowIndex < height; rowIndex++) {
+            let row = [];
+            for(let colIndex = 0; colIndex < width; colIndex++) {
+                row.push(new Cell(rowIndex, colIndex))
+            }
+            cells.push(row);
+        }
+
+        for(let row of cells) {
+            for(let cell of row) {
+                cell.determineBombCount();
+            }
+        }
+    </script>
+</body>
+</html>

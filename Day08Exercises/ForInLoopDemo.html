@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For In Loop Demo</title>
+</head>
+<body>
+    <svg width="400" height="400"></svg>
+    <script>
+        shapes = [
+            {shape: "rect", x: "50", y: "100", width: "100", height: "20", fill: "red"},
+            {shape: "circle", cx: "200", cy: "200", r: "50", fill: "blue"},
+            {shape: "polygon", points: "300,300 320,300 340,350 340,375 280,380 250,360 275,320", fill: "green"}
+        ]
+        //add each shape to the canvas
+        for(let shape of shapes) {
+            addGraphicFromObject(shape);
+        }
+        //add a shape to the canvas
+        function addGraphicFromObject(object) {
+            //create a new svg element using the tag name given in the object's shape property
+            let element = document.createElementNS("http://www.w3.org/2000/svg", object.shape);
+            //for each property in the object
+            for(let property in object) {
+                if(property !== "shape") {
+                    //set the attribute using the property NAME and the VALUE of the property
+                    //for example if the property is "x" and the value of the "x" property was "50"
+                    //then we would set the "x" attribute of the element to have a value of "50"
+                    element.setAttribute(property, object[property]);
+                }
+            }
+            document.getElementsByTagName("svg")[0].appendChild(element);
+        }
+    </script>
+    
+</body>
+</html>

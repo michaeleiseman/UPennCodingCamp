@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table of Elements</title>
+    <style>
+        #flex {
+            display: flex;
+            width: 800px;
+            margin: auto;
+            margin-top: 20px;
+        }
+        #periodicTable {
+            display: grid;
+            grid-template-columns: repeat(18, 1fr);
+            flex: 4;
+            font-family: sans-serif;
+
+        }
+        #elementInfo {
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            flex: 1;
+            border: 2px solid black
+        }
+        .element {
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid black;
+            padding: 5px;
+            background-color: lightblue
+        }
+        #atomicNumber {
+            font-size: 12px;
+            float: left;
+            padding: 5px
+        }
+        #atomicWeight {
+            font-size: 12px;
+            float:right;
+            padding: 5px
+        }
+        #symbol {
+            font-Size: 36px;
+            font-weight: bold;
+            text-align:center;
+            margin: 0px
+        }
+        #name {
+            text-align: center;
+            font-size: 12px
+        }
+    </style>
+</head>
+<body>
+    <div id="flex">
+        <div id="periodicTable">
+            <div class="element">H</div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div class="element">He</div>
+            <div class="element">Li</div><div class="element">Be</div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div class="element">B</div><div class="element">C</div><div class="element">N</div><div class="element">O</div><div class="element">F</div><div class="element">Ne</div>
+            <div class="element">Na</div><div class="element">Mg</div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div class="element">Al</div><div class="element">Si</div><div class="element">P</div><div class="element">S</div><div class="element">Cl</div><div class="element">Ar</div>
+            <div class="element">K</div><div class="element">Ca</div><div class="element">Sc</div><div class="element">Ti</div><div class="element">V</div><div class="element">Cr</div><div class="element">Mn</div><div class="element">Fe</div><div class="element">Co</div><div class="element">Ni</div><div class="element">Cu</div><div class="element">Zn</div><div class="element">Ga</div><div class="element">Ge</div><div class="element">As</div><div class="element">Se</div><div class="element">Br</div><div class="element">Kr</div>
+        </div>
+        <div id="elementInfo">
+            <div>
+                <span id="atomicNumber"></span>
+                <span id="atomicWeight"></span>
+            </div>
+            <p id="symbol"></p>
+            <p id="name"></p>
+        </div>
+    </div>
+    <script>
+        let chemArray = [
+            {name: "Hydrogen", atomicWeight: 1.008},
+            {name: "Helium", atomicWeight: 4.003},
+            {name: "Lithium", atomicWeight: 6.941},
+            {name: "Beryllium", atomicWeight: 9.012},
+            {name: "Boron", atomicWeight: 10.81},
+            {name: "Carbon", atomicWeight: 12.01},
+            {name: "Nitrogen", atomicWeight: 14.01},
+            {name: "Oxygen", atomicWeight: 16},
+            {name: "Fluorine", atomicWeight: 19},
+            {name: "Neon", atomicWeight: 20.18},
+            {name: "Sodium", atomicWeight: 22.99},
+            {name: "Magnesium", atomicWeight: 24.31},
+            {name: "Aluminum", atomicWeight: 26.98},
+            {name: "Silicon", atomicWeight: 28.09},
+            {name: "Phosphorus", atomicWeight: 30.97},
+            {name: "Sulfur", atomicWeight: 32.06},
+            {name: "Chlorine", atomicWeight: 35.45},
+            {name: "Argon", atomicWeight: 39.95},
+            {name: "Potassium", atomicWeight: 39.1},
+            {name: "Calcium", atomicWeight: 40.08},
+            {name: "Scandium", atomicWeight: 44.96},
+            {name: "Titanium", atomicWeight: 47.87},
+            {name: "Vanadium", atomicWeight: 50.94},
+            {name: "Chromium", atomicWeight: 52},
+            {name: "Manganese", atomicWeight: 54.94},
+            {name: "Iron", atomicWeight: 55.85},
+            {name: "Cobalt", atomicWeight: 58.93},
+            {name: "Nickel", atomicWeight: 58.69},
+            {name: "Copper", atomicWeight: 63.55},
+            {name: "Zinc", atomicWeight: 65.38},
+            {name: "Galium", atomicWeight: 69.72},
+            {name: "Germanium", atomicWeight: 72.64},
+            {name: "Arsenic", atomicWeight: 74.92},
+            {name: "Selenium", atomicWeight: 78.96},
+            {name: "Bromine", atomicWeight: 79.9},
+            {name: "Krypton", atomicWeight: 83.8}
+        ]
+        let chemicalDivs = document.getElementsByClassName("element");
+        class ChemObject {
+            constructor(name, atomicNumber, atomicWeight, symbol, htmlElement) {
+                this.name = name;
+                this.atomicNumber = atomicNumber;
+                this.atomicWeight = atomicWeight;
+                this.symbol = symbol;
+                htmlElement.addEventListener('mouseenter', show, false);
+            }
+        }
+        //initialize this periodic table by creating an object for each element that contains all of the properties of interest
+        //and adds an event listener to each chemical element div
+        for(let i = 0; i < chemicalDivs.length; i++) {
+            chemicalDivs[i].chemicalObject = new ChemObject(chemArray[i].name, i + 1, chemArray[i].atomicWeight, chemicalDivs[i].textContent, chemicalDivs[i]);
+        }
+        function show() {
+            let chemicalObject = this.chemicalObject;
+            document.getElementById("atomicNumber").textContent = chemicalObject.atomicNumber.toString();
+            document.getElementById("atomicWeight").textContent = chemicalObject.atomicWeight.toFixed(2);
+            document.getElementById("symbol").textContent = chemicalObject.symbol;
+            document.getElementById("name").textContent = chemicalObject.name.toUpperCase();
+        }
+    </script>
+</body>
+</html>

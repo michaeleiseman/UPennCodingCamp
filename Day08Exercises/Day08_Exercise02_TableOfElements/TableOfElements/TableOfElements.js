@@ -62,7 +62,7 @@ let chemicalDivs = document.getElementsByClassName("element");
 
 
 //define a callback function here that publishes the data for a chemical object
-function showElement() {
+
     // remember that 'this' is the div that the mouse is floating over and our page
     // initialization process made it so the correct chemical object is now a property of 'this'.
     // Therefore we can easily gain access to the correct chemical object
@@ -72,5 +72,5 @@ function showElement() {
     
     
 
-    
-}
+
+
