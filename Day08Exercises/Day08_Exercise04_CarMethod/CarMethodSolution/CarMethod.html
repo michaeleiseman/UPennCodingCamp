@@ -13,7 +13,7 @@
             height: 687px;
             position: relative
         }
-        .flasher {
+        .light {
             position: absolute;
             background-color: black;
             border-radius: 26px;
@@ -44,40 +44,50 @@
 </head>
 <body>
     <div id="car">
-        <div id="left" class="flasher"></div>
-        <div id="right" class="flasher"></div>
+        <div id="left" class="light"></div>
+        <div id="right" class="light"></div>
         <button>Flashers</button>
     </div>
     <script>
-        let timer;
         let myCar = {
             element: document.getElementById("car"),
-            flashers: document.getElementsByClassName("flasher"),
+            lights: document.getElementsByClassName("light"),
             flashersAreOn: false,
             lightsAreOn: false,
+            timer: null,
             toggleFlashers: function () {
                 if(myCar.flashersAreOn) {
-                    clearInterval(timer);
+                    //stop toggling the car lights
+                    clearInterval(myCar.timer);
                     myCar.flashersAreOn = false;
-                    if(myCar.lightsAreOn) {
-                        myCar.toggleLights();
-                    }
-                } else {
-                    myCar.toggleLights();
-                    timer = setInterval(myCar.toggleLights, 500);
-                    myCar.flashersAreOn = true;
-                }
+                    //turn off myCar's lights here
+                    myCar.turnLightsOff();
+                    return;
+                } 
+                //turn on myCar's lights here
+                myCar.turnLightsOn();
+                //set the myCar's lights to toggle every half second
+                myCar.timer = setInterval(myCar.toggleLights, 500);
+                myCar.flashersAreOn = true;
             },
             toggleLights: function() {
                 if(myCar.lightsAreOn) {
-                    myCar.flashers[0].style.setProperty("background-color", "black");
-                    myCar.flashers[1].style.setProperty("background-color", "black");
-                    myCar.lightsAreOn = false;
-                } else {
-                    myCar.flashers[0].style.setProperty("background-color", "red");
-                    myCar.flashers[1].style.setProperty("background-color", "red");
-                    myCar.lightsAreOn = true;
+                    //turn off myCar's lights here
+                    myCar.turnLightsOff();
+                    return;
                 }
+                //turn on myCar's lights here
+                myCar.turnLightsOn();
+            },
+            turnLightsOn: function() {
+                this.lights[0].style.setProperty("background-color", "red");
+                this.lights[1].style.setProperty("background-color", "red");
+                this.lightsAreOn = true;
+            },
+            turnLightsOff: function() {
+                this.lights[0].style.setProperty("background-color", "black");
+                this.lights[1].style.setProperty("background-color", "black");
+                this.lightsAreOn = false;
             }
         }
         document.getElementsByTagName("button")[0].addEventListener('click', myCar.toggleFlashers, false);

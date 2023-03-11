@@ -9,28 +9,28 @@
         #raceTrack {
             position: relative
         }
-        #box{
+        #square{
             position: absolute;
             width: 100px;
-            height: 50px;
+            height: 100px;
             background-color: black;
         }
     </style>
 </head>
 <body>
     <div id="raceTrack">
-        <div id="box"></div>
+        <div id="square"></div>
     </div>
     
     <script>
-        let myBox =  {
-            //element is a PROPERTY of myBox
-            element: document.getElementById("box"),
-            //x is a PROPERTY of myBox
+        let mySquare =  {
+            //element is a PROPERTY of mySquare
+            element: document.getElementById("square"),
+            //x is a PROPERTY of mySquare
             x: 0,
-            //y is a PROPERTY of myBox
+            //y is a PROPERTY of mySquare
             y: 0,
-            //move is a METHOD for myBox because its value is a FUNCTION
+            //move is a METHOD for mySquare because its value is a FUNCTION
             move: function(deltaX, deltaY) {
                 this.x = this.x + deltaX;
                 this.element.style.setProperty("left", this.x + "px");
@@ -38,21 +38,21 @@
                 this.element.style.setProperty("top", this.y + "px");
             }
         }
-        document.addEventListener("keydown", moveBox, false);
-        function moveBox(event) {
+        document.addEventListener("keydown", moveSquare, false);
+        function moveSquare(event) {
             let key = event.key;
             if(key === "ArrowRight") {
                 //we can call the move METHOD for my box to move it
-                myBox.move(5, 0);
+                mySquare.move(5, 0);
             }
             if(key === "ArrowLeft") {
-                myBox.move(-5, 0);
+                mySquare.move(-5, 0);
             }
             if(key === "ArrowUp") {
-                myBox.move(0, -5);
+                mySquare.move(0, -5);
             }
             if(key === "ArrowDown") {
-                myBox.move(0, 5);
+                mySquare.move(0, 5);
             }
         }
     </script>
