@@ -6,92 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Methods Demo</title>
     <style>
-        #grid{
-            display: grid;
-            grid-template-columns: repeat(20, 30px);
+        #raceTrack {
+            position: relative
         }
-        .cell {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 30px;
-            border: 1px solid black;
-        }
-        .bullet {
-            font-size: 36px;
-            margin: 0px
+        #box{
+            position: absolute;
+            width: 100px;
+            height: 50px;
+            background-color: black;
         }
     </style>
 </head>
 <body>
-    <div id="grid"></div>
+    <div id="raceTrack">
+        <div id="box"></div>
+    </div>
+    
     <script>
-        let width = 20;
-        let height = 20;
-        class Cell {
-            constructor(rowIndex, colIndex) {
-                this.rowIndex = rowIndex;
-                this.colIndex = colIndex;
-                this.hasBomb = Math.random() < 0.1;
-                this.element = document.createElement("div");
-                this.element.className = "cell";
-                document.getElementById("grid").appendChild(this.element);
-                this.element.cell = this;
-                if(this.hasBomb) {
-                    let bullet = document.createElement("p");
-                    bullet.className = "bullet";
-                    bullet.textContent = "•";
-                    this.element.appendChild(bullet);
-                }
-                this.bombCount = 0;
+        let myBox =  {
+            //element is a PROPERTY of myBox
+            element: document.getElementById("box"),
+            //x is a PROPERTY of myBox
+            x: 0,
+            //y is a PROPERTY of myBox
+            y: 0,
+            //move is a METHOD for myBox because its value is a FUNCTION
+            move: function(deltaX, deltaY) {
+                this.x = this.x + deltaX;
+                this.element.style.setProperty("left", this.x + "px");
+                this.y = this.y + deltaY;
+                this.element.style.setProperty("top", this.y + "px");
             }
-            determineBombCount() {
-                //if this cell has a bomb
-                if(this.hasBomb) {
-                    //don't do anything
-                    return;
-                }
-                let col = this.colIndex;
-                let row = this.rowIndex;
-                let minRow = Math.max(0, row - 1);
-                let maxRow = Math.min(height, row + 2);
-                let minCol = Math.max(0, col - 1);
-                let maxCol = Math.min(width, col + 2);
-                //check every cell that neighbors this cell
-                //the row indicies will be between row - 1 and row + 1 unless this cell is on the top or bottom row
-                for(let neighborRow = minRow; neighborRow < maxRow; neighborRow++) {
-                    //the column indicies will be between col - 1 and col + 1 unless this cell is in the first or last column
-                    for(let neighborCol = minCol; neighborCol < maxCol; neighborCol++) {
-                        //If the neighboring cell has a bomb (note we don't have to worry about this cell having a bomb
-                        //because the first condition of this method ensures it doesn't if we get to this point)
-                        if(cells[neighborRow][neighborCol].hasBomb) {
-                            //increase the bomb count for this cell
-                            this.bombCount++;
-                        }
-                    }
-                }
-                if(this.bombCount > 0) {
-                    let p = document.createElement("p");
-                    p.textContent = this.bombCount.toString();
-                    this.element.appendChild(p);
-                }
-            }
-
         }
-        //construct the cell objects and put them in a 2-dimensional array
-        //that corresponds to their position on the grid
-        let cells = []
-        for(let rowIndex = 0; rowIndex < height; rowIndex++) {
-            let row = [];
-            for(let colIndex = 0; colIndex < width; colIndex++) {
-                row.push(new Cell(rowIndex, colIndex));
+        document.addEventListener("keydown", moveBox, false);
+        function moveBox(event) {
+            let key = event.key;
+            if(key === "ArrowRight") {
+                //we can call the move METHOD for my box to move it
+                myBox.move(5, 0);
             }
-            cells.push(row);
-        }
-
-        for(let row of cells) {
-            for(let cell of row) {
-                cell.determineBombCount();
+            if(key === "ArrowLeft") {
+                myBox.move(-5, 0);
+            }
+            if(key === "ArrowUp") {
+                myBox.move(0, -5);
+            }
+            if(key === "ArrowDown") {
+                myBox.move(0, 5);
             }
         }
     </script>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Method</title>
+    <style>
+        #car {
+            background-image: url("car.png");
+            background-repeat: none;
+            width: 834px;
+            height: 687px;
+            position: relative
+        }
+        .flasher {
+            position: absolute;
+            background-color: black;
+            border-radius: 26px;
+            width: 124px;
+            height: 76px
+        }
+        #left {
+            top: 305px;
+            left: 73px
+        }
+        #right {
+            top: 305px;
+            right: 74px
+        }
+        button {
+            color: white;
+            background-color: cornflowerblue;
+            font-size: 24px;
+            font-style: 'sans-serif';
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            position: absolute;
+            top: 320px;
+            left: 355px
+        }
+    </style>
+</head>
+<body>
+    <div id="car">
+        <div id="left" class="flasher"></div>
+        <div id="right" class="flasher"></div>
+        <button>Flashers</button>
+    </div>
+    <script>
+        let timer;
+        let myCar = {
+            element: document.getElementById("car"),
+            flashers: document.getElementsByClassName("flasher"),
+            flashersAreOn: false,
+            lightsAreOn: false,
+            toggleFlashers: function () {
+                if(myCar.flashersAreOn) {
+                    clearInterval(timer);
+                    myCar.flashersAreOn = false;
+                    if(myCar.lightsAreOn) {
+                        myCar.toggleLights();
+                    }
+                } else {
+                    myCar.toggleLights();
+                    timer = setInterval(myCar.toggleLights, 500);
+                    myCar.flashersAreOn = true;
+                }
+            },
+            toggleLights: function() {
+                if(myCar.lightsAreOn) {
+                    myCar.flashers[0].style.setProperty("background-color", "black");
+                    myCar.flashers[1].style.setProperty("background-color", "black");
+                    myCar.lightsAreOn = false;
+                } else {
+                    myCar.flashers[0].style.setProperty("background-color", "red");
+                    myCar.flashers[1].style.setProperty("background-color", "red");
+                    myCar.lightsAreOn = true;
+                }
+            }
+        }
+        document.getElementsByTagName("button")[0].addEventListener('click', myCar.toggleFlashers, false);
+    </script>
+</body>
+</html>
