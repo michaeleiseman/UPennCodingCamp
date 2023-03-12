@@ -118,20 +118,24 @@
                 this.atomicNumber = atomicNumber;
                 this.atomicWeight = atomicWeight;
                 this.symbol = symbol;
-                htmlElement.addEventListener('mouseenter', show, false);
+                //as usual, we attach the event listener to the html element
+                htmlElement.addEventListener('mouseenter', this.show, false);
+            }
+            show() {
+                //because we arrive at this method from an event handler, "this" is the html div that corresponds to this object
+                //not the object itself. But we can get access to the object because it is a property of the html div.
+                let chemicalObject = this.chemicalObject;
+                document.getElementById("atomicNumber").textContent = chemicalObject.atomicNumber.toString();
+                document.getElementById("atomicWeight").textContent = chemicalObject.atomicWeight.toFixed(2);
+                document.getElementById("symbol").textContent = chemicalObject.symbol;
+                document.getElementById("name").textContent = chemicalObject.name.toUpperCase();
             }
         }
         //initialize this periodic table by creating an object for each element that contains all of the properties of interest
         //and adds an event listener to each chemical element div
         for(let i = 0; i < chemicalDivs.length; i++) {
+            //here we are making the OBJECT a PROPERTY of its corresponding html div
             chemicalDivs[i].chemicalObject = new ChemObject(chemArray[i].name, i + 1, chemArray[i].atomicWeight, chemicalDivs[i].textContent, chemicalDivs[i]);
-        }
-        function show() {
-            let chemicalObject = this.chemicalObject;
-            document.getElementById("atomicNumber").textContent = chemicalObject.atomicNumber.toString();
-            document.getElementById("atomicWeight").textContent = chemicalObject.atomicWeight.toFixed(2);
-            document.getElementById("symbol").textContent = chemicalObject.symbol;
-            document.getElementById("name").textContent = chemicalObject.name.toUpperCase();
         }
     </script>
 </body>
