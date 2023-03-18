@@ -1,8 +1,18 @@
 document.getElementsByTagName("button")[0].addEventListener('click', primeFactorize, false);
+document.addEventListener('keydown', enter, false);
 let numberElement = document.getElementsByTagName("input")[0];
 let output = document.getElementById("output");
+function enter(event) {
+    if(event.key === "Enter") {
+        primeFactorize();
+    }
+}
 function primeFactorize() {
-    let number = Number(numberElement.value);
+    let number = Math.abs(Number(numberElement.value));
+    //don't do anything if there is no number, or if it is 0.
+    if(number === NaN || number === 0) {
+        return;
+    }
     let primeNumber = 2;
     let primeFactors = [];
     //Keep dividing the number by prime factors
@@ -28,12 +38,7 @@ function primeFactorize() {
 function smallestPrimeFactor(number, divisor) {
     //we must try to divide our number by divisors from divisor up to the 
     //square root of the number.
-    //Note that we only want to take the square root ONCE, because
-    //taking square roots can be computationally intensive. We don't
-    //want to have a square root computation in our while condition
-    //that will need to be run repeatedly
-    let max = Math.sqrt(number);
-    while(divisor <= max) {
+    while(divisor * divisor <= number) {
         if(number % divisor == 0) {
             return divisor;
         }

@@ -1,8 +1,18 @@
 document.getElementsByTagName("button")[0].addEventListener('click', primeFactorize, false);
+document.addEventListener('keydown', enter, false);
 let numberElement = document.getElementsByTagName("input")[0];
 let output = document.getElementById("output");
+function enter(event) {
+    if(event.key === "Enter") {
+        primeFactorize();
+    }
+}
 function primeFactorize() {
-    let number = Number(numberElement.value);
+    let number = Math.abs(Number(numberElement.value));
+    //don't do anything if there is no number, or if it is 0.
+    if(number === NaN || number === 0) {
+        return;
+    }
     let primeNumber = 2;
     let primeFactors = [];
     //Keep dividing the number by prime factors
@@ -26,12 +36,7 @@ function primeFactorize() {
 function smallestPrimeFactor(number, divisor) {
     //we must try to divide our number by divisors from divisor up to the 
     //square root of the number.
-    //Note that we only want to take the square root ONCE, because
-    //taking square roots can be computationally intensive. We don't
-    //want to have a square root computation in our while condition
-    //that will need to be run repeatedly
-    let max = Math.sqrt(number);
-    while(divisor <= max) {
+    while(divisor * divisor <= number) {
         if(number % divisor == 0) {
             return divisor;
         }
@@ -44,38 +49,22 @@ function smallestPrimeFactor(number, divisor) {
 //the prime factors of the number are.
 function getOutputText(primeFactors) {
     //if there is only 1 element in the primeFactors array
-    if(primeFactors.length == 1) {
+    if(primeFactors.length === 1) {
         //return text indicating this number is a prime number
         return numberElement.value + " is a prime number.";
     }
     //Start the output.
-    let text = "The prime factors of " + numberElement.value + " are ";
+    let text = "The prime factors of " + numberElement.value + " are " +  primeFactors[0];
     //Iterate through each prime factor (hint: use an INDEXED loop).
     //Make a sentence that lists the prime factors of the number.
     //For example, if the primeFactors array is [2, 3, 7], the output
     //should be "The prime factors of 42 are 2, 3, and 7."
-    for(let i = 0; i < primeFactors.length; i++) {
-        //if this is the last factor,
-        if(i == primeFactors.length - 1) {
-            //preceed it with the word "and"
-            text = text + "and ";
-        }
-        //append the factor to the sentence
-        text = text + primeFactors[i];
-        //in most cases, we will add a comma after the factor
-        let punctuation = ", ";
-        //but if this is the last factor, 
-        if(i == primeFactors.length - 1) {
-            //we should add a period after the factor
-            punctuation = ".";
-        }
-        //or if it is the penultimate factor and there are only two factors
-        if(i == primeFactors.length - 2 && primeFactors.length == 2) {
-            //simply add a space after the factor
-            punctuation = " ";
-        }
-        //append the punctuation to the sentence
-        text = text + punctuation;
+    if(primeFactors.length === 2) {
+        return text + " and " + primeFactors[1] + ".";
     }
-    return text;
+    for(let i = 1; i < primeFactors.length - 1; i++) {
+        //append the factor to the sentence
+        text = text + ", " + primeFactors[i];
+    }
+    return text + ", and " + primeFactors[primeFactors.length - 1] + ".";
 }
