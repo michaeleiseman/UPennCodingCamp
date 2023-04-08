@@ -39,6 +39,9 @@
         .property {
             color: cyan
         }
+        .value {
+            color: pink
+        }
         #boxContainer {
             max-width: 800px;
             background-color: white;
@@ -73,12 +76,24 @@
 <body>
     <p>HTML:</p>
     <div class="background">
-        <code>&lt;<span class="tagName">div </span> <span class="attribute">id</span>=<span class="value">"red"</span>&gt;R&lt;<span class="tagName">/div</span>&gt;</code>
-        <code>&lt;<span class="tagName">div </span> <span class="attribute">id</span>=<span class="value">"green"</span>&gt;G&lt;<span class="tagName">/div</span>&gt;</code>
-        <code>&lt;<span class="tagName">div </span> <span class="attribute">id</span>=<span class="value">"blue"</span>&gt;B&lt;<span class="tagName">/div</span>&gt;</code>
+        <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"boxContainer"</span>&gt;</code>
+        <div class="indent">
+            <code>&lt;<span class="tagName">div </span> <span class="attribute">id</span>=<span class="value">"red"</span>&gt;R&lt;<span class="tagName">/div</span>&gt;</code>
+            <code>&lt;<span class="tagName">div </span> <span class="attribute">id</span>=<span class="value">"green"</span>&gt;G&lt;<span class="tagName">/div</span>&gt;</code>
+            <code>&lt;<span class="tagName">div </span> <span class="attribute">id</span>=<span class="value">"blue"</span>&gt;B&lt;<span class="tagName">/div</span>&gt;</code>
+        </div>
+        <code>&lt;<span class="tagName">/div</span>&gt;</code>
     </div>
     <p>CSS:</p>
     <div class="background">
+        <code><span class="selector">#boxContainer</span> {</code>
+            <div class="indent">
+                <code><span class="property">max-width</span>: <span class="value">800px</span>;</code>
+                <code><span class="property">background-color</span>: <span class="value">white</span>;</code>
+                <code><span class="property">position</span>: <span class="value">relative</span>;</code>
+                <code><span class="property">border</span>: <span class="value">solid 2px black</span>;</code>
+            </div>
+        <code>}</code>
         <code><span class="selector">#red</span> {</code>
             <div class="indent">
                 <code><span class="property">display</span>:
