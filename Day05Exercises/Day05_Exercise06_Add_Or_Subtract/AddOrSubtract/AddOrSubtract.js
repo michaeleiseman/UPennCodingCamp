@@ -16,5 +16,6 @@ function combine() {
     let firstNumber = Number(firstInput.value);
     let secondNumber = Number(secondInput.value);
     //You'll need to put code in here too.
+    //If the checkbox is checked, you should multiply secondNumber by -1 before adding the first number to the second.
 
 }

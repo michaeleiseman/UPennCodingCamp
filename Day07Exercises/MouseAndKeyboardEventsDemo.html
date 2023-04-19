@@ -13,25 +13,17 @@
     </style>
 </head>
 <body>
-    <svg width="800" height="600"></svg>
+    <svg width="800" height="600" viewport="800 600">
+        <circle r="10" cx="400" cy="300" fill="red"></circle>
+    </svg>
 
     <script>
         let svg = document.getElementsByTagName("svg")[0]
-        svg.addEventListener('click', addCircle, false);
-        document.addEventListener('keyup', move, false);
-        //create a circle
-        let circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        //set its radius to 10 pixels
-        circle.setAttribute("r", "10");
-        //put the circle in the middle of this drawing area
-        circle.setAttribute("cx", "400");
-        circle.setAttribute("cy", "300");
-        //make the circle red
-        circle.setAttribute("fill", "red");
-        //add the circle to the drawing area
-        svg.appendChild(circle);
+        svg.addEventListener('click', teleport, false);
+        document.addEventListener('keydown', move, false);
+        let circle = document.getElementsByTagName("circle")[0];
         //move the circle center to coincide with the position of a mouse click
-        function addCircle(event) {
+        function teleport(event) {
             circle.setAttribute("cx", event.offsetX.toString());
             circle.setAttribute("cy", event.offsetY.toString());
         }
