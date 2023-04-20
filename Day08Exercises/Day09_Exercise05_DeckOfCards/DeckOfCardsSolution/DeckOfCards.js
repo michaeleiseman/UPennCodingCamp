@@ -39,8 +39,16 @@ class Card {
         return "The " + this.faceValue + " of " + this.suit;
     }
 }
+document.getElementsByTagName("button")[0].addEventListener('click', deal, false);
 let suits = ["hearts", "diamonds", "clubs", "spades"];
 let faceValues = ["ace", 2, 3, 4, 5, 6, 7, 8, 9, 10, "jack", "queen", "king"];
 let myDeck = new Deck(suits, faceValues);
 myDeck.shuffle();
-let myhand = myDeck.deal(5);
+function deal() {
+    let myHand = myDeck.deal(5);
+    for(let card of myHand) {
+       let para = document.createElement("p");
+       para.textContent = card.describe();
+       document.body.append(para);
+    }
+}

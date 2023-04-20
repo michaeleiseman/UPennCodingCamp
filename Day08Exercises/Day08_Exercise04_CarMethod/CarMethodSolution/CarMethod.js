@@ -4,28 +4,28 @@ let myCar = {
     lightsAreOn: false,
     timer: null,
     toggleFlashers: function () {
-        if(myCar.flashersAreOn) {
+        if(this.flashersAreOn) {
             //stop toggling the car lights
-            clearInterval(myCar.timer);
-            myCar.flashersAreOn = false;
+            clearInterval(this.timer);
+            this.flashersAreOn = false;
             //turn off myCar's lights here
-            myCar.turnLightsOff();
+            this.turnLightsOff();
             return;
         } 
         //turn on myCar's lights here
-        myCar.turnLightsOn();
+        this.turnLightsOn();
         //set the myCar's lights to toggle every half second
-        myCar.timer = setInterval(myCar.toggleLights, 500);
-        myCar.flashersAreOn = true;
+        this.timer = setInterval(function() {myCar.toggleLights()}, 500);
+        this.flashersAreOn = true;
     },
     toggleLights: function() {
-        if(myCar.lightsAreOn) {
+        if(this.lightsAreOn) {
             //turn off myCar's lights here
-            myCar.turnLightsOff();
+            this.turnLightsOff();
             return;
         }
         //turn on myCar's lights here
-        myCar.turnLightsOn();
+        this.turnLightsOn();
     },
     turnLightsOn: function() {
         this.lights[0].style.setProperty("background-color", "red");
@@ -38,4 +38,4 @@ let myCar = {
         this.lightsAreOn = false;
     },
 }
-document.getElementsByTagName("button")[0].addEventListener('click', myCar.toggleFlashers, false);
+document.getElementsByTagName("button")[0].addEventListener('click', function() {myCar.toggleFlashers()}, false);

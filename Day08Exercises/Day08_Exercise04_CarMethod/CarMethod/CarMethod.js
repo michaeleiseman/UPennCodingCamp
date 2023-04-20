@@ -4,10 +4,10 @@ let myCar = {
     lightsAreOn: false,
     timer: null,
     toggleFlashers: function () {
-        if(myCar.flashersAreOn) {
+        if(this.flashersAreOn) {
             //stop toggling the car lights
-            clearInterval(myCar.timer);
-            myCar.flashersAreOn = false;
+            clearInterval(this.timer);
+            this.flashersAreOn = false;
             //CALL A METHOD HERE THAT TURNS OFF myCar's LIGHTS
 
             return;
@@ -15,17 +15,17 @@ let myCar = {
         //CALL A METHOD HERE THAT TURNS ON myCar's LIGHTS
 
         //set the myCar's lights to toggle every half second
-        myCar.timer = setInterval(myCar.toggleLights, 500);
-        myCar.flashersAreOn = true;
+        this.timer = setInterval(function() {myCar.toggleLights()}, 500);
+        this.flashersAreOn = true;
     },
     toggleLights: function() {
-        if(myCar.lightsAreOn) {
+        if(this.lightsAreOn) {
             //CALL A METHOD HERE THAT TURNS OFF myCar's LIGHTS
            
             return;
         }
         //CALL A METHOD HERE THAT TURNS ON myCar's LIGHTS
-        myCar.turnLightsOn();
+        
     },
     //CREATE A METHOD HERE THAT TURNS ON myCar's LIGHTS
     //note that you can access the left light using this.lights[0]
@@ -44,4 +44,4 @@ let myCar = {
 
 
 }
-document.getElementsByTagName("button")[0].addEventListener('click', myCar.toggleFlashers, false);
+document.getElementsByTagName("button")[0].addEventListener('click', function() {myCar.toggleFlashers()}, false);
