@@ -8,7 +8,8 @@ class Deck {
         let cards = [];
         for(let suit of this.suits) {
             for(let faceValue of this.faceValues) {
-                cards.push(new Card(suit, faceValue));
+                var card = //GENERATE A NEW CARD HERE USING suit AND faceValue AS PARAMETERS
+                cards.push(card);
             }
         }
         return cards;
@@ -30,15 +31,17 @@ class Deck {
         return hand;
     }
 }
-class Card {
-    constructor(suit, faceValue) {
-        this.suit = suit;
-        this.faceValue = faceValue;
-    }
-    describe() {
-        return "The " + this.faceValue + " of " + this.suit;
-    }
-}
+//CREATE YOUR CARD CLASS HERE
+//The card class should take its suit and face value as parameters and assign them
+//as properties of the object it generates.
+//Cards should also have a method that return text that identifies the card.
+
+
+
+
+
+
+
 document.getElementsByTagName("button")[0].addEventListener('click', deal, false);
 let suits = ["hearts", "diamonds", "clubs", "spades"];
 let faceValues = ["ace", 2, 3, 4, 5, 6, 7, 8, 9, 10, "jack", "queen", "king"];
@@ -53,7 +56,7 @@ function deal() {
     let myHand = myDeck.deal(5);
     for(let card of myHand) {
        let para = document.createElement("p");
-       para.textContent = card.describe();
+       para.textContent = //CALL THE CARD METHOD HERE THAT RETURNS TEXT THAT IDENTIFIES THE CARD;
        handDiv.append(para);
     }
 }
