@@ -25,11 +25,8 @@ let books = [
     {year: 1953, title: "Fahrenheit 451", author: "Ray Bradbury"}
 ]
 let grid = document.getElementById("grid");
-for(let book of books) {
-    for(let property in book) {
-        let div = document.createElement("div");
-        div.className = "item";
-        div.textContent = book[property];
-        grid.appendChild(div);
-    }
-}
+//Here is where you write your code.
+//You want to iterate through each book OF books.
+//Within each book, you want to iterate through each property IN that book
+//For each property in each book, you want to create a div whose text content
+//is the value for that property

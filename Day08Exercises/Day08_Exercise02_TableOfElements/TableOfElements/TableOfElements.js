@@ -37,7 +37,7 @@ let chemArray = [
     {name: "Bromine", atomicWeight: 79.9}
 
     //OOPS!! we forgot Krypton which has an atomic weight of 83.80
-    //Please add Krypton below!! Don't forget to add a comma after
+    //Please add Krypton below Bromine!! Don't forget to add a comma after
     //the Bromine (previous) object.
 
 
