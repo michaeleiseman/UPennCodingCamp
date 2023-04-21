@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation Demo</title>
+    <style>
+        button {
+            margin-bottom: 30px;
+        }
+        .greeting {
+            display: inline;
+            font-family: sans-serif;
+            font-size: 14px;
+            animation-name: shrink;
+            animation-duration: 3s;
+            animation-fill-mode: forwards;
+        }
+        .greeting:hover {
+            animation-name: grow;
+            animation-duration: 3s;
+            animation-fill-mode: forwards;
+        }
+        div {
+            height: 100px;
+            width: 100px;
+            background-color: black;
+            animation-name: square;
+            animation-duration: 3s;
+            animation-fill-mode: forwards;
+        }
+        div:hover {
+            animation-name: circle;
+            animation-duration: 3s;
+            animation-fill-mode: forwards;
+        }
+        @keyframes grow {
+            from {
+                font-size: 14px;
+            }
+            to {
+                font-weight: bold;
+                font-size: 128px;
+                margin-top: -30px;
+            }
+        }
+        @keyframes shrink {
+            from {
+                margin-top: -30px;
+                font-size: 128px;
+                font-weight: bold;
+            }
+            to {
+                font-size: 14px;
+            }
+        }
+        @keyframes circle {
+            from {
+                border-radius: 0px;
+            }
+            to {
+                border-radius: 50%;
+            }
+        }
+        @keyframes square {
+            from {
+                border-radius: 50%;
+            }
+            to {
+                border-radius: 0px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <p class="greeting">Hello World</p>
+</body>
+</html>

@@ -16,8 +16,9 @@ class Deck {
     shuffle() {
         let shuffledCards = [];
         while(this.cards.length > 0) {
-            //pick a card, any card
+            //pick a card, any card from the new deck
             let index = Math.floor(this.cards.length * Math.random());
+            //take the card out of the deck and place it on top of the suffled cards pile
             shuffledCards.push(this.cards.splice(index, 1)[0]);
         }
         this.cards = shuffledCards;
