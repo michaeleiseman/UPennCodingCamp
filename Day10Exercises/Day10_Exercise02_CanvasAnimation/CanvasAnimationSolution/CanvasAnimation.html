@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Animation Demo</title>
+</head>
+<body>
+    <canvas id="canvas" style="border: 1px solid black" width="300" height="300"></canvas>
+    <script>
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext("2d");
+        let ballRadius = 20;
+        class Ball {
+            constructor(x, y, radius, color) {
+                this.x = x;
+                this.y = y;
+                this.radius = radius;
+                this.color = color;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+        }
+        let balls = [];
+        for(let i = 0; i < 20; i++) {
+            balls.push(createRandomBall());
+        }
+        function createRandomBall() {
+            let x = Math.floor((canvas.width - 2 * ballRadius) * Math.random() + 20);
+            let y = Math.floor((canvas.height - 2 * ballRadius) * Math.random() + 20);
+            let r = Math.floor(256 * Math.random());
+            let g = Math.floor(256 * Math.random());
+            let b = Math.floor(256 * Math.random());
+            let ball = new Ball(x, y, ballRadius, "rgb(" + r + ", " + g + ", " + b + ")");
+            ball.draw();
+            return ball;
+        }
+        let ball = new Ball(100, 100, 20, "black");
+        ball.draw();
+        document.addEventListener('keydown', moveBall, false);
+        function moveBall(event) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let key = event.key;
+            for(let ball of balls) {
+                if(key == "ArrowRight") {
+                    ball.x = (ball.x + 5) % canvas.width;
+                }
+                if(key == "ArrowLeft") {
+                    ball.x = ball.x - 5;
+                    if(ball.x < 0) {
+                        ball.x = canvas.width;
+                    }
+                }
+                if(key == "ArrowUp") {
+                    ball.y = ball.y - 5;
+                    if(ball.y < 0) {
+                        ball.y = canvas.height;
+                    }
+                }
+                if(key == "ArrowDown") {
+                    ball.y = (ball.y + 5) % canvas.height;
+                }
+                ball.draw();
+            }
+        }
+    </script> 
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Animation Demo</title>
+</head>
+<body>
+    <canvas id="canvas" style="border: 1px solid black" width="300" height="300"></canvas>
+    <script>
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext("2d");
+        //we want to make request animation frame a global variable
+        let raf;
+        class Ball {
+            constructor(x, y, dx, dy, radius, color) {
+                this.x = x;
+                this.y = y;
+                this.dx = dx;
+                this.dy = dy;
+                this.radius = radius;
+                this.color = color;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+        }
+        let autoBall = new Ball(100, 100, 2, 3, 20, "black");
+        let manualBall = new Ball(200, 200, 0, 0, 20, "red");
+        document.addEventListener('keydown', manualMoveBall, false);
+        moveBalls();
+        let running = true;
+        //this function responds to keyboard commands including moving the ball
+        //in any direction and pausing and restarting the animation
+        function manualMoveBall(event) {
+            let key = event.key;
+            if(key == "ArrowRight" && manualBall.x < canvas.width - manualBall.radius) {
+                manualBall.x = manualBall.x + 5;
+            }
+            if(key == "ArrowLeft" && manualBall.x > manualBall.radius) {
+                manualBall.x = manualBall.x - 5;
+            }
+            if(key == "ArrowUp" && manualBall.y > manualBall.radius) {
+                manualBall.y = manualBall.y - 5;
+            }
+            if(key == "ArrowDown" && manualBall.y < canvas.height - manualBall.radius) {
+                manualBall.y = manualBall.y + 5;
+            }
+            if(key == "Enter") {
+                if(running == true) {
+                    window.cancelAnimationFrame(raf);
+                    running = false;
+                } else {
+                    running = true;
+                    moveBalls();
+                }
+                
+            }
+        }
+        function autoMoveBall() {
+            autoBall.x = autoBall.x + autoBall.dx;
+            autoBall.y = autoBall.y + autoBall.dy;
+            //if the ball collides with either the left or right wall of the canvas
+            if(autoBall.x > canvas.width - autoBall.radius || autoBall.x < autoBall.radius) {
+                //reverse the direction of the x-component of the velocity of the ball
+                autoBall.dx = -autoBall.dx;
+            }
+            //if the ball collides with either the top or bottom wall of the canvas
+            if(autoBall.y > canvas.height - autoBall.radius || autoBall.y < autoBall.radius) {
+                //reverse the direction of the y-component of the velocity of the ball
+                autoBall.dy = -autoBall.dy;
+            }
+        }
+        function moveBalls() {
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            autoMoveBall();
+            autoBall.draw();
+            manualBall.draw();
+            raf = window.requestAnimationFrame(moveBalls);
+        }
+    </script>
+</body>
+</html>

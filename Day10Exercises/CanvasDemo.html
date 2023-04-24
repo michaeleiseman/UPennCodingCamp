@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Demo</title>
+</head>
+<body>
+    <canvas id="canvas" style="border: 1px solid black" width="300" height="300"></canvas>
+    <script>
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext("2d");
+        //This code draws a black triangle
+        ctx.fillStyle = "black";
+        ctx.beginPath();
+        ctx.moveTo(20, 50);
+        ctx.lineTo(40, 15);
+        ctx.lineTo(60, 50);
+        ctx.fill();
+
+        //This code writes "Three" on the canvas
+        ctx.font = "16pt Arial";
+        //ctx.fillText(text, x, y)
+        ctx.fillText("Three", 80, 45);
+
+
+        //This code draws a red rectangle
+        ctx.fillStyle = "red";
+        //ctx.fillRect(x, y, width, height)
+        ctx.fillRect(20, 70, 40, 30);
+
+        //This code writes "Four" on the canvas
+        ctx.font = "bold 24pt Serif";
+        ctx.fillText("Four", 80, 95);
+
+        //This code draws a blue pentagon
+        ctx.fillStyle = "blue";
+        ctx.beginPath();
+        ctx.moveTo(28, 163);
+        ctx.lineTo(20, 140);
+        ctx.lineTo(40, 120);
+        ctx.lineTo(60, 140);
+        ctx.lineTo(52, 163);
+        ctx.fill();
+
+        //This code writes "Five" on the canvas
+        ctx.font = "italic 12pt Serif";
+        ctx.fillText("Five", 80, 150);
+
+        //This code draws a green circle
+        ctx.fillStyle = "green";
+        ctx.beginPath();
+        ctx.moveTo(150, 220);
+        //ctx.arc(centerX, centerY, radius, startingAngleInRadians, endingAngleInRadians)
+        ctx.arc(150, 220, 50, 0, 2 * Math.PI);
+        ctx.fill();
+    </script>
+</body>
+</html>

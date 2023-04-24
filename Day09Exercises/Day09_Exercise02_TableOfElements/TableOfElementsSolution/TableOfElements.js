@@ -58,6 +58,7 @@ for(let i = 0; i < chemicalDivs.length; i++) {
 //a function that publishes the data for a chemical object
 function showElement() {
     //we initialized our divs so that we have access to the correct chemical object
+    //Remember that 'this' is the div that fires the event listener
     let chemicalObject = this.chemicalObject;
     //and our chemical object has all of the properties we need to publish
     document.getElementById("atomicNumber").textContent = chemicalObject.atomicNumber.toString();
