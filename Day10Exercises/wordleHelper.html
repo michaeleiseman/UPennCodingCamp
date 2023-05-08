@@ -358,39 +358,43 @@
                 for(let inputIndex = 0; inputIndex < inputsForRow.length; inputIndex++){
                     const input = inputsForRow[inputIndex];
                     const letter = input.value.toLowerCase();
-                    //First count how many times the letter is indicated to appear in the word.
-                    const numberOfThisLetter = Array.from(inputsForRow).reduce((accumulator, currentValue) => {
-                        if(currentValue.value.toLowerCase() === letter && (currentValue.style.getPropertyValue("background-color") == "darkgreen" || currentValue.style.getPropertyValue("background-color") == "gold")) {
-                            accumulator++;
+                    if(letter != "") {
+                        //First count how many times the letter is indicated to appear in the word.
+                        const numberOfThisLetter = Array.from(inputsForRow).reduce((accumulator, currentValue) => {
+                            if(currentValue.value.toLowerCase() === letter && (currentValue.style.getPropertyValue("background-color") == "darkgreen" || currentValue.style.getPropertyValue("background-color") == "gold")) {
+                                accumulator++;
+                            }
+                            return accumulator;
+                        }, 0);
+                        if(input.style.getPropertyValue("background-color") == "darkgreen") {
+                            //Only allow words where the letter is in the word at this input index.
+                            choices = choices.filter(word => word.charAt(inputIndex) == letter);
+                            lettersInWord.push(letter);
                         }
-                        return accumulator;
-                    }, 0);
-                    if(input.style.getPropertyValue("background-color") == "darkgreen") {
-                        //Only allow words where the letter is in the word at this input index.
-                        choices = choices.filter(word => word.charAt(inputIndex) == letter);
-                        lettersInWord.push(letter);
-                    }
-                    if(input.style.getPropertyValue("background-color") == "gold") {
-                        //Only allow words where the letter is in the word at least the right number of times, but not at this input index.
-                        choices = choices.filter(word => determineOccurrencesInWord(word, letter) >= numberOfThisLetter && word.charAt(inputIndex) != letter);
-                        lettersInWord.push(letter);
+                        if(input.style.getPropertyValue("background-color") == "gold") {
+                            //Only allow words where the letter is in the word at least the right number of times, but not at this input index.
+                            choices = choices.filter(word => determineOccurrencesInWord(word, letter) >= numberOfThisLetter && word.charAt(inputIndex) != letter);
+                            lettersInWord.push(letter);
+                        }
                     }
                 }
                 if(!Array.from(inputsForRow).map(input => input.style.getPropertyValue("background-color")).some(color => color == "" || color == "transparent")) {
                     for(let inputIndex = 0; inputIndex < inputsForRow.length; inputIndex++) {
                         const input = inputsForRow[inputIndex];
                         const letter = input.value.toLowerCase();
-                        const numberOfThisLetter = lettersInWord.reduce((accumulator, currentValue) => {
-                            if(currentValue == letter) {
-                                accumulator++;
-                            }
-                            return accumulator;
-                        }, 0);
-                        if(input.style.getPropertyValue("background-color") == "gray") {
-                            if(lettersInWord.some(let => let == letter)) {
-                                choices = choices.filter(word => determineOccurrencesInWord(word, letter) == numberOfThisLetter);
-                            } else {
-                                choices = choices.filter(word => word.indexOf(letter) == -1);
+                        if(letter != "") {
+                            const numberOfThisLetter = lettersInWord.reduce((accumulator, currentValue) => {
+                                if(currentValue == letter) {
+                                    accumulator++;
+                                }
+                                return accumulator;
+                            }, 0);
+                            if(input.style.getPropertyValue("background-color") == "gray") {
+                                if(lettersInWord.some(let => let == letter)) {
+                                    choices = choices.filter(word => determineOccurrencesInWord(word, letter) == numberOfThisLetter);
+                                } else {
+                                    choices = choices.filter(word => word.indexOf(letter) == -1);
+                                }
                             }
                         }
                     }
@@ -412,7 +416,6 @@
             }
             return occurences;
         }
-
     </script>
 </body>
 </html>
