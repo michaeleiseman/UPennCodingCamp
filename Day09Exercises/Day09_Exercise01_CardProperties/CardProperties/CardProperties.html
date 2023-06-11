@@ -20,8 +20,11 @@
     <img src="NineOfDiamonds.png" alt="The nine of diamonds">
     <h1 id="output"></h1>
     <script>
+        //cards is an HTML COLLECTION.
         let cards = document.getElementsByTagName("img");
+        //The first card in the collection gets a property "number" and the value of its number is "ace".
         cards[0].number = "ace";
+        //The first card in the collection also gets a property "suit" and the value of its suit is "hearts".
         cards[0].suit = "hearts";
         //Now give number and suit properties to the other three cards
         //ENTER YOUR CODE HERE
@@ -42,7 +45,7 @@
         }
         //for each card
         for (let card of cards) {
-            //add a click event listener whose callback modifies the text content of the output div
+            //This is a click event listener whose callback modifies the text content of the output div
             card.addEventListener('click', identifyCard, false);
         }
         //perform this function when the user clicks on a card

@@ -6,6 +6,8 @@ class Deck {
     }
     constructCards() {
         let cards = [];
+        //Note that these nested for loops with make every combination of face value and suit
+        //but the cards will not be in random order
         for(let suit of this.suits) {
             for(let faceValue of this.faceValues) {
                 var card = //GENERATE A NEW CARD HERE USING suit AND faceValue AS PARAMETERS
@@ -14,6 +16,7 @@ class Deck {
         }
         return cards;
     }
+    //a function that randomizes the order of elements in an array
     shuffle() {
         let shuffledCards = [];
         while(this.cards.length > 0) {
@@ -48,13 +51,19 @@ let suits = ["hearts", "diamonds", "clubs", "spades"];
 let faceValues = ["ace", 2, 3, 4, 5, 6, 7, 8, 9, 10, "jack", "queen", "king"];
 
 function deal() {
+    //clear any hand that is currently posted
     document.body.removeChild(document.getElementById("hand"));
+    //create a place to post a new hand
     var handDiv = document.createElement("div");
     handDiv.id = "hand";
     document.body.appendChild(handDiv);
+    //create a new deck of cards
     let myDeck = new Deck(suits, faceValues);
+    //and shuffle them
     myDeck.shuffle();
+    //take the first five cards from the shuffled deck
     let myHand = myDeck.deal(5);
+    //append a description of each of these 5 cards to our new handDiv
     for(let card of myHand) {
        let para = document.createElement("p");
        para.textContent = //CALL THE CARD METHOD HERE THAT RETURNS TEXT THAT IDENTIFIES THE CARD;

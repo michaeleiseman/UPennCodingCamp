@@ -31,25 +31,27 @@
             }
         }
         let autoBall = new Ball(100, 100, 2, 3, 20, "black");
-        let manualBall = new Ball(200, 200, 0, 0, 20, "red");
+        let arrowBall = new Ball(200, 200, 0, 0, 20, "red");
         document.addEventListener('keydown', manualMoveBall, false);
+        let clickBall = new Ball(150, 150, 0, 0, 20, "blue");
+        canvas.addEventListener('click', clickMoveBall, false);
         moveBalls();
         let running = true;
         //this function responds to keyboard commands including moving the ball
         //in any direction and pausing and restarting the animation
         function manualMoveBall(event) {
             let key = event.key;
-            if(key == "ArrowRight" && manualBall.x < canvas.width - manualBall.radius) {
-                manualBall.x = manualBall.x + 5;
+            if(key == "ArrowRight" && arrowBall.x < canvas.width - arrowBall.radius) {
+                arrowBall.x = arrowBall.x + 5;
             }
-            if(key == "ArrowLeft" && manualBall.x > manualBall.radius) {
-                manualBall.x = manualBall.x - 5;
+            if(key == "ArrowLeft" && arrowBall.x > arrowBall.radius) {
+                arrowBall.x = arrowBall.x - 5;
             }
-            if(key == "ArrowUp" && manualBall.y > manualBall.radius) {
-                manualBall.y = manualBall.y - 5;
+            if(key == "ArrowUp" && arrowBall.y > arrowBall.radius) {
+                arrowBall.y = arrowBall.y - 5;
             }
-            if(key == "ArrowDown" && manualBall.y < canvas.height - manualBall.radius) {
-                manualBall.y = manualBall.y + 5;
+            if(key == "ArrowDown" && arrowBall.y < canvas.height - arrowBall.radius) {
+                arrowBall.y = arrowBall.y + 5;
             }
             if(key == "Enter") {
                 if(running == true) {
@@ -61,6 +63,10 @@
                 }
                 
             }
+        }
+        function clickMoveBall(event) {
+            clickBall.x = event.offsetX;
+            clickBall.y = event.offsetY;
         }
         function autoMoveBall() {
             autoBall.x = autoBall.x + autoBall.dx;
@@ -77,10 +83,11 @@
             }
         }
         function moveBalls() {
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             autoMoveBall();
             autoBall.draw();
-            manualBall.draw();
+            arrowBall.draw();
+            clickBall.draw();
             raf = window.requestAnimationFrame(moveBalls);
         }
     </script>
