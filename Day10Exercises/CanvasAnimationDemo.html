@@ -35,8 +35,8 @@
         document.addEventListener('keydown', manualMoveBall, false);
         let clickBall = new Ball(150, 150, 0, 0, 20, "blue");
         canvas.addEventListener('click', clickMoveBall, false);
-        moveBalls();
         let running = true;
+        moveBalls();
         //this function responds to keyboard commands including moving the ball
         //in any direction and pausing and restarting the animation
         function manualMoveBall(event) {
@@ -53,15 +53,9 @@
             if(key == "ArrowDown" && arrowBall.y < canvas.height - arrowBall.radius) {
                 arrowBall.y = arrowBall.y + 5;
             }
+            //this toggles the automatic movement of the autoBall
             if(key == "Enter") {
-                if(running == true) {
-                    window.cancelAnimationFrame(raf);
-                    running = false;
-                } else {
-                    running = true;
-                    moveBalls();
-                }
-                
+                running = !running;
             }
         }
         function clickMoveBall(event) {
@@ -84,7 +78,9 @@
         }
         function moveBalls() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            autoMoveBall();
+            if(running === true) {
+                autoMoveBall();
+            }
             autoBall.draw();
             arrowBall.draw();
             clickBall.draw();
