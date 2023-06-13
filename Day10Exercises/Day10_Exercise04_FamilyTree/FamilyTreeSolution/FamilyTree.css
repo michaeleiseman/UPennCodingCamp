@@ -1,0 +1,13 @@
+#people {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 20px
+}
+#list {
+    margin-top: 20px;
+}
+h2, p {
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}

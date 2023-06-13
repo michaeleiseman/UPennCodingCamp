@@ -213,15 +213,23 @@ function createFamilyObject(tree) {
             person.spouse.children.push(childObject);
             childObject.parents = [person, person.spouse];
         }
+        
     }
     return person;
 }
-//a function that not only lists the children of a person, but also lists their children's children, and their children's children's children, and so on.
+//a function that not only lists the children of a person, but also lists their children's children, 
+//and their children's children's children, and so on.
 function listDecendents(person) {
-    for(child of person.children) {
-        let p = document.createElement("p");
-        p.textContent = child.first + " " + child.last;
-        document.getElementById("list").appendChild(p);
-        listDecendents(child);
-    }
+    //get each child of this person in a for loop. Note that you can access this person's children in person.children
+    //which is an array of this person's children
+
+        //for each child create a paragrah element
+        
+        //make the text content of the paragraph element be the first and last name of this child
+
+        //append this paragraph to the element in the document with the id of "list"
+
+        //execute the command that will list the decendents of this child
+
+
 }
