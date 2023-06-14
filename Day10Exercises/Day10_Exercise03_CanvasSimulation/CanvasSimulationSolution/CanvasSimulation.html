@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Simulation</title>
+    <style>
+        #flex {
+            display:flex;
+            gap: 10px
+        }
+        #fire {
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            background-color: red;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            border-radius: 10px;
+            padding: 20px
+        }
+        #fire:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+    <div id="flex">
+        <canvas id="canvas" style="border: 1px solid black" width="800" height="600"></canvas>
+        <div>
+            <div>
+                <label>Initial Velocity Factor</label>
+                <input id="velocity" type="number" max="200" min="1" step="1" value="100">
+            </div>
+            <div>
+                <label>Angle in Degrees</label>
+                <input id="angle" type="number" max="90" min="0" step="1" value="45">
+            </div>
+            <div>
+                <label>Gravity Factor</label>
+                <input id="gravity" type="number" max="500" min="0" step="1" value="100">
+            </div>
+            <div>
+                <button id="fire">Fire</button>
+            </div>
+        </div>
+    
+    </div>
+    
+    
+
+    <script>
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext("2d");
+        let velocityInput = document.getElementById("velocity");
+        velocityInput.addEventListener('change', displayVector, false);
+        let angleInput = document.getElementById("angle");
+        angleInput.addEventListener("change", displayVector, false);
+        document.getElementById("fire").addEventListener('click', fire, false);
+        let gravityInput = document.getElementById("gravity");
+        displayVector();
+        //this displays the arrow showing the initial velocity of the missile
+        function displayVector() {
+            let angle = -Math.PI * angleInput.value / 180;
+            let velocity = Number(velocityInput.value) + 30;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.translate(0, canvas.height);
+            ctx.rotate(angle);
+            ctx.moveTo(0, -15);
+            ctx.lineTo(velocity, -15);
+            ctx.lineTo(velocity, -30);
+            ctx.lineTo(velocity + 40, 0);
+            ctx.lineTo(velocity, 30);
+            ctx.lineTo(velocity, 15);
+            ctx.lineTo(0, 15);
+            ctx.rotate(-angle);
+            ctx.translate(0, -canvas.height);
+            ctx.fill();
+        }
+        //we want to make request animation frame a global variable
+        let raf;
+        class Ball {
+            constructor(x, y, dx, dy, radius, color) {
+                this.x = x;
+                this.y = y;
+                this.dx = dx;
+                this.dy = dy;
+                this.radius = radius;
+                this.color = color;
+            }
+            draw() {
+                ctx.fillStyle = "black";
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+        }
+        let missile = new Ball(0, canvas.height, 0, 0, 20);        
+        //This function sets the intial position and velocity of the missile and then sets it into motion
+        function fire() {
+            missile.x = 0;
+            missile.y = canvas.height;
+            //break the velocity into x and y components
+            missile.dx = velocityInput.value * Math.cos(Math.PI * angleInput.value / 180) / 15;
+            missile.dy = -velocityInput.value * Math.sin(Math.PI * angleInput.value / 180) / 15;
+            moveMissile();
+        }
+        //This function controls the movement of the missile
+        function moveMissile() {
+            //clear the entire canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            //display the vector (arrow)
+            displayVector();
+            //draw the missile
+            missile.draw();
+            //gravity should decrease the vertical component of the velocity of the missile
+            //by a constant amount every animation frame
+            missile.dy = missile.dy + Number(gravityInput.value) / 2500;
+            //for every new animation frame, the vertical coordinate of the missile
+            //changes by an amount that is proportional to its current vertical velocity.
+            missile.y = missile.y + missile.dy;
+            //the horizontal coordinate of the missile changes by a constant amount every animation frame.
+            missile.x = missile.x + missile.dx;
+            //if the missile hits the bottom wall of the canvas while traveling downward or the right wall of the canvas
+            if(missile.x > canvas.width - 20 || (missile.y > canvas.height - 20 && missile.dy > 0)) {
+                //stop requesting animation frames
+                window.cancelAnimationFrame(raf);
+            //otherwise request a new animation frame   
+            } else {
+                raf = window.requestAnimationFrame(moveMissile);
+            }
+            
+        }
+    </script>
+</body>
+</html>

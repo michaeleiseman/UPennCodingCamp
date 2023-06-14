@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Animation Demo</title>
+</head>
+<body>
+    <canvas id="canvas" style="border: 1px solid black" width="300" height="300"></canvas>
+    <script>
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext("2d");
+        //we want to make request animation frame a global variable
+        let raf;
+        document.addEventListener('keydown', stopBall, false);
+        //This will stop the ball from moving by cancelling the animation frame requests
+        function stopBall() {
+            window.cancelAnimationFrame(raf);
+        }
+        class Ball {
+            constructor(x, y, dx, dy, radius, color) {
+                this.x = x;
+                this.y = y;
+                this.dx = dx;
+                this.dy = dy;
+                this.radius = radius;
+                this.color = color;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+        }
+        let ball = new Ball(100, 100, 2, 3, 20, "black");
+        moveBall();
+        function moveBall() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ball.x = ball.x + ball.dx;
+            ball.y = ball.y + ball.dy;
+            //if the ball collides with either the left or right wall of the canvas
+            if(ball.x > canvas.width - ball.radius || ball.x < ball.radius) {
+                //reverse the direction of the x-component of the velocity of the ball
+                ball.dx = -ball.dx;
+            }
+            //if the ball collides with either the top or bottom wall of the canvas
+            if(ball.y > canvas.height - ball.radius || ball.y < ball.radius) {
+                //reverse the direction of the y-component of the velocity of the ball
+                ball.dy = -ball.dy;
+            }
+            ball.draw();
+            raf = window.requestAnimationFrame(moveBall);
+        }
+    </script>
+</body>
+</html>
