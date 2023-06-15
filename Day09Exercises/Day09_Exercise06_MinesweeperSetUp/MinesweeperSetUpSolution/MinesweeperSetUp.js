@@ -23,6 +23,9 @@ class GameBoard {
         for(let row of this.cells) {
             for(let cell of row) {
                 cell.determineBombCount();
+                if(cell.bombCount > 0) {
+                    cell.publishBombCount();
+                }
             }
         }
     }
@@ -82,9 +85,6 @@ class Cell {
                     this.bombCount++;
                 }
             }
-        }
-        if(this.bombCount > 0) {
-            this.publishBombCount();
         }
     }
     publishBombCount() {

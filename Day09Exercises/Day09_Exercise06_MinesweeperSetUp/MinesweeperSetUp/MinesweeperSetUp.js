@@ -34,8 +34,12 @@ class GameBoard {
         for(let row of this.cells) {
             //and for every cell in each row
             for(let cell of row) {
-                //determine the bomb count for that cell
                 /***** CALL A METHOD ON THE CELL HERE THAT DETERMINES THE BOMB COUNT FOR THIS CELL ******/
+                /***** AND STORES THE BOMB COUNT IN cell.bombCount  *****/
+
+                /***** IF THE BOMB COUNT FOR THIS CELL IS GREATER THAN 0, ******/
+                    /****** CALL THE cell.publishBombCount() METHOD BELOW TO WRITE THE BOMB COUNT ON THE GRID ******/
+
 
             }
         }
@@ -99,9 +103,7 @@ class Cell {
                 
         //increase the bomb count for this cell (note that bombCount is a property of this cell) for every neighboring cell that has a bomb
 
-        //if the bomb count for this cell is greater than 0, call the this.publishBombCount() method below to write the number on the grid
-
-
+        
 
 
     publishBombCount() {
