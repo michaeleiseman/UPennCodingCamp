@@ -48,12 +48,12 @@
         ctx.font = "italic 12pt Serif";
         ctx.fillText("Five", 80, 150);
 
-        //This code draws a green circle
+        //This code draws the lower-right quarter of a green circle
         ctx.fillStyle = "green";
         ctx.beginPath();
         ctx.moveTo(150, 220);
         //ctx.arc(centerX, centerY, radius, startingAngleInRadians, endingAngleInRadians)
-        ctx.arc(150, 220, 50, 0, 2 * Math.PI);
+        ctx.arc(150, 220, 50, 0, Math.PI / 2);
         ctx.fill();
     </script>
 </body>

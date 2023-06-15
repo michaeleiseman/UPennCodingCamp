@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" style="border: 1px solid black" width="300" height="300"></canvas>
+    <script>
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext("2d");
+        let x = 30;
+        ctx.fillStyle = "black";
+        drawBall(x);
+        function drawBall(x){
+            ctx.beginPath();
+            ctx.arc(x, 100, 30, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+        document.addEventListener('keydown', moveBall, false);
+        function moveBall(){
+            //clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            //move the x-coordinate of the ball by 5 pixels
+            x = x + 5;
+            //draw a ball
+            drawBall(x);
+        }
+    </script>
+</body>
+</html>
