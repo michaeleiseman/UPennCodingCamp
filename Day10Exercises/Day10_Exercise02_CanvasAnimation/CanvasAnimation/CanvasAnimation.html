@@ -47,41 +47,30 @@
             return ball;
         }
         document.addEventListener('keydown', moveBall, false);
+        
+        /*** THIS IS THE FUNCTION THAT YOU NEED TO WRITE ***/
         function moveBall(event) {
             //clear the drawing canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
             //use the EVENT to record which key was pressed
-            let key = event.key;
+            
             //loop through each ball of the balls array
-            for(let ball of balls) {
+            
                 //if the user pressed the right arrow, the ball should move to the right
                     //If the ball goes past the right border, it should go back to the left border
-                if(key == "ArrowRight") {
-                    ball.x = (ball.x + 5) % canvas.width;
-                }
+               
+
                 //if the user pressed the left arrow, the ball should move to the left
                     //If the ball goes past the left border, it should go back to the right border
-                if(key == "ArrowLeft") {
-                    ball.x = ball.x - 5;
-                    if(ball.x < 0) {
-                        ball.x = canvas.width;
-                    }
-                }
+                
                 //if the user pressed the up arrow, the ball should move up
                     //If the ball goes past the top border, it should go back to the bottom border
-                if(key == "ArrowUp") {
-                    ball.y = ball.y - 5;
-                    if(ball.y < 0) {
-                        ball.y = canvas.height;
-                    }
-                }
+                
                 //if the user pressed the down arrow, the ball should move down
                     //If the ball goes past the bottom border, it should go back to the top border
-                if(key == "ArrowDown") {
-                    ball.y = (ball.y + 5) % canvas.height;
-                }
+                
                 //draw the ball using its draw() method
-                ball.draw();
+                
             }
         }
     </script> 

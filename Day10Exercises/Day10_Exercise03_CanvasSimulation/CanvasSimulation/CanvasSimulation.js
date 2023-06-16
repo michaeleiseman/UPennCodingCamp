@@ -55,10 +55,11 @@ function fire() {
     missile.dy = -velocityInput.value * Math.sin(Math.PI * angleInput.value / 180) / 10;
     moveMissile();
 }
-//This function controls the movement of the missile
+/*** YOU'LL NEED TO FILL IN THIS FUNCTION THAT CONTROLS THE MOVEMENT OF THE MISSILE ***/
 function moveMissile() {
     //clear the entire canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+
     //gravity should increase the vertical component of the velocity of the missile
     //by a constant amount every animation frame
     missile.dy = missile.dy + Number(gravityInput.value) / 1000;
@@ -72,11 +73,10 @@ function moveMissile() {
     //draw the missile
     missile.draw();
     //if the missile hits the bottom wall of the canvas while traveling downward or the right wall of the canvas
-    if(missile.x > canvas.width - 20 || (missile.y > canvas.height - 20 && missile.dy > 0)) {
+    
         //stop requesting animation frames
-        window.cancelAnimationFrame(raf);
+        
     //otherwise request a new animation frame   
-    } else {
-        raf = window.requestAnimationFrame(moveMissile);
-    }
+    
 }
+   
