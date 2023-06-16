@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tree Recursion Demo</title>
+</head>
+<body>
+    <script>
+        countDown(5);
+        function countDown(number) {
+            if(number > 0) {
+                let p = document.createElement("p");
+                p.textContent = number;
+                document.body.appendChild(p);
+                countDown(number - 1);
+            }
+        }
+    </script>
+</body>
+</html>
