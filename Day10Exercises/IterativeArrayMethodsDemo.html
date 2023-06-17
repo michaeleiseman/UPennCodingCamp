@@ -8,11 +8,25 @@
 </head>
 <body>
     <script>
-        let numbers = [4, 7, 15, 2, 32, 9, 1, 21];
-        //The iterative method filter
-        let method1 = numbers.filter(number => number < 10);
+        let numbers = [4, 7, 15, 2, 32, 7, 9, 1, 21];
+        //The iterative method filter to eliminate repeats in an array
+        let method1 = numbers.filter((number, index) => numbers.indexOf(number) === index);
+        //Is exactly the same as
+        let method2 = eliminateDuplicates(numbers);
+        function eliminateDuplicates(numbers) {
+            let result = [];
+            for(let index = 0; index < numbers.length; index++) {
+                let number = numbers[index];
+                if(numbers.indexOf(number) === index) {
+                    result.push(number)
+                }
+            }
+            return result;
+        }
+        //The iterative method filter to filter out numbers >= 10
+        method1 = numbers.filter(number => number < 10);
         //is exactly the same as
-        let method2 = filter(numbers);
+        method2 = filter(numbers);
         function filter(numbers) {
             let filteredNumbers = [];
             for(let number of numbers) {

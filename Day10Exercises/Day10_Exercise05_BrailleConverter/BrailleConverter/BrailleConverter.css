@@ -1,0 +1,17 @@
+#instructions {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+input {
+    width: 100%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 24px;
+    outline: none
+}
+#output {
+    font-size: 24px;
+}
