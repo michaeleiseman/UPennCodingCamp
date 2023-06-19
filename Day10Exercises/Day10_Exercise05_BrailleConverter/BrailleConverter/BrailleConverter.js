@@ -28,7 +28,7 @@ brailleMap = {
     ' ': '⠀'
   };
 let input = document.getElementsByTagName("input")[0];
-window.addEventListener('keydown', convertToBraille, false);
+input.addEventListener('input', convertToBraille, false);
 function convertToBraille() {
     /****** WRITE YOUR CODE HERE */
     //This code should:

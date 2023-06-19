@@ -2,7 +2,7 @@ let resetButton = document.getElementById("reset");
 resetButton.addEventListener('click', reset, false);
 let secretCode = null;
 let colors = ["red", "blue", "yellow", "green", "orange", "purple"];
-let selects = document.getElementsByTagName("select")
+let selects = document.getElementsByTagName("select");
 //The background of each select tag should reflect the color option that the user chooses
 for(let select of selects) {
     select.addEventListener('change', changeColor, false);

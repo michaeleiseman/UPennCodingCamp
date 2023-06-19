@@ -18,11 +18,13 @@
         canvas.addEventListener('click', addRandomGhost, false)
         canvas.addEventListener('mousemove', moveEyes, false)
         let ghosts = [];
-        let x;
-        let y;
         let colors = ["red", "green", "blue", "yellow", "cyan", "magenta", "black", "purple", "orange"];
         let eyeRadius = 20;
         let pupilRadius = 10;
+        let headRadius = 60;
+        let bodyWidth = 2 * headRadius;
+        let bodyHeight = 100;
+        let eyeSpacing = 25; //from center of head
 
         
         function addRandomGhost(event) {
@@ -31,27 +33,27 @@
             let color = colors[Math.floor(colors.length * Math.random())];
             let ghost = document.createElementNS("http://www.w3.org/2000/svg", "g");
             //add the head
-            ghost.appendChild(createCircle(cx, cy, 60, color));
+            ghost.appendChild(createCircle(cx, cy, headRadius, color));
             //add the body
             let body = document.createElementNS("http://www.w3.org/2000/svg", "rect");
             body.setAttribute("x", (cx - 60).toString());
             body.setAttribute("y", cy.toString());
-            body.setAttribute("width", "120");
-            body.setAttribute("height", "100");
+            body.setAttribute("width", bodyWidth);
+            body.setAttribute("height", bodyHeight);
             body.setAttribute("fill", color);
             ghost.appendChild(body);
             //add the left eye
-            ghost.appendChild(createCircle(cx - 25, cy, eyeRadius, "white"));
+            ghost.appendChild(createCircle(cx - eyeSpacing, cy, eyeRadius, "white"));
             //add the right eye
-            ghost.appendChild(createCircle(cx + 25, cy, eyeRadius, "white"));
+            ghost.appendChild(createCircle(cx + eyeSpacing, cy, eyeRadius, "white"));
             //add the left pupil
-            ghost.appendChild(createCircle(cx - 25, cy, pupilRadius, "blue"));
+            ghost.appendChild(createCircle(cx - eyeSpacing, cy, pupilRadius, "blue"));
             //add the right pupil
-            ghost.appendChild(createCircle(cx + 25, cy, pupilRadius, "blue"));
+            ghost.appendChild(createCircle(cx + eyeSpacing, cy, pupilRadius, "blue"));
             //add the feet
-            ghost.appendChild(createCircle(cx - 40, cy + 100, 20, color));
-            ghost.appendChild(createCircle(cx, cy + 100, 20, color));
-            ghost.appendChild(createCircle(cx + 40, cy + 100, 20, color));
+            ghost.appendChild(createCircle(cx - bodyWidth / 3, cy + bodyHeight, bodyWidth / 6, color));
+            ghost.appendChild(createCircle(cx, cy + bodyHeight, bodyWidth / 6, color));
+            ghost.appendChild(createCircle(cx + bodyWidth / 3, cy + bodyHeight, bodyWidth / 6, color));
             canvas.appendChild(ghost);
             ghosts.push(ghost);
 

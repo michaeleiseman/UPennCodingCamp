@@ -51,6 +51,7 @@
             let yGhost = Number(ghost.getAttribute("y")) + 60;
             let mouseToGhostDistanceSquared = (x - xGhost)**2 + (y - yGhost)**2;
             let v = vMax;
+            //This slows the ghost down when the ghost gets close to the mouse
             if(mouseToGhostDistanceSquared < 3600) {
                 v = vMax * mouseToGhostDistanceSquared / 3600;
             }

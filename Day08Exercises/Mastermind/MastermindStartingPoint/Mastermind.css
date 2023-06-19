@@ -1,0 +1,62 @@
+#gameBoard {
+    width:fit-content;
+    margin: auto;
+    margin-top: 20px
+}
+#reset, #submit {
+    margin-bottom: 20px
+}
+#submit {
+    float: right
+}
+.mmRow {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-bottom: 20px
+}
+.guess {
+    display: flex;
+    justify-content: space-around;
+    width: 300px
+}
+.feedback {
+    width: 120px;
+    display: flex;
+}
+option {
+    color: white
+}
+select {
+    color: white;
+    background-color: red;
+}
+.red {
+    background-color: red
+}
+.blue {
+    background-color: blue
+}
+.yellow {
+    background-color: yellow;
+    color: black
+}
+.green {
+    background-color: green
+}
+.orange {
+    background-color: orange
+}
+.purple {
+    background-color: purple
+}
+.black {
+    background-color: black;
+}
+.white {
+    border: 1px solid black;
+}
+.indicator {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}

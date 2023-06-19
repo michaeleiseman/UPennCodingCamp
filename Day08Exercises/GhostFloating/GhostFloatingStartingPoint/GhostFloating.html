@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghost Animation</title>
+    <style>
+        svg {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <svg id="canvas" width="1000" height="600" viewbox="0 0 1000 600">
+        <use id="redGhost" x="200" y="200" href="#ghost" fill="red"/>
+        <defs>
+            <g id="ghost">
+                <circle cx="60" cy="60" r="60"/>
+                <rect  x="0" y="60" width="120" height="100"/>
+                <circle cx="20" cy="160" r="20"/>
+                <circle cx="60" cy="160" r="20"/>
+                <circle cx="100" cy="160" r="20"/>
+                <circle cx="35" cy="60" r="10" fill="white" />
+                <circle cx="85" cy="60" r="10" fill="white" />
+                <circle cx="40" cy="60" r="5" fill="blue" />
+                <circle cx="90" cy="60" r="5" fill="blue" />
+            </g>
+        </defs>
+    </svg>
+    <script>
+        let ghost = document.getElementById("redGhost");
+        let x = 260; //You'll want the x-coordinate of the mouse to be a global variable
+        let y = 260; //You'll want the y-coordinate of the mouse to be a global variable
+
+        /** You'll want to create a mousemove event listener that publishes the current
+        mouse coordinate values to these global x and y variables */
+
+        /** You'll want to create a set interval callback that moves the ghost
+        towards these mouse coordinates **/
+
+        /* In the callback function, you should be able to get the current "x" attribute
+        of the ghost by using ghost.getAttribute("x"), and you should be able to set the 
+        "x" attribute of the ghost to a value using ghost.setAttribute("x", value). The 
+        same is true for "y". */
+        
+    </script>
+</body>
+</html>
