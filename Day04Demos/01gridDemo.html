@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Grid</title>
+    <style>
+        body {
+            font-family: sans-serif
+        }
+        li {
+            margin: 10px
+        }
+        .bold {
+            font-weight: bold;
+        }
+        .showHide {
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer
+        }
+        .cloak {
+            display:none;
+            margin-left: 30px
+        }
+        .tagName {
+            color: #8181ff
+        }
+        .attribute {
+            color: cyan
+        }
+        .value {
+            color: pink
+        }
+        code {
+            color: white;
+            font-size: 18px;
+        }
+        .background {
+            background-color: black;
+            display: inline-flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+        .indent {
+            display: inline-flex;
+            flex-direction: column;
+            margin-left: 20px
+        }
+        .radioFlex {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
+            margin: 20px;
+        }
+        #grid1 {
+            display: grid;
+            background-color: gray;
+            grid-template-columns: 100px 200px 300px;
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        #grid2 {
+            display: grid;
+            background-color: gray;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-areas:
+                "nb nb nb nb nb nb nb nb nb nb nb nb"
+                "sb sb sb i1 i1 i1 i2 i2 i2 i3 i3 i3"
+                "sb sb sb co co co co co co co co co"
+                "fo fo fo fo fo fo fo fo fo fo fo fo";
+            color: white;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        #first {
+            background-color: red;
+            padding: 10px;
+        }
+        #second {
+            background-color: goldenrod;
+            padding: 10px;
+        }
+        #third {
+            background-color: blue;
+            padding: 10px;
+        }
+        #fourth {
+            background-color: green;
+            padding: 10px;
+        }
+        #fifth {
+            background-color: purple;
+            padding: 10px;
+        }
+        #sixth {
+            background-color: navy;
+            padding: 10px;
+        }
+        #seventh {
+            background-color: darkorange;
+            padding: 10px;
+        }
+        #eighth {
+            background-color:pink;
+            padding: 10px;
+        }
+        #ninth {
+            background-color: brown;
+            padding: 10px;
+        }
+        #navBar {
+            grid-area: nb;
+            background-color: purple
+        }
+        #sideBar {
+            grid-area: sb;
+            background-color: darkorange
+        }
+        .sideBar {
+            background-color: darkorange;
+            color: white
+        }
+        #item1 {
+            grid-area: i1;
+            text-align: center;
+            background-color: navy;
+        }
+        .item1 {
+            background-color: navy;
+            color: white
+        }
+        #item2 {
+            grid-area: i2;
+            text-align: center;
+            background-color: darkslategray;
+        }
+        #item3 {
+            grid-area: i3;
+            text-align: center;
+            background-color: darkred;
+        }
+        #content {
+            grid-area: co;
+            background-color: green;
+        }
+        #footer {
+            grid-area: fo;
+            background-color: red;
+        }
+        #areaSelect {
+            height: 60px;
+        }
+        .border {
+            display: inline;
+            border-color: red;
+            border-style: solid;
+            border-width: 2px;
+            width: fit-content
+        }
+        .flexBorder {
+            display: flex;
+            border-color: red;
+            border-style: solid;
+            border-width: 2px;
+            flex-direction: column;
+        }
+        .selector {
+            color: #cbbc71
+        }
+        .property {
+            color: cyan
+        }
+    </style>
+</head>
+<body>
+    <h1>Learning Grid</h1>
+    <p>An html grid element typically contains elements that need to be precisely positioned in <span class="bold">both</span> horizontal rows <span class="bold">and</span> vertical columns. Giving a value of <span class="bold">grid</span> to an element's CSS <span class="bold">display</span> property enables control of the 2-dimensional spacial arrangement of the items within it.  Properties given to the style attribute of the grid control how the nested elements are positioned. In the following examples, we'll see what these properties are and what they do.</p>
+
+    <p>We will show how to arrange grids using two different methods:(Click on the triangles on the left to see the examples.)</p>
+    <p></p>
+    <div>
+        <h3><span class="showHide">▸</span>The first method is useful for relatively simple grids where each column runs down the complete grid uninterupted, and each row runs across the entire grid uninterupted. Not all of the rows need to have the same height, nor do all of the columns need to have the same width.</h3>
+        <div class="cloak">
+            <div id="exercise1">
+                <p>HTML:</p>
+                <p>First, we'll place nine elements of defined dimensions into our grid.</p>
+                <div class="background">
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"grid"</span>&gt;</code>
+                    <div class="indent">
+                        <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"first"</span>&gt;This first box contains a complete sentence.&lt;<span class="tagName">/div</span>&gt;</code>
+                        <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"second"</span>&gt;second&lt;<span class="tagName">/div</span>&gt;</code>
+                        <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"third"</span>&gt;</code>
+                        <div class="indent">
+                            <code>&lt;<span class="tagName">p</span>&gt;third&lt;<span class="tagName">/p</span>&gt;</code>
+                            <code>&lt;<span class="tagName">p</span>&gt;third&lt;<span class="tagName">/p</span>&gt;</code>
+                            <code>&lt;<span class="tagName">p</span>&gt;third&lt;<span class="tagName">/p</span>&gt;</code>
+                            <code>&lt;<span class="tagName">p</span>&gt;third&lt;<span class="tagName">/p</span>&gt;</code>
+                            <code>&lt;<span class="tagName">p</span>&gt;third&lt;<span class="tagName">/p</span>&gt;</code>
+                        </div>
+                        <code>&lt;<span class="tagName">/div</span>&gt;</code>
+                        <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"fourth"</span>&gt;</code>
+                        <div class="indent">
+                            <code>&lt;<span class="tagName">p</span>&gt;fourth&lt;<span class="tagName">/p</span>&gt;</code>
+                            <code>&lt;<span class="tagName">p</span>&gt;fourth&lt;<span class="tagName">/p</span>&gt;</code>
+                        </div>
+                        <code>&lt;<span class="tagName">/div</span>&gt;</code>
+                        <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"fifth"</span>&gt;</code>
+                        <div class="indent">
+                            <code>&lt;<span class="tagName">p</span>&gt;This fifth box has eight paragraphs.&lt;<span class="tagName">/p</span>&gt;</code>
+                            <code>&lt;<span class="tagName">p</span>&gt;This fifth box has eight paragraphs.&lt;<span class="tagName">/p</span>&gt;</code>
+                            <code>&lt;<span class="tagName">p</span>&gt;This fifth box has eight paragraphs.&lt;<span class="tagName">/p</span>&gt;</code>
+                            <code>&lt;<span class="tagName">p</span>&gt;This fifth box has eight paragraphs.&lt;<span class="tagName">/p</span>&gt;</code>
+                            <code>&lt;<span class="tagName">p</span>&gt;This fifth box has eight paragraphs.&lt;<span class="tagName">/p</span>&gt;</code>
+                            <code>&lt;<span class="tagName">p</span>&gt;This fifth box has eight paragraphs.&lt;<span class="tagName">/p</span>&gt;</code>
+                            <code>&lt;<span class="tagName">p</span>&gt;This fifth box has eight paragraphs.&lt;<span class="tagName">/p</span>&gt;</code>
+                            <code>&lt;<span class="tagName">p</span>&gt;This fifth box has eight paragraphs.&lt;<span class="tagName">/p</span>&gt;</code>
+                        </div>
+                        <code>&lt;<span class="tagName">/div</span>&gt;</code>
+                        <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"sixth"</span>&gt;sixth&lt;<span class="tagName">/div</span>&gt;</code>
+                        <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"seventh"</span>&gt;&lt;<span class="tagName">/div</span>&gt;</code>
+                        <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"eighth"</span>&gt;&lt;<span class="tagName">/div</span>&gt;</code>
+                        <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"ninth"</span>&gt;This is the ninth box.&lt;<span class="tagName">/div</span>&gt;</code>
+                    </div>
+                    <code>&lt;<span class="tagName">/div</span>&gt;</code>
+                </div>
+                <p>CSS:</p>
+                <div>
+                    <div class="background">
+                        <code><span class="selector">#first</span> {</code>
+                        <div class="indent">
+                            <code><span class="property">background-color</span>: <span class="value">red</span>;</code>
+                            <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                        </div>
+                        <code>}</code>
+                        <code><span class="selector">#second</span> {</code>
+                        <div class="indent">
+                            <code><span class="property">background-color</span>: <span class="value">goldenrod</span>;</code>
+                            <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                        </div>
+                        <code>}</code>
+                        <code><span class="selector">#third</span> {</code>
+                        <div class="indent">
+                            <code><span class="property">background-color</span>: <span class="value">blue</span>;</code>
+                            <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                        </div>
+                        <code>}</code>
+                        <code><span class="selector">#fourth </span>{</code>
+                        <div class="indent">
+                            <code><span class="property">background-color</span>: <span class="value">green</span>;</code>
+                            <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                        </div>
+                        <code>}</code>
+                        <code><span class="selector">#fifth</span> {</code>
+                        <div class="indent">
+                            <code><span class="property">background-color</span>: <span class="value">purple</span>;</code>
+                            <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                        </div>
+                        <code>}</code>
+                        <code><span class="selector">#sixth</span> {</code>
+                        <div class="indent">
+                            <code><span class="property">background-color</span>: <span class="value">navy</span>;</code>
+                            <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                        </div>
+                        <code>}</code>
+                        <code><span class="selector">#seventh</span> {</code>
+                        <div class="indent">
+                            <code><span class="property">background-color</span>: <span class="value">darkorange</span>;</code>
+                            <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                        </div>
+                        <code>}</code>
+                        <code><span class="selector">#eighth</span> {</code>
+                        <div class="indent">
+                            <code><span class="property">background-color</span>: <span class="value">pink</span>;</code>
+                            <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                        </div>
+                        <code>}</code>
+                        <code><span class="selector">#ninth</span> {</code>
+                            <div class="indent">
+                                <code><span class="property">background-color</span>: <span class="value">brown</span>;</code>
+                                <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                            </div>
+                            <code>}</code>
+                        <code><span class="selector">#grid</span> {</code>
+                        <div class="indent">
+                            <code><span class="property">background-color</span>: <span class="value">gray</span>;</code>
+                            <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                            <code class="border"><span class="property">display</span>: <span class="value">grid</span>;</code>
+                            <code><span class="property">grid-template-columns</span>:
+                                <select class="grid-template-columns">
+                                    <option value="100px 200px 300px" selected>100px 200px 300px</option>
+                                    <option value="1fr 1fr 1fr">1fr 1fr 1fr</option>
+                                    <option value="2fr 1fr 3fr 1fr">2fr 1fr 3fr 1fr</option>
+                                    <option value="200px 2fr 1fr">200px 2fr 1fr</option>
+                                    <option value="repeat(6, 1fr)">repeat(6, 1fr)</option>
+                                </select>;
+                            </code>
+                            <code><span class="property">gap</span>:
+                                <select class="gap">
+                                    <option value="0px" selected>0px (default)</option>
+                                    <option value="10px">10px</option>
+                                    <option value="20px">20px</option>
+                                </select>;
+                            </code>
+                        </div>
+                        <code>}</code>
+                    </div>
+                    <p>The <span class="bold">grid-template-columns</span> property of the grid element defines the structure of the grid. The items in the grid conform to the structure. Try each of the options in this exercise.  You'll see that</p>
+                    <ul>
+                        <li>The <span class="bold">"100px 200px 300px"</span> value creates 3 columns where the left-most column is 100px wide, the next column is 200px wide and the last column is 300px wide.  Because these columns all have a fixed width, nothing in the grid changes when you change the width of the browsing window.</li>
+                        <li>The <span class="bold">"1fr 1fr 1fr"</span> value creates 3 columns of equal width. The <span class="bold">fr</span> unit stands for fraction. The more fractional units you devote to a column, the wider it becomes at the expense of the other fractional width columns. Because these columns all have fractional widths, they all change width when the user changes the width of the grid by changing the width of the browsing window since the grid takes up the entire width of the browsing window.</li>
+                        <li>The <span class="bold">"2fr 1fr 3fr 1fr"</span> value creates 4 columns where the second and fourth columns have equal widths, the first column is twice as wide as the second column, and the third column is three times as wide as the second column. Again, because these are all fractional widths, their widths change as the width of the browsing window changes.</li>
+                        <li>The <span class="bold">"200px 2fr 1fr"</span> value creates 3 columns where the first column is 200px wide and the second and third columns divide the remaining width of the grid so that the second column is twice as wide as the third column. Since only the second and third columns have fractional widths, only the widths of the second and third columns change as the width of the browsing window changes. The first column remains 200px regardless of the width of the browsing window.</li>
+                        <li>The <span class="bold">"repeat(6, 1fr)"</span> value creates 6 columns of equal width. "repeat(6, 1fr)" is a short-hand for "1fr 1fr 1fr 1fr 1fr 1fr".</li>
+                    </ul>
+                    <p>Also, try the <span class="bold">gap</span> property to easily separate the rows and the columns by a fixed dimension.</p>
+                    <div id="grid1">
+                        <div id="first">This first box contains a complete sentence.</div>
+                        <div id="second">second</div>
+                        <div id="third">
+                            <p>third</p>
+                            <p>third</p>
+                            <p>third</p>
+                            <p>third</p>
+                            <p>third</p>
+                        </div>
+                        <div id="fourth">
+                            <p>fourth</p>
+                            <p>fourth</p>
+                        </div>
+                        <div id="fifth">
+                            <p>This fifth box has eigth paragraphs.</p>
+                            <p>This fifth box has eigth paragraphs.</p>
+                            <p>This fifth box has eigth paragraphs.</p>
+                            <p>This fifth box has eigth paragraphs.</p>
+                            <p>This fifth box has eigth paragraphs.</p>
+                            <p>This fifth box has eigth paragraphs.</p>
+                            <p>This fifth box has eigth paragraphs.</p>
+                            <p>This fifth box has eigth paragraphs.</p>
+                        </div>
+                        <div id="sixth">sixth</div>
+                        <div id="seventh"></div>
+                        <div id="eighth"></div>
+                        <div id="ninth">This is the ninth box.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h3><span class="showHide">▸</span>The second method uses a naming scheme to specify the relative size and position of two-dimensional regions within the grid. This enables specific columns in a row to span more than one column width and specific rows in a column to span more than one row. It builds upon the simple grid structure in the first exercise and "merges" specific rows and columns.</h3>
+        <div class="cloak">
+            <div id="exercise2">
+                <p>HTML:</p>
+                <div class="background">
+                    <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"flex"</span>&gt;</code>
+                    <div class="indent">
+                        <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"navBar"</span>&gt;Navagation&lt;<span class="tagName">/div</span>&gt;</code>
+                        <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"sideBar"</span>&gt;Side Bar&lt;<span class="tagName">/div</span>&gt;</code>
+                        <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"item1"</span>&gt;Item 1&lt;<span class="tagName">/div</span>&gt;</code>
+                        <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"item2"</span>&gt;Item 2&lt;<span class="tagName">/div</span>&gt;</code>
+                        <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"item3"</span>&gt;Item 3&lt;<span class="tagName">/div</span>&gt;</code>
+                        <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"content"</span>&gt;</code>
+                        <div class="indent">
+                            <code>&lt;<span class="tagName">p</span>&gt;Content goes in here.&lt;<span class="tagName">/p</span>&gt;</code>
+                            <code>&lt;<span class="tagName">p</span>&gt;Content goes in here.&lt;<span class="tagName">/p</span>&gt;</code>
+                            <code>&lt;<span class="tagName">p</span>&gt;Content goes in here.&lt;<span class="tagName">/p</span>&gt;</code>
+                            <code>&lt;<span class="tagName">p</span>&gt;Content goes in here.&lt;<span class="tagName">/p</span>&gt;</code>
+                            <code>&lt;<span class="tagName">p</span>&gt;Content goes in here.&lt;<span class="tagName">/p</span>&gt;</code>
+                        </div>
+                        <code>&lt;<span class="tagName">/div</span>&gt;</code>
+                        <code>&lt;<span class="tagName">div </span><span class="attribute">id</span>=<span class="value">"footer"</span>&gt;Footer&lt;<span class="tagName">/div</span>&gt;</code>
+                    </div>
+                    <code>&lt;<span class="tagName">/div</span>&gt;</code>
+                </div>
+                <p>CSS:</p>
+                <div>
+                    <div class="background">
+                        <code><span class="selector">#navBar</span> {</code>
+                        <div class="indent">
+                            <code><span class="property">background-color</span>: <span class="value">purple</span>;</code>
+                            <code class="border"><span class="property">grid-area</span>: nb;</code>
+                        </div>
+                        <code>}</code>
+                        <code><span class="selector">#sideBar</span> {</code>
+                        <div class="indent">
+                            <code><span class="property">background-color</span>: <span class="value">darkorange</span>;</code>
+                            <code class="border"><span class="property">grid-area</span>: sb;</code>
+                        </div>
+                        <code>}</code>
+                        <code><span class="selector">#item1</span> {</code>
+                        <div class="indent">
+                            <code><span class="property">background-color</span>: <span class="value">navy</span>;</code>
+                            <code class="border"><span class="property">grid-area</span>: i1;</code>
+                        </div>
+                        <code>}</code>
+                        <code><span class="selector">#item2 </span>{</code>
+                        <div class="indent">
+                            <code><span class="property">background-color</span>: <span class="value">darkslategray</span>;</code>
+                            <code class="border"><span class="property">grid-area</span>: i2;</code>
+                        </div>
+                        <code>}</code>
+                        <code><span class="selector">#item3</span> {</code>
+                        <div class="indent">
+                            <code><span class="property">background-color</span>: <span class="value">darkred</span>;</code>
+                            <code class="border"><span class="property">grid-area</span>: i3;</code>
+                        </div>
+                        <code>}</code>
+                        <code><span class="selector">#content</span> {</code>
+                        <div class="indent">
+                            <code><span class="property">background-color</span>: <span class="value">green</span>;</code>
+                            <code class="border"><span class="property">grid-area</span>: co;</code>
+                        </div>
+                        <code>}</code>
+                        <code><span class="selector">#footer</span> {</code>
+                        <div class="indent">
+                            <code><span class="property">background-color</span>: <span class="value">red</span>;</code>
+                            <code class="border"><span class="property">grid-area</span>: fo;</code>
+                        </div>
+                        <code>}</code>
+                        <code><span class="selector">#grid</span> {</code>
+                        <div class="indent">
+                            <code><span class="property">background-color</span>: <span class="value">gray</span>;</code>
+                            <code><span class="property">padding</span>: <span class="value">10px</span>;</code>
+                            <code><span class="property">display</span>: <span class="value">grid</span>;</code>
+                            <code><span class="property">grid-template-columns</span>: <span class="value">repeat(12, 1fr)</span>;</code>
+                            <div class="flexBorder">
+                                <code><span class="property">grid-template-areas</span>:</code>
+                                    <div class="radioFlex">
+                                        <input type="radio" name="grid-template-areas" value="0" checked>
+                                        <label for="grid-template-areas">
+                                            <code style="display: block">"nb nb nb nb nb nb nb nb nb nb nb nb"</code>
+                                            <code style="display: block">"sb sb sb i1 i1 i1 i2 i2 i2 i3 i3 i3"</code>
+                                            <code style="display: block">"sb sb sb co co co co co co co co co"</code>
+                                            <code style="display: block">"fo fo fo fo fo fo fo fo fo fo fo fo";</code>
+                                        </label>
+                                    </div>
+                                    <div class="radioFlex">
+                                        <input type="radio" name="grid-template-areas" value="1">
+                                        <label for="grid-template-areas">
+                                            <code style="display: block">"nb nb nb nb nb nb nb nb nb nb sb sb"</code>
+                                            <code style="display: block">"i1 i1 i2 i2 i2 i2 i3 i3 i3 i3 sb sb"</code>
+                                            <code style="display: block">"i1 i1 co co co co co co co co sb sb"</code>
+                                            <code style="display: block">"i1 i1 fo fo fo fo fo fo fo fo fo fo";</code>
+                                        </label>
+                                    </div>
+                            </div>
+                            <code><span class="property">gap</span>:
+                                <select class="gap">
+                                    <option value="0px" selected>0px (default)</option>
+                                    <option value="10px">10px</option>
+                                    <option value="20px">20px</option>
+                                </select>;
+                            </code>
+                        </div>
+                        <code>}</code>
+                    </div>
+                    <p>Here again, we give a value of <span class="bold">grid</span> to the CSS display property of the parent element, and we have designated 12 columns of equal width by setting the <span class="bold">grid-template-columns</span> property to <span class="bold">repeat(12, 1fr)</span>. We have also assigned area names to the elements in the CSS using the <span class="bold">grid-area</span> property. This allows to easily define 2-dimensional <span class="bold">grid-template-areas</span> using a clever intuitive syntax that suggests the spacial arrangement we seek on our grid. Each row in the layout is represented with a string (in quotes) of element names separated by spaces. Each column of each row is designated with a named area. Each named item is given a rectangular area that is reflected in the grid layout.</p>
+                    <p>This scheme allows us to designate each area across multiple rows and columns.  In both radio button options the grid is divided into 4 rows and 12 columns. In the first option the <span class="sideBar">Side Bar</span> spans the first two columns and the middle two rows. In the second radio button option <span class= "item1">Item 1</span> spans the first two columns and the last three rows while the <span class="sideBar">Side Bar</span> spans the last two columns and the first three rows.</p>
+                    <div id="grid2">
+                        <div id="navBar">Navagation</div>
+                        <div id="sideBar">Side Bar</div>
+                        <div id="item1">Item 1</div>
+                        <div id="item2">Item 2</div>
+                        <div id="item3">Item 3</div>
+                        <div id="content">
+                            <p>Content goes in here.</p>
+                            <p>Content goes in here.</p>
+                            <p>Content goes in here.</p>
+                            <p>Content goes in here.</p>
+                            <p>Content goes in here.</p>
+                        </div>
+                        <div id="footer">Footer</div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <script>
+        for(const triangle of document.getElementsByClassName("showHide")){
+            triangle.addEventListener("click", toggleCloak, false);
+        }
+        function toggleCloak(event) {
+            const exercise = this.parentNode.parentNode.getElementsByClassName("cloak")[0];
+            if(exercise.style.display === "block") {
+                exercise.style.setProperty("display", "none");
+                this.textContent = '▸';
+            } else {
+                exercise.style.setProperty("display", "block");
+                this.textContent = '▾';
+            }
+        }
+        const exercises = [
+            {
+                element: document.getElementById("exercise1"),
+                grid: document.getElementById("grid1"),
+                properties: ["grid-template-columns", "gap"]
+            },
+            {
+                element: document.getElementById("exercise2"),
+                grid: document.getElementById("grid2"),
+                properties: ["gap"]
+            },
+        ]
+        const areaSettings = [`"nb nb nb nb nb nb nb nb nb nb nb nb" "sb sb sb i1 i1 i1 i2 i2 i2 i3 i3 i3" "sb sb sb co co co co co co co co co" "fo fo fo fo fo fo fo fo fo fo fo fo"`, `"nb nb nb nb nb nb nb nb nb nb sb sb" "i1 i1 i2 i2 i2 i2 i3 i3 i3 i3 sb sb" "i1 i1 co co co co co co co co sb sb" "i1 i1 fo fo fo fo fo fo fo fo fo fo"`];
+        for(const exercise of exercises) {
+            for(const property of exercise.properties) {
+                const select = exercise.element.getElementsByClassName(property)[0];
+                select.addEventListener("change", function(event) {
+                    exercise.grid.style.setProperty(this.className, this.value);
+                }, false);
+            }
+        }
+        for(const input of document.getElementsByTagName("input")) {
+            input.addEventListener("click", function(event) {
+                exercises[1].grid.style.setProperty("grid-template-areas", areaSettings[parseInt(this.value)]);
+            }, false);
+        }
+    </script>
+</body>
+</html>
