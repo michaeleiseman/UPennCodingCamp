@@ -9,6 +9,7 @@
 <body>
     <script>
         let numbers = [4, 7, 15, 2, 32, 7, 9, 1, 21];
+
         //The iterative method filter to eliminate repeats in an array
         let method1 = numbers.filter((number, index) => numbers.indexOf(number) === index);
         //Is exactly the same as
@@ -23,6 +24,7 @@
             }
             return result;
         }
+
         //The iterative method filter to filter out numbers >= 10
         method1 = numbers.filter(number => number < 10);
         //is exactly the same as
@@ -36,6 +38,7 @@
             }
             return filteredNumbers;
         }
+
         let sequence = [1, 2, 3, 4, 5, 6, 7, 8];
         //The iterative method map
         method1 = sequence.map(number => number * number);
@@ -48,6 +51,11 @@
             }
             return mappedSequence;
         }
+
+        //note that we can chain methods together
+        //this statement gives an array of the square of the numbers less than 10
+        let lessThan10Squared = numbers.filter(number => number < 10).map(number => number * number);
+
         //The iterative method reduce
         method1 = numbers.reduce((sum, number) => sum + number, 0);
         //is exactly the same as
