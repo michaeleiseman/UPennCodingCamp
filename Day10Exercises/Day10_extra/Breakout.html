@@ -6,20 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Breakout I</title>
     <style>
-        canvas {
+        #ballCourt {
+            position: absolute;
             border: 1px solid black
+        }
+        #brickArea {
+            position:absolute
+        }
+        #paddleArea {
+            position: absolute;
+            top: 593px
         }
     </style>
 </head>
 <body>
-    <canvas width="400" height="600"></canvas>
+    <canvas id="ballCourt" width="400" height="600"></canvas>
+    <canvas id="brickArea" width="400" height="100"></canvas>
+    <canvas id="paddleArea" width="400" height="10"></canvas>
     <script>
         class Board {
-            constructor(canvas, rowsOfBricks, bricksPerRow, brickGap, brickHeight, paddleHeight, ballRadius, paddleWidth, ballX, ballY, ballVx, ballVy) {
-                this.canvas = canvas;
-                this.width = canvas.width;
-                this.height = canvas.height;
-                this.ctx = canvas.getContext("2d");
+            constructor(court, brickArea, paddleArea, rowsOfBricks, bricksPerRow, brickGap, brickHeight, paddleHeight, ballRadius, paddleWidth, ballX, ballY, ballVx, ballVy) {
+                this.court = court;
+                this.brickArea = brickArea,
+                this.paddleArea = paddleArea,
+                this.width = court.width;
+                this.height = court.height;
+                this.courtctx = court.getContext("2d");
+                this.brickctx = brickArea.getContext("2d");
+                this.paddlectx = paddleArea.getContext("2d");
                 this.rowsOfBricks = rowsOfBricks;
                 this.bricsPerRow = bricksPerRow;
                 this.brickGap = brickGap;
@@ -30,17 +44,16 @@
                 };
                 this.init();
                 this.paddleHeight = paddleHeight;
-                this.paddleLevel = this.height - brickGap - paddleHeight;
                 this.ballRadius = ballRadius;
-                this.paddle = new Paddle(this.width / 2, paddleWidth, this.paddleLevel, paddleHeight, this.ctx);
-                this.ball = new Ball(ballX, ballY, ballVx, ballVy, ballRadius, this.ctx, this.bricks, this.paddle);
+                this.paddle = new Paddle(this.width / 2, paddleWidth, paddleHeight, this.paddlectx);
+                this.ball = new Ball(ballX, ballY, ballVx, ballVy, ballRadius, this.courtctx, this.bricks, this.paddle);
             }
             buildBricks() {
                 let bricks = [];
                 for(let y = this.brickGap; y < this.rowsOfBricks * (this.brickGap + this.brickHeight); y = y + this.brickGap + this.brickHeight) {
                     for(let x = this.brickGap; x < this.width - this.brickGap; x = x + this.brickWidth + this.brickGap) {
-                        let brick = new Brick(x, y, this.brickWidth, this.brickHeight, this.ctx, this);
-                        brick.draw(this.ctx);
+                        let brick = new Brick(x, y, this.brickWidth, this.brickHeight, this.brickctx, this);
+                        brick.draw();
                         bricks.push(brick);
                     }
                 }
@@ -52,48 +65,60 @@
             }
         }
         class Brick {
-            constructor(x, y, brickWidth, brickHeight, ctx) {
+            constructor(x, y, brickWidth, brickHeight, brickctx) {
                 this.x = x;
                 this.y = y;
                 this.width = brickWidth;
                 this.height = brickHeight;
-                this.ctx = ctx;
+                this.brickctx = brickctx;
                 this.draw();
             }
             draw() {
-                this.ctx.fillRect(this.x, this.y, this.width, this.height);
+                this.brickctx.fillRect(this.x, this.y, this.width, this.height);
             }
             clear() {
-                this.ctx.clearRect(this.x - 1, this.y - 1, this.width + 2, this.height + 2);
+                this.brickctx.clearRect(this.x - 1, this.y - 1, this.width + 2, this.height + 2);
             }
         }
         class Paddle {
-            constructor(centerX, width, paddleLevel, paddleHeight, ctx) {
+            constructor(centerX, width, paddleHeight, paddlectx) {
                 this.x = centerX - width / 2;
                 this.width = width;
-                this.y = paddleLevel;
                 this.height = paddleHeight;
-                this.ctx = ctx;
+                this.paddlectx = paddlectx;
+                this.raf = null;
+                this.delta = 10;
                 this.draw();
             }
             draw() {
-                this.ctx.fillRect(this.x , this.y, this.width, this.height);
+                this.paddlectx.fillRect(this.x , 0, this.width, this.height);
             }
-            determinePaddleDelta(event, paddle) {
+            determinePaddleDelta(event) {
+                event.preventDefault();
                 let key = event.key;
                 if(key !== "ArrowRight" && key !== "ArrowLeft") {
                     return;
                 }
-                let delta = 10;
+                window.removeEventListener('keydown', gameBoard.paddle.determinePaddleDelta, false);
+                window.addEventListener('keyup', gameBoard.paddle.stopMoving, false)
+                
+                gameBoard.paddle.delta = 10;
                 if(key === "ArrowLeft") {
-                    delta = -delta;
+                    gameBoard.paddle.delta = -10;
                 }
-                paddle.move(delta);
+                gameBoard.paddle.move();
             }
-            move(delta) {
-                this.ctx.clearRect(this.x, this.y, this.width, this.height);
-                this.x = this.x + delta;
-                this.draw(this.ctx);
+            move() {
+                this.paddlectx.clearRect(this.x, 0, this.width, this.height);
+                this.x = this.x + gameBoard.paddle.delta;
+                this.draw(this.paddlectx);
+                this.raf = window.requestAnimationFrame(this.move)
+            }
+            stopMoving() {
+                this.removeEventListener('keyup', gameBoard.paddle.stopMoving, false);
+                window.cancelAnimationFrame(gameBoard.paddle.raf);
+                window.addEventListener('keydown', gameBoard.paddle.determinePaddleDelta, false);
+
             }
         }
         class Ball {
@@ -116,30 +141,21 @@
                 ctx.fillStyle = "black";
                 ctx.fill();
             }
-            clear(ctx) {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius + 0.5, 0, Math.PI * 2);
-                ctx.closePath();
-                ctx.fillStyle = "white";
-                ctx.strokeStyle = "white";
-                ctx.fill();
-                ctx.stroke();
-            }
             move() {
-                this.clear(this.ctx);
-                this.x = this.x + this.vx;
-                this.y = this.y + this.vy;
-                this.draw(this.ctx);
-                this.adjustVelocityForCollisionWithWall();
-                this.checkForCollisionWithBricks();
-                if(this.y >= gameBoard.paddle.y - this.radius) {
-                    this.adjustVelocityForCollisionWithPaddle();
+                gameBoard.courtctx.clearRect(0, 0, 400, 600);
+                gameBoard.ball.x = gameBoard.ball.x + gameBoard.ball.vx;
+                gameBoard.ball.y = gameBoard.ball.y + gameBoard.ball.vy;
+                gameBoard.ball.adjustVelocityForCollisionWithWall();
+                gameBoard.ball.checkForCollisionWithBricks();
+                gameBoard.ball.draw(gameBoard.courtctx);
+                if(gameBoard.ball.y >= 593 - gameBoard.ball.radius) {
+                    gameBoard.ball.adjustVelocityForCollisionWithPaddle();
                 }
                 
-                if(this.y > gameBoard.height || this.bricks.length === 0) {
+                if(gameBoard.ball.y > gameBoard.height || gameBoard.ball.bricks.length === 0) {
                     window.cancelAnimationFrame(gameBoard.raf);
                 } else {
-                    gameBoard.raf = window.requestAnimationFrame(function() {gameBoard.ball.move()});
+                    gameBoard.raf = window.requestAnimationFrame(gameBoard.ball.move);
                 }
             }
             adjustVelocityForCollisionWithWall() {
@@ -177,16 +193,9 @@
                 this.vx = Math.floor(10 * (this.x - this.paddle.x)/this.paddle.width - 5);
             }
         }
-        let gameBoard = new Board(document.getElementsByTagName("canvas")[0], 6, 10, 5, 10, 10, 20, 200, 300, 300, 2, -1);
-        document.addEventListener('keydown', function(event) {gameBoard.paddle.determinePaddleDelta(event, gameBoard.paddle)}, false);
-        //let timer;
-        //document.addEventListener('keydown', function(event) {timer = setInterval(gameBoard.paddle.determinePaddleDelta(event, gameBoard.paddle), 30)}, false);
-        // document.addEventListener('keyup', function(event) {
-        //     if(event.key === "ArrowLeft" || event.key === "ArrowRight") {
-        //         clearInterval(timer);
-        //     }
-        // }, false);
-        gameBoard.raf = window.requestAnimationFrame(function() {gameBoard.ball.move(gameBoard.ball)});
+        let gameBoard = new Board(document.getElementById("ballCourt"), document.getElementById("brickArea"), document.getElementById("paddleArea"), 6, 10, 5, 10, 10, 20, 200, 300, 300, 2, -1);
+        document.addEventListener('keydown', gameBoard.paddle.determinePaddleDelta, false);
+        gameBoard.raf = window.requestAnimationFrame(gameBoard.ball.move);
 
     </script>
 </body>
