@@ -40,7 +40,6 @@
     <script>
         let beat = 0;
         let noteIndicies = [40, 42, 44, 45, 47, 49, 51, 52, 54, 56, 57];
-        let notes = [];
         let song = [];
         let selectedNote = null;
         let noteSpacing = 40;
@@ -49,34 +48,22 @@
         let soundType = "square";
         let context;
         let timer;
+        let index;
         let o = null;
         let g = null;
         document.getElementsByTagName("button")[0].addEventListener('click', playSong, false);
         function playSong() {
-            context = new AudioContext();
-            let index = 0
-            timer = setInterval(playNoteOfSong, tempo);
-            playNote(440, soundType);
-
+            //context = new AudioContext();
+            index = 0
+            timer = setInterval(playNotesOfSong, tempo);
         }
-        function playNoteOfSong() {
-            let frequency = song[index].frequency
-            setTimeout(function(){
-                    o = context.createOscillator();
-                    g = context.createGain();
-                    o.type = type;
-                    o.connect(g);
-                    o.frequency.value = frequency;
-                    g.connect(context.destination);
-                    o.start(0);
-                    g.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + quarterNoteDuration / 1000);
-                }, 0);
-                index++;
-                if(index == song.length) {
-                    clearInterval(timer);
-                }
+        function playNotesOfSong() {
+            song[index].play();
+            index++;
+            if(index == song.length) {
+                clearInterval(timer);
+            }
         }
-        
         class Note {
             constructor (boundary, noteIndex, beat) {
                 this.boundary = boundary;
@@ -91,17 +78,17 @@
             draw() {
                 this.noteBody = document.createElementNS("http://www.w3.org/2000/svg", "ellipse");
                 let cx = (100 + beat * noteSpacing).toString();
-                let cy = (180 - 10 * noteIndicies.indexOf(this.noteIndex)).toString();
+                let cy = (270 - 15 * noteIndicies.indexOf(this.noteIndex)).toString();
                 this.noteBody.setAttribute("cx", cx);
                 this.noteBody.setAttribute("cy", cy);
-                this.noteBody.setAttribute("rx", "13");
-                this.noteBody.setAttribute("ry", "10");
+                this.noteBody.setAttribute("rx", "17");
+                this.noteBody.setAttribute("ry", "13");
                 this.noteBody.setAttribute("transform", "rotate(-20 " + cx + " " + cy +")");
                 document.getElementById("staff").appendChild(this.noteBody);
                 this.noteBody.addEventListener('click', this.select, false);
                 this.noteStem = document.createElementNS("http://www.w3.org/2000/svg", "line");
-                let deltaX = 12;
-                let deltaY = -50;
+                let deltaX = 15;
+                let deltaY = -70;
                 if(this.noteIndex > 50) {
                     deltaX = -deltaX;
                     deltaY = -deltaY;
@@ -110,7 +97,7 @@
                 this.noteStem.setAttribute("y1", cy);
                 this.noteStem.setAttribute("x2", (Number(cx) + deltaX).toString());
                 this.noteStem.setAttribute("y2", (Number(cy) + deltaY).toString());
-                this.noteStem.setAttribute("stroke-width", "2");
+                this.noteStem.setAttribute("stroke-width", "3");
                 this.noteStem.setAttribute("stroke", "black");
                 document.getElementById("staff").appendChild(this.noteStem);
             }
@@ -125,6 +112,21 @@
                 }
                 selectedNote.noteBody.setAttribute("fill", "red");
                 selectedNote.noteStem.setAttribute("stroke", "red");
+                selectedNote.play();
+            }
+            play() {
+                let note = this;
+                context = new AudioContext();
+                setTimeout(function(){
+                    o = context.createOscillator();
+                    g = context.createGain();
+                    o.type = soundType;
+                    o.connect(g);
+                    o.frequency.value = note.frequency;
+                    g.connect(context.destination);
+                    o.start(0);
+                    g.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + quarterNoteDuration / 1000);
+                }, 0);
             }
 
         }
@@ -137,10 +139,10 @@
             if(event.target.tagName === "line") {
                 y = Number(event.target.getAttribute("y1"));
             }
-            let extent = Math.floor((y - 159) / 22)
+            let extent = Math.floor((y - 113) / 15)
             beat++;
-            let note = new Note ( 159 + extent * 22, noteIndicies[10 - extent], beat);
-            notes.push(note);
+            let note = new Note ( 113 + extent * 15, noteIndicies[10 - extent], beat);
+            song.push(note);
             note.draw();
             note.noteBody.noteObject = note;
             note.select();
