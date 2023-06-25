@@ -49,26 +49,34 @@
         let context;
         let timer;
         let index;
+        let mouseIsDown = false;
+        let songIsPlaying = false;
         let o = null;
         let g = null;
         document.getElementsByTagName("button")[0].addEventListener('click', playSong, false);
         function playSong() {
-            //context = new AudioContext();
-            index = 0
+            index = 0;
+            songIsPlaying = true;
             timer = setInterval(playNotesOfSong, tempo);
         }
         function playNotesOfSong() {
+            song[index].select();
             song[index].play();
             index++;
             if(index == song.length) {
                 clearInterval(timer);
+                setTimeout(function() {
+                    selectedNote.deselect();
+                    songIsPlaying = false;
+                }, quarterNoteDuration)
+                
             }
         }
         class Note {
             constructor (boundary, noteIndex, beat) {
                 this.boundary = boundary;
                 this.noteIndex = noteIndex;
-                this.frequency = Math.pow(2, (this.noteIndex - 49) / 12) * 440;
+                this.frequency = function () { return Math.pow(2, (this.noteIndex - 49) / 12) * 440;}
                 this.beat = beat;
                 this.duration = null;
                 this.modifier = null;
@@ -85,7 +93,8 @@
                 this.noteBody.setAttribute("ry", "13");
                 this.noteBody.setAttribute("transform", "rotate(-20 " + cx + " " + cy +")");
                 document.getElementById("staff").appendChild(this.noteBody);
-                this.noteBody.addEventListener('click', this.select, false);
+                this.noteBody.addEventListener('mousedown', this.select, false);
+                this.noteBody.addEventListener('drag', this.changePitch, false);
                 this.noteStem = document.createElementNS("http://www.w3.org/2000/svg", "line");
                 let deltaX = 15;
                 let deltaY = -70;
@@ -102,6 +111,7 @@
                 document.getElementById("staff").appendChild(this.noteStem);
             }
             select(event) {
+                mouseIsDown = true;
                 if(selectedNote) {
                     selectedNote.noteBody.setAttribute("fill", "black");
                     selectedNote.noteStem.setAttribute("stroke", "black");
@@ -114,6 +124,42 @@
                 selectedNote.noteStem.setAttribute("stroke", "red");
                 selectedNote.play();
             }
+            deselect() {
+                mouseIsDown = false;
+                if(selectedNote) {
+                    selectedNote.noteBody.setAttribute("fill", "black");
+                    selectedNote.noteStem.setAttribute("stroke", "black");
+                }
+                selectedNote = null;
+            }
+            changePitch(event) {
+                if(!mouseIsDown) {
+                    return
+                }
+                let y = event.offsetY;
+                let originalBoundary = selectedNote.boundary
+                let extent = Math.floor((y - 113) / 15);
+                let currentBoundary = 113 + extent * 15;
+                if(originalBoundary != currentBoundary) {
+                    selectedNote.boundary = currentBoundary
+                    selectedNote.noteIndex = noteIndicies[10 - extent];
+                    let cy = (270 - 15 * noteIndicies.indexOf(selectedNote.noteIndex)).toString();
+                    let cx = selectedNote.noteBody.getAttribute("cx");
+                    selectedNote.noteBody.setAttribute("cy", cy);
+                    selectedNote.noteBody.setAttribute("transform", "rotate(-20 " + cx + " " + cy + ")");
+                    let deltaX = 15;
+                    let deltaY = -70;
+                    if(selectedNote.noteIndex > 50) {
+                        deltaX = -deltaX;
+                        deltaY = -deltaY;
+                    }
+                    selectedNote.noteStem.setAttribute("x1", (Number(cx) + deltaX).toString());
+                    selectedNote.noteStem.setAttribute("y1", cy);
+                    selectedNote.noteStem.setAttribute("x2", (Number(cx) + deltaX).toString());
+                    selectedNote.noteStem.setAttribute("y2", (Number(cy) + deltaY).toString());
+                    selectedNote.play();
+                }
+            }
             play() {
                 let note = this;
                 context = new AudioContext();
@@ -122,7 +168,7 @@
                     g = context.createGain();
                     o.type = soundType;
                     o.connect(g);
-                    o.frequency.value = note.frequency;
+                    o.frequency.value = note.frequency();
                     g.connect(context.destination);
                     o.start(0);
                     g.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + quarterNoteDuration / 1000);
@@ -130,7 +176,14 @@
             }
 
         }
-        document.getElementById("staff").addEventListener("click", makeNote, false);
+        document.getElementById("staff").addEventListener("mousedown", makeNote, false);
+        document.getElementById("staff").addEventListener("mouseup", mouseIsUp, false);
+        document.getElementById("staff").addEventListener('mousemove', function(event) {
+                if(!selectedNote || !mouseIsDown || songIsPlaying) {
+                    return
+                }
+                selectedNote.changePitch(event);
+            }, false);
         function makeNote(event) {
             if(event.target !== document.getElementById("staff") && event.target.tagName != "line") {
                 return;
@@ -139,13 +192,19 @@
             if(event.target.tagName === "line") {
                 y = Number(event.target.getAttribute("y1"));
             }
-            let extent = Math.floor((y - 113) / 15)
+            let extent = Math.floor((y - 113) / 15);
             beat++;
-            let note = new Note ( 113 + extent * 15, noteIndicies[10 - extent], beat);
-            song.push(note);
-            note.draw();
-            note.noteBody.noteObject = note;
-            note.select();
+            let noteIndex = noteIndicies[10 - extent];
+            if(noteIndex != -1) {
+                let note = new Note ( 113 + extent * 15, noteIndicies[10 - extent], beat);
+                song.push(note);
+                note.draw();
+                note.noteBody.noteObject = note;
+                note.select();
+            }
+        }
+        function mouseIsUp() {
+            mouseIsDown = false;
         }
     </script>
 </body>
