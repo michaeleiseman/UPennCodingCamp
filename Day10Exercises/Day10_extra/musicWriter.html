@@ -18,11 +18,33 @@
             top: 105px;
             left: 0px
         }
+        form {
+            display: inline-flex;
+            width: fit-content;
+        }
         
     </style>
 </head>
 <body>
     <button>Play</button>
+    <form class="flex">
+        <div>
+            <input type="radio" name="duration" value="0.5">
+            <label for="eighth">eighth</label><br>
+        </div>
+        <div>
+            <input type="radio" name="duration" value="1" checked>
+            <label for="quarter">quarter</label><br>
+        </div>
+        <div>
+            <input type="radio"  name="duration" value="2">
+            <label for="half">half</label>
+        </div>
+        <div>
+            <input type="radio"  name="duration" value="4">
+            <label for="whole">whole</label>
+        </div>
+    </form>    
     <div class="relative">
         <svg id="staff" viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg">
             <line x1="0" y1="120" x2="1200" y2="120" stroke="black"/>
@@ -38,54 +60,69 @@
     
    
     <script>
-        let beat = 0;
         let noteIndicies = [40, 42, 44, 45, 47, 49, 51, 52, 54, 56, 57];
         let song = [];
         let selectedNote = null;
         let noteSpacing = 40;
-        let tempo = 500;
-        let quarterNoteDuration = 1500;
+        let tempo = 0.3;
         let soundType = "square";
         let context;
         let timer;
         let index;
         let mouseIsDown = false;
         let songIsPlaying = false;
+        let noteEnvelope = 0.01;
         let o = null;
         let g = null;
         document.getElementsByTagName("button")[0].addEventListener('click', playSong, false);
         function playSong() {
-            index = 0;
+            if(song.length === 0) {
+                return;
+            }
             songIsPlaying = true;
-            timer = setInterval(playNotesOfSong, tempo);
-        }
-        function playNotesOfSong() {
-            song[index].select();
-            song[index].play();
-            index++;
-            if(index == song.length) {
-                clearInterval(timer);
-                setTimeout(function() {
-                    selectedNote.deselect();
-                    songIsPlaying = false;
-                }, quarterNoteDuration)
-                
+            if(selectedNote) {
+                selectedNote.deselect();
+            }
+            let timing = 0;
+            let context = new AudioContext();
+            o = context.createOscillator();
+            g = context.createGain();
+            o.type = soundType;
+            o.connect(g);
+            g.connect(context.destination);
+            o.onended = function() {
+                song[song.length - 1].deselect(); 
+                songIsPlaying = false;
+            }
+            o.start(context.currentTime);
+            for(let note of song) {
+                note.start = timing
+                o.frequency.setValueAtTime(note.frequency(), context.currentTime + note.start);
+                g.gain.setValueAtTime(1, context.currentTime + note.start + noteEnvelope);
+                g.gain.setValueAtTime(0.001, context.currentTime + note.start + note.duration - noteEnvelope);
+                timing = timing + note.duration;
+                if(note = song[song.length - 1]) {
+                    o.stop(context.currentTime + context.currentTime + timing);
+                }
+            }
+            for(let note of song) {
+                setTimeout(function() {note.select()}, note.start * 1000);
             }
         }
         class Note {
-            constructor (boundary, noteIndex, beat) {
+            constructor (boundary, noteIndex, duration) {
                 this.boundary = boundary;
                 this.noteIndex = noteIndex;
                 this.frequency = function () { return Math.pow(2, (this.noteIndex - 49) / 12) * 440;}
-                this.beat = beat;
-                this.duration = null;
+                this.start = 0;
+                this.duration = duration;
                 this.modifier = null;
                 this.noteBody = null;
                 this.noteStem = null;
             }
             draw() {
                 this.noteBody = document.createElementNS("http://www.w3.org/2000/svg", "ellipse");
-                let cx = (100 + beat * noteSpacing).toString();
+                let cx = (120 + song.indexOf(this) * noteSpacing).toString();
                 let cy = (270 - 15 * noteIndicies.indexOf(this.noteIndex)).toString();
                 this.noteBody.setAttribute("cx", cx);
                 this.noteBody.setAttribute("cy", cy);
@@ -111,7 +148,9 @@
                 document.getElementById("staff").appendChild(this.noteStem);
             }
             select(event) {
-                mouseIsDown = true;
+                if(event) {
+                    mouseIsDown = true;
+                }
                 if(selectedNote) {
                     selectedNote.noteBody.setAttribute("fill", "black");
                     selectedNote.noteStem.setAttribute("stroke", "black");
@@ -122,7 +161,7 @@
                 }
                 selectedNote.noteBody.setAttribute("fill", "red");
                 selectedNote.noteStem.setAttribute("stroke", "red");
-                selectedNote.play();
+                
             }
             deselect() {
                 mouseIsDown = false;
@@ -131,6 +170,12 @@
                     selectedNote.noteStem.setAttribute("stroke", "black");
                 }
                 selectedNote = null;
+            }
+            isSelected() {
+                if(selectedNote === this) {
+                    return true;
+                }
+                return false;
             }
             changePitch(event) {
                 if(!mouseIsDown) {
@@ -157,22 +202,18 @@
                     selectedNote.noteStem.setAttribute("y1", cy);
                     selectedNote.noteStem.setAttribute("x2", (Number(cx) + deltaX).toString());
                     selectedNote.noteStem.setAttribute("y2", (Number(cy) + deltaY).toString());
+                    selectedNote.start = 0;
                     selectedNote.play();
                 }
             }
             play() {
-                let note = this;
                 context = new AudioContext();
-                setTimeout(function(){
-                    o = context.createOscillator();
-                    g = context.createGain();
-                    o.type = soundType;
-                    o.connect(g);
-                    o.frequency.value = note.frequency();
-                    g.connect(context.destination);
-                    o.start(0);
-                    g.gain.exponentialRampToValueAtTime(0.00001, context.currentTime + quarterNoteDuration / 1000);
-                }, 0);
+                o = context.createOscillator();
+                o.type = soundType;
+                o.connect(context.destination);
+                o.frequency.setValueAtTime(this.frequency(), context.currentTime + this.start);
+                o.start(context.currentTime + this.start);
+                o.stop(context.currentTime + this.start + this.duration);
             }
 
         }
@@ -193,13 +234,13 @@
                 y = Number(event.target.getAttribute("y1"));
             }
             let extent = Math.floor((y - 113) / 15);
-            beat++;
             let noteIndex = noteIndicies[10 - extent];
             if(noteIndex != -1) {
-                let note = new Note ( 113 + extent * 15, noteIndicies[10 - extent], beat);
+                let note = new Note ( 113 + extent * 15, noteIndicies[10 - extent], Number(document.querySelector("input:checked").value) * tempo);
                 song.push(note);
                 note.draw();
                 note.noteBody.noteObject = note;
+                note.play();
                 note.select();
             }
         }
