@@ -29,19 +29,19 @@
     <button>Play</button>
     <form class="flex">
         <div>
-            <input type="radio" name="duration" value="0.5">
+            <input id="eighth" type="radio" name="duration" value="0.5">
             <label for="eighth">eighth</label><br>
         </div>
         <div>
-            <input type="radio" name="duration" value="1" checked>
+            <input id="quarter" type="radio" name="duration" value="1" checked>
             <label for="quarter">quarter</label><br>
         </div>
         <div>
-            <input type="radio"  name="duration" value="2">
+            <input id="half" type="radio"  name="duration" value="2">
             <label for="half">half</label>
         </div>
         <div>
-            <input type="radio"  name="duration" value="4">
+            <input id="whole" type="radio"  name="duration" value="4">
             <label for="whole">whole</label>
         </div>
     </form>    
@@ -66,14 +66,28 @@
         let noteSpacing = 40;
         let tempo = 0.3;
         let soundType = "square";
-        let context;
+
         let timer;
         let index;
         let mouseIsDown = false;
         let songIsPlaying = false;
+        let userHasInitiatedAudio = false;
         let noteEnvelope = 0.01;
-        let o = null;
-        let g = null;
+        let context;
+        let o;
+        let g;
+        
+        function initializeAudio() {
+            context = new AudioContext();
+            o = context.createOscillator();
+            g = context.createGain();
+            o.type = soundType;
+            o.connect(g);
+            g.connect(context.destination);
+            o.start(context.currentTime);
+            g.gain.setValueAtTime(0, context.currentTime);
+            userHasInitiatedAudio = true;
+        }
         document.getElementsByTagName("button")[0].addEventListener('click', playSong, false);
         function playSong() {
             if(song.length === 0) {
@@ -84,30 +98,31 @@
                 selectedNote.deselect();
             }
             let timing = 0;
-            let context = new AudioContext();
-            o = context.createOscillator();
-            g = context.createGain();
-            o.type = soundType;
-            o.connect(g);
-            g.connect(context.destination);
-            o.onended = function() {
-                song[song.length - 1].deselect(); 
-                songIsPlaying = false;
-            }
-            o.start(context.currentTime);
+
+            // o.onended = function() {
+            //     song[song.length - 1].deselect(); 
+            //     songIsPlaying = false;
+            // }
+            
             for(let note of song) {
                 note.start = timing
                 o.frequency.setValueAtTime(note.frequency(), context.currentTime + note.start);
                 g.gain.setValueAtTime(1, context.currentTime + note.start + noteEnvelope);
-                g.gain.setValueAtTime(0.001, context.currentTime + note.start + note.duration - noteEnvelope);
+                g.gain.setValueAtTime(0, context.currentTime + note.start + note.duration - noteEnvelope);
                 timing = timing + note.duration;
-                if(note = song[song.length - 1]) {
-                    o.stop(context.currentTime + context.currentTime + timing);
-                }
+                // if(note = song[song.length - 1]) {
+                //     o.stop(context.currentTime + context.currentTime + timing);
+                //     initializeAudio();
+                // }
             }
             for(let note of song) {
                 setTimeout(function() {note.select()}, note.start * 1000);
             }
+            let lastNote = song[song.length - 1];
+            setTimeout(function() {
+                lastNote.deselect();
+                songIsPlaying = false
+            }, (lastNote.start + lastNote.duration) * 1000);
         }
         class Note {
             constructor (boundary, noteIndex, duration) {
@@ -161,6 +176,9 @@
                 }
                 selectedNote.noteBody.setAttribute("fill", "red");
                 selectedNote.noteStem.setAttribute("stroke", "red");
+                if(mouseIsDown) {
+                    selectedNote.play();
+                }
                 
             }
             deselect() {
@@ -207,25 +225,27 @@
                 }
             }
             play() {
-                context = new AudioContext();
-                o = context.createOscillator();
-                o.type = soundType;
-                o.connect(context.destination);
-                o.frequency.setValueAtTime(this.frequency(), context.currentTime + this.start);
-                o.start(context.currentTime + this.start);
-                o.stop(context.currentTime + this.start + this.duration);
+                if(!userHasInitiatedAudio) {
+                    initializeAudio();
+                }
+                o.frequency.setValueAtTime(this.frequency(), context.currentTime);
+                g.gain.setValueAtTime(1, context.currentTime  + noteEnvelope);
+                g.gain.setValueAtTime(0, context.currentTime + this.duration - noteEnvelope);
             }
 
         }
         document.getElementById("staff").addEventListener("mousedown", makeNote, false);
         document.getElementById("staff").addEventListener("mouseup", mouseIsUp, false);
         document.getElementById("staff").addEventListener('mousemove', function(event) {
-                if(!selectedNote || !mouseIsDown || songIsPlaying) {
-                    return
-                }
-                selectedNote.changePitch(event);
-            }, false);
+            if(!selectedNote || !mouseIsDown || songIsPlaying) {
+                return
+            }
+            selectedNote.changePitch(event);
+        }, false);
         function makeNote(event) {
+            if(!userHasInitiatedAudio) {
+                initializeAudio();
+            }
             if(event.target !== document.getElementById("staff") && event.target.tagName != "line") {
                 return;
             }
