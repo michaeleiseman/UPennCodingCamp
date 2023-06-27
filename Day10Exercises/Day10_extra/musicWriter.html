@@ -53,6 +53,9 @@
             <line x1="0" y1="210" x2="1200" y2="210" stroke="black"/>
             <line x1="0" y1="240" x2="1200" y2="240" stroke="black"/>
             <defs>
+                <g id="eighthNote">
+                    <ellipse cx="0" cy="0" rx="18" ry="14" transform="rotate(-20 0 0)"/>
+                </g>
                 <g id="quarterNote">
                     <ellipse cx="0" cy="0" rx="18" ry="14" transform="rotate(-20 0 0)"/>
                 </g>
@@ -63,6 +66,15 @@
                     </mask>
                     <ellipse cx="0" cy="0" rx="18" ry="14" transform="rotate(-20 0 0)" mask="url(#halfMask)"/>
                 </g>
+                <g id="wholeNote">
+                    <mask id="wholeMask">
+                        <rect x="-22" y="-20" width="44" height="40" fill="white"></rect>
+                        <ellipse cx="0" cy="0" rx="13" ry="8" transform="rotate(60 0 0)" fill="black"></ellipse>
+                    </mask>
+                    <ellipse cx="0" cy="0" rx="20" ry="15" mask="url(#wholeMask)"/>
+                </g>
+                <path id="upFlag" d="M 0 0 H 2 C 2.1 2.3, 2.2 4.9 4.9 9.9 S 17 21.3 17.7 29.5 S 15.3 44, 12.2 50.0 L 10.6 49.5 C 15.4 43.7, 16.2 36.6 16 32.4 S 10.3 15.7 0 17.8 Z"/>
+                <path id="downFlag" d="M 0 50 H 2 C 2.1 47.7, 2.2 45.1 4.9 40.1 S 17 28.7 17.7 20.5 S 15.3 6, 12.2 0 L 10.6 0.5 C 15.4 6.3, 16.2 13.4 16 17.6 S 10.3 34.3 0 32.2 Z"/>
             </defs>
         </svg>
         <svg id="trebelClef" viewBox="0 0 75 250" width="100" height="300">
@@ -75,7 +87,7 @@
         let noteIndicies = [40, 42, 44, 45, 47, 49, 51, 52, 54, 56, 57];
         let song = [];
         let selectedNote = null;
-        let noteSpacing = 40;
+        let noteSpacing = 60;
         let tempo = 0.3;
         let soundType = "square";
 
@@ -108,8 +120,21 @@
             if(!selectedNote) {
                 return;
             }
-            selectedNote.noteBody.setAttribute("href", "#" + this.id + "Note")
-            selectedNote.duration = Number(this.value) * tempo
+            let oldDuration = selectedNote.duration;
+            let newDuration = Number(this.value) * tempo;
+            selectedNote.noteBody.setAttribute("href", "#" + this.id + "Note");
+            selectedNote.duration = newDuration;
+            if(oldDuration < 4 * tempo && newDuration === 4 * tempo) {
+                document.getElementById("staff").removeChild(selectedNote.noteStem);
+            } else if(oldDuration === 4 * tempo && newDuration < 4 * tempo) {
+                document.getElementById("staff").appendChild(selectedNote.noteStem);
+            }
+            if(oldDuration > 0.5 * tempo && newDuration === 0.5 * tempo) {
+                document.getElementById("staff").appendChild(selectedNote.noteFlag);
+            } else if(oldDuration == 0.5 * tempo && newDuration > 0.5 * tempo) {
+                document.getElementById("staff").removeChild(selectedNote.noteFlag);
+            }
+            selectedNote.type = selectedNote.noteBody.getAttribute("href");
         }
         function playSong() {
             if(song.length === 0) {
@@ -142,11 +167,12 @@
                 this.noteIndex = noteIndex;
                 this.frequency = function () { return Math.pow(2, (this.noteIndex - 49) / 12) * 440;}
                 this.start = 0;
-                this.type =type;
+                this.type = type;
                 this.duration = duration;
                 this.modifier = null;
                 this.noteBody = null;
                 this.noteStem = null;
+                this.noteFlag = null;
             }
             draw() {
                 this.noteBody = document.createElementNS("http://www.w3.org/2000/svg", "use");
@@ -159,11 +185,16 @@
                 this.noteBody.addEventListener('mousedown', this.select, false);
                 this.noteBody.addEventListener('drag', this.changePitch, false);
                 this.noteStem = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                this.noteFlag = document.createElementNS("http://www.w3.org/2000/svg", "use");
+                this.noteFlag.setAttribute("href", "#upFlag");
                 let deltaX = 16;
                 let deltaY = -90;
+                let flagDelta = 0
                 if(this.noteIndex > 50) {
                     deltaX = -deltaX;
                     deltaY = -deltaY;
+                    this.noteFlag.setAttribute("href", "#downFlag");
+                    flagDelta = -50;
                 }
                 this.noteStem.setAttribute("x1", (Number(cx) + deltaX).toString());
                 this.noteStem.setAttribute("y1", cy);
@@ -171,7 +202,15 @@
                 this.noteStem.setAttribute("y2", (Number(cy) + deltaY).toString());
                 this.noteStem.setAttribute("stroke-width", "3");
                 this.noteStem.setAttribute("stroke", "black");
-                document.getElementById("staff").appendChild(this.noteStem);
+                this.noteFlag.setAttribute("x", (Number(cx) + deltaX).toString());
+                this.noteFlag.setAttribute("y", (Number(cy) + deltaY + flagDelta).toString());
+                if(this.duration < 4 * tempo) {
+                    document.getElementById("staff").appendChild(this.noteStem);
+                }
+                if(this.duration === 0.5 * tempo) {
+                    document.getElementById("staff").appendChild(this.noteFlag);
+                }
+                
             }
             select(event) {
                 if(event) {
@@ -180,6 +219,7 @@
                 if(selectedNote) {
                     selectedNote.noteBody.setAttribute("fill", "black");
                     selectedNote.noteStem.setAttribute("stroke", "black");
+                    selectedNote.noteFlag.setAttribute("fill", "black");
                 }
                 selectedNote = this;
                 if(this.tagName) {
@@ -187,9 +227,11 @@
                 }
                 selectedNote.noteBody.setAttribute("fill", "red");
                 selectedNote.noteStem.setAttribute("stroke", "red");
+                selectedNote.noteFlag.setAttribute("fill", "red");
                 if(mouseIsDown) {
                     selectedNote.play();
                 }
+                document.getElementById(selectedNote.type.slice(1, -4)).checked = true;
                 
             }
             deselect() {
@@ -197,6 +239,7 @@
                 if(selectedNote) {
                     selectedNote.noteBody.setAttribute("fill", "black");
                     selectedNote.noteStem.setAttribute("stroke", "black");
+                    selectedNote.noteFlag.setAttribute("fill", "black");
                 }
                 selectedNote = null;
             }
@@ -220,17 +263,22 @@
                     let cy = (270 - 15 * noteIndicies.indexOf(selectedNote.noteIndex)).toString();
                     let cx = selectedNote.noteBody.getAttribute("x");
                     selectedNote.noteBody.setAttribute("y", cy);
-                    // selectedNote.noteBody.setAttribute("transform", "rotate(-20 " + cx + " " + cy + ")");
+                    selectedNote.noteFlag.setAttribute("href", "#upFlag")
                     let deltaX = 16;
                     let deltaY = -90;
+                    let flagDelta = 0;
                     if(selectedNote.noteIndex > 50) {
                         deltaX = -deltaX;
                         deltaY = -deltaY;
+                        selectedNote.noteFlag.setAttribute("href", "#downFlag");
+                        flagDelta = -50;
                     }
                     selectedNote.noteStem.setAttribute("x1", (Number(cx) + deltaX).toString());
                     selectedNote.noteStem.setAttribute("y1", cy);
                     selectedNote.noteStem.setAttribute("x2", (Number(cx) + deltaX).toString());
                     selectedNote.noteStem.setAttribute("y2", (Number(cy) + deltaY).toString());
+                    selectedNote.noteFlag.setAttribute("y", (Number(cy) + deltaY + flagDelta).toString());
+                    selectedNote.noteFlag.setAttribute("x", (Number(cx) + deltaX).toString());
                     selectedNote.start = 0;
                     selectedNote.play();
                 }
@@ -272,7 +320,7 @@
                 song.push(note);
                 note.draw();
                 note.noteBody.noteObject = note;
-                note.play();Number(durationSelection.value) * tempo
+                note.play();
                 note.select();
             }
         }
