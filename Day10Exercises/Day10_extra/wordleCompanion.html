@@ -378,6 +378,7 @@
                         }
                     }
                 }
+                //If all of the inputs for this row have been colored
                 if(!Array.from(inputsForRow).map(input => input.style.getPropertyValue("background-color")).some(color => color == "" || color == "transparent")) {
                     for(let inputIndex = 0; inputIndex < inputsForRow.length; inputIndex++) {
                         const input = inputsForRow[inputIndex];
@@ -389,10 +390,15 @@
                                 }
                                 return accumulator;
                             }, 0);
+                            //if the letter in this input has been colored gray
                             if(input.style.getPropertyValue("background-color") == "gray") {
+                                //If the letter in this input is in the word
                                 if(lettersInWord.some(let => let == letter)) {
+                                    //The number of times this letter appears in a word must match the number of times the letter is in the word in this row
                                     choices = choices.filter(word => determineOccurrencesInWord(word, letter) == numberOfThisLetter);
+                                //If the letter in this input is not in the word
                                 } else {
+                                    //This letter cannot appear in the list of possible words
                                     choices = choices.filter(word => word.indexOf(letter) == -1);
                                 }
                             }

@@ -1,0 +1,73 @@
+body {
+    background-color: black;
+}
+.jeopardy {
+    background-color: blue;
+}
+.cell, .heading {
+    text-shadow: 2px 2px black;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    padding: 10px;
+}
+.cell > button {
+    color: rgb(255, 225, 0);
+    text-shadow: 2px 2px black;
+}
+.player {
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+}
+.pickingPlayer{
+    background-color: green
+}
+.row-name, .row-score, .row-buzzer {
+    padding: 5px;
+}
+.col-name {
+    font-size: 36px;
+}
+.label, .input {
+    font-size: 18px;
+}
+
+.forbiddenZone {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: black;
+    opacity: 0.5;
+}
+.dialog {
+    position: fixed;
+    top: 30px;
+    left: 10%;
+    width: 80%;
+}
+.answerArea {
+    text-align: center;
+    font-size: 36px;
+    padding: 20px;
+}
+.questionArea {
+    padding: 0px 20px 20px 20px;
+}
+.advisoryDiv {
+    padding: 20px;
+}
+.advisory {
+    color: red;
+    text-align: center;
+    font-size: 24px;
+}
+.buzzer, .score {
+    font-size: 24px;
+}
+#buzzInName {
+    color: red;
+    font-size: 24px;
+}

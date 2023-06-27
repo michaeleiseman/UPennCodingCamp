@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <title>Electric Check</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <style>
+            p{
+                margin-bottom: 2px;
+            }
+            #check {
+                background-image: url(background.png);
+                max-width: 1200px;
+                margin: auto;
+            }
+            #number {
+                background-color: #F4FFEC;
+                border: none;
+                font-size: 24px;
+                text-align: right;
+                width: 100%
+            }
+            #numberBorder {
+                position: relative;
+                border-color: #D2F0BE;
+                border-style: solid;
+                border-width: 2px;
+                width: 100%;
+            }
+            #topBorder {
+                width: 100%;
+                height: 10px;
+                background-color:darkgreen;
+            }
+            #bottomBorder {
+                width: 100%;
+                height: 10px;
+                background-color:darkgreen;
+            }
+            #dateBlank {
+                height: 60%;
+            }
+            #dateField {
+                height: 100%;
+                width: 100%;
+                background: none;
+                font-size: 24px;
+                text-align: center;
+                border: none;
+            }
+            #dateFilled {
+                height: 40%;
+            }
+            #dateHr {
+                width: 100%;
+                border-color: darkgreen;
+                margin: 0px;
+                border-width: 2px;
+            }
+            #dateLabel {
+                text-align: right;
+                font-size: 12px;
+                color: darkgreen;
+            }
+            input:focus {
+                outline: none;
+            }
+            #payee{
+                height: 100%;
+                width: 100%;
+                background: none;
+                font-size: 24px;
+                text-align: center;
+                border-color: darkgreen;
+                border-width: 0px 0px 2px 0px;
+            }
+            #memoField {
+                height: 100%;
+                width: 100%;
+                background: none;
+                font-size: 24px;
+                text-align: center;
+                border:none;
+            }
+            #dollarSign {
+                color: darkgreen;
+                font-size: 24px;
+                text-align: center;
+            }
+            #literalRow{
+                border-bottom-width: 2px;
+                border-color: darkgreen;
+                border-bottom-style: solid;
+                margin-top: 20px;
+                min-height: 36px;
+            }
+            #memo, #signature{
+                border-bottom-width: 2px;
+                border-bottom-color: darkgreen;
+                border-bottom-style: solid;
+                margin-top: 20px;
+                height: 36px;
+            }
+            #literalAmount {
+                text-align:center;
+                font-size: 24px;
+            }
+            @font-face {font-family:"micrenc";src:url("MICREncoding.woff") format("woff");font-weight:normal;font-style:normal;}
+
+            #micr{ 
+                font-family: "micrenc";
+                font-size: 32px;
+            }
+            #for{
+                margin-top: 36px;
+                text-align: right;
+                color: darkgreen;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="check">
+            <div id="topBorder"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-7">
+                        <p><strong>Michael Eiseman</strong></p>
+                        <p>2222 22<sup>nd</sup> Street</p>
+                        <p>Philadelphia, PA 19140</p>
+                    </div>
+                    <div class="col-4">
+                        <div id="dateBlank" class="row">
+                            <div class="col">
+                                <input id="dateField" type="date">
+                            </div>
+                        </div>
+                        <div id="dateFilled" class="row">
+                            <div class="col">
+                                <hr id="dateHr">
+                                <p id="dateLabel">Date</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        1987
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <p style="margin-top:10%; color:darkgreen">Pay to the Order of</p>
+                    </div>
+                    <div class="col-7">
+                        <input id="payee" type="text" placeholder="Enter Payee Here">
+                    </div>
+                    <div class="col-3">
+                        <div class="row">
+                            <div class="col-2">
+                                <p id="dollarSign">$</p>
+                            </div>
+                            <div class="col-10">
+                                <div id="numberBorder">
+                                    <input id="number" type="number" step="0.01" min="0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="literalRow" class="row">
+                    <div class="col-11">
+                        <p id="literalAmount"></p>
+                    </div>
+                    <div class="col-1">
+                        <img id="speaker" src="speaker.png" width="50px" height="40px" alt="Press this to hear the amount spoken aloud.">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1">
+                        <p id="for">For</p>
+                    </div>
+                    <div id="memo" class="col-5">
+                        <input type="text" id="memoField">
+                    </div>
+                    <div class="col-1">
+                    </div>
+                        <div id="signature" class="col-4">
+                    </div>
+                </div>
+                <div class="row">
+                    <p id="micr">a0042000076a 8371083619c  1987</p>
+                </div>
+                
+            </div>
+            <div id="bottomBorder"></div>
+        </div>
+        
+        <script>
+            var synth = window.speechSynthesis
+            document.getElementById("speaker").addEventListener("click", speakText, false);
+            function speakText() {
+                var textToReadAloud = "This check is for " + document.getElementById("literalAmount").textContent + ".";
+                var utterThis = new SpeechSynthesisUtterance(textToReadAloud);
+			    synth.speak(utterThis);
+            }
+            
+            var date = new Date();
+            dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'numeric', day: 'numeric' });
+            var dateParts = dateTimeFormat.formatToParts(date);
+            var dateField = document.getElementById("dateField") // dateTimeFormat.format(date);
+            dateField.value = dateParts[4]["value"] + "-" + dateParts[0]["value"].padStart(2,0) + "-" + dateParts[2]["value"];
+            var numberField = document.getElementById("number");            
+            document.getElementById("number").addEventListener("change", function() {
+                document.getElementById("literalAmount").textContent = dollarsAndCents(numberField.value)
+            }, false);
+            document.getElementById("number").addEventListener("keyup", function() {
+                document.getElementById("literalAmount").textContent = dollarsAndCents(numberField.value)
+            }, false);
+            var ones = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+            var tens = ["twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+            var orders = [" thousand", " million", " billion", " trillion", " quadrillion"];
+            function integerToLiteral(number) {
+                if(number < 20) {
+                    return ones[number]
+                } else if (number < 100) {
+                    var text = tens[Math.floor(number/10) - 2]
+                    if(number % 10 !== 0) {
+                        text = text + "-" + integerToLiteral(number - Math.floor(number/10)*10);
+                    }
+                    return text;
+                } else if (number < 1000) {
+                    var text = ones[Math.floor(number/100)] + " hundred"
+                    if (number % 100 !== 0) {
+                        text = text + " and " + integerToLiteral(number - Math.floor(number/100)*100);
+                    }
+                    return text;
+                } else if (number < 1000000000000000000) {
+                    var i = Math.floor(Math.log10(number)/3) - 1
+                    var order = Math.pow(10, (i + 1) * 3)
+                    var text = integerToLiteral(Math.floor(number/order)) + orders[i];
+                    if (number % order !== 0) {
+                        var remainder = number - Math.floor(number/order)*order
+                        if (remainder > 0) {
+                            if (remainder < 100) {
+                                text = text + " and " + integerToLiteral(remainder);
+                            } else {
+                                text = text + ", " + integerToLiteral(remainder);
+                            }
+                        }
+                    }
+                    return text;
+                } else {
+                    return number.toString();
+                }
+            }
+            function pluralize(word, integer) {
+                if(integer != 1) {
+                    word += "s";
+                }
+                return word;
+            }
+            function dollarsAndCents(number){
+                var dollarInt = Math.floor(number);
+                var centInt = Math.round((number - Math.floor(number)) * 100);
+                return integerToLiteral(dollarInt) + pluralize(" dollar", dollarInt) + " and " + integerToLiteral(centInt) + pluralize(" cent", centInt)
+            }
+        </script>
+    </body>
+</html>
