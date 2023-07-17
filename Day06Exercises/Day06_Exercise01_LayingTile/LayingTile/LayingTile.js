@@ -3,6 +3,6 @@
     //inside the loop...
     //create an image element using the createElement method.
     
-    //set the element's .src property to "Tile.svg"
+    //set the element's .src attribute to "Tile.svg"
     
     //insert the new element into the container element provided
