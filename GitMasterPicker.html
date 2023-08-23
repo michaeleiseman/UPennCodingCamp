@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Master Picker</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/picker.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col text-center gray">
+        <p id="directions-text">Group: 
+          <select id="choice">
+            <option id="navy" value="navy #000080">Navy #000080</option>
+            <option id="deepSkyBlue" value="deepSkyBlue #00BFFF">Deep Sky Blue #00BFFF</option>
+            <option id="royalBlue" value="royalBlue #4169E1">Royal Blue #4169E1</option>
+            <option id="steelBlue" value="steelBlue #4682B4">Steel Blue #4682B4</option>
+            <option id="indigo" value="indigo #4B0082">Indigo #4B0082</option>
+            <option id="midnightBlue" value="midnightBlue #191970">Midnight Blue #191970</option>
+            <option id="pennBlue" value="pennBlue #011F5b">Penn Blue #011F5b</option>
+            <!-- <option id="columbiaBlue" value="columbiaBlue #B9D9EB">Columbia Blue #B9D9EB</option> -->
+            <!-- <option id="mediumBlue" value="mediumBlue #0000CD">Medium Blue #0000CD</option> -->
+          </select>
+          <button style="background-color:#002D62;" class="btn-primary">Pick the Project Initiator!</button>
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div id="pick" class="col-sm text-center red">
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var teams = [
+      {
+        name: "midnightBlue #191970",
+        members: ["Aaron", "Emily", "Quinn", "Sashrik", "Tom"],
+        project: ""
+      },
+      {
+        name: "indigo #4B0082",
+        members: ["Christopher", "Cindy", "Haoran", "Jarron", "Owen"],
+        project: ""
+      },
+      // {
+      //   name: "columbiaBlue #B9D9EB",
+      //   members: [],
+      //   project: ""
+      // },
+      {
+        name: "navy #000080",
+        members: ["Ben", "Gerry", "Jayden", "Justin", "Sophia"],
+        project: ""
+      },
+      {
+        name: "royalBlue #4169E1",
+        members: ["Alina", "Feng", "Hoang", "Myra", "Yuki"],
+        project: ""
+      },
+      {
+        name: "steelBlue #4682B4",
+        members: ["Abbey", "Djaka", "Jack", "Keaton", "Tony"],
+        project: ""
+      },
+      {
+        name: "deepSkyBlue #00BFFF",
+        members: ["Akshaya", "Armann", "Jimmy", "Luke", "Luca"],
+        project: ""
+      },
+      {
+        name: "pennBlue #011F5b",
+        members: ["Grace", "Ivan", "Joseph", "Meena", "Tuan"],
+        project: ""
+      }
+      // {
+      //   name: "mediumBlue #0000CD",
+      //   members: ["Sonia Dissanayake", "Joshua Dong", "Aidan Goetzinger", "Taiga Koyama", "Emily Murphy", "Henry Smith", "Alexander Yao"]
+      //}
+      
+    ]
+
+    var button = document.getElementsByTagName("BUTTON")[0];
+    var selectTag = document.getElementsByTagName("SELECT")[0];
+    var oldSelection = document.getElementsByTagName("option")[0];
+    var pickDiv = document.getElementById("pick");
+    button.addEventListener("click", pick, false);
+    selectTag.addEventListener("change", clearChoice, false);
+    selectTag.addEventListener("change", colorSelect, false);
+    function pick(event) {
+        clearChoice();
+        var members = teams.filter(team => team.name == selectTag.value)[0].members;
+        // Randomly pick.
+        var pick = members[Math.floor(Math.random() * members.length)];
+        var firstLine = document.createElement("p");
+        firstLine.textContent = "The project initiator is";
+        var secondLine = document.createElement("p");
+        secondLine.textContent = pick;
+        pickDiv.appendChild(firstLine);
+        pickDiv.appendChild(secondLine);
+        pickDiv.style.setProperty("color", selectTag.value.slice(-7));
+    };
+    function colorSelect(event) {
+        oldSelection.style.setProperty("color", oldSelection.id);
+        let color = selectTag.value.slice(-7);
+        let team = selectTag.value.slice(0, selectTag.value.length - 8);
+        selectTag.style.setProperty("color", color);
+        //document.getElementById(team).style.setProperty("color", color);
+        button.style.setProperty("background-color", selectTag.value.slice(-7));
+        oldSelection = document.getElementById(team)
+    }
+    function clearChoice() {
+        var result = document.getElementById("pick");
+        for(var i = result.children.length - 1; i >= 0; i--) {
+            result.removeChild(result.children[i]);
+        }
+    }
+  </script>
+
+</body>
+
+</html>
