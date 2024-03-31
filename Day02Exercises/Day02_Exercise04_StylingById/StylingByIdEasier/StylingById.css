@@ -1,0 +1,34 @@
+header {
+    background-color: lightgray;
+}
+body {
+    margin: 0px;
+}
+/* Style the #logo here */
+
+
+button {
+    border-radius: 20px;
+    font-size:18px;
+    cursor: pointer;
+    padding: 5px;
+}
+/* Style the #loginButton here */
+
+
+
+/* Style the #createAccount button here */
+
+
+
+/* Style the #navigation bar here*/
+
+
+span {
+    color: white;
+    /* How can we horizonally space out the span elements? */
+
+    font-weight: bold;
+    font-size: 18px;
+}
+/* Make the #background div here lightgray here*/
