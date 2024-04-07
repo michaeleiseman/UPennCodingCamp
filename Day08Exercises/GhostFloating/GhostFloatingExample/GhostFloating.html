@@ -47,6 +47,11 @@
         //using ghost.getAttribute("x"), and you should be able to set the "x" attribute
         //of the ghost to a value using ghost.setAttribute("x", value).
         function moveGhost() {
+            //let (xGhost, yGhost) be the coordinates of the center of the
+            //ghost's head.
+            //We add 60 to the x and y coordinates because the center of the 
+            //ghost's head is 60 pixels down and to the right of the upper-left-hand
+            //corner of the entire ghost.
             let xGhost = Number(ghost.getAttribute("x")) + 60;
             let yGhost = Number(ghost.getAttribute("y")) + 60;
             let mouseToGhostDistanceSquared = (x - xGhost)**2 + (y - yGhost)**2;

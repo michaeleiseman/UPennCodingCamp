@@ -1,0 +1,23 @@
+#translation {
+    padding: 20px;
+    background-color: brown;
+}
+.chineseItem {
+    text-align: center;
+    padding: 10px;
+    background-color: beige;
+    max-width: 150px;
+    border-radius: 5px;
+}
+.character {
+    background-color: black;
+    padding: 10px;
+    color: white
+}
+.pinyin {
+    font-weight: bold;
+    margin: 0px;
+}
+.english {
+    font-style: italic
+}

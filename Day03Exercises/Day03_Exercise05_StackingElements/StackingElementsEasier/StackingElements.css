@@ -7,5 +7,9 @@ h1, h3 {
 }
 img {
     display: block;
-    margin: auto;
+    margin:auto
+}
+p {
+    /* You'll need to clear this to put it
+    on its own line */
 }

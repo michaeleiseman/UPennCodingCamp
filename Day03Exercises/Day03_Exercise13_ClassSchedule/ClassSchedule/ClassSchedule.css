@@ -11,7 +11,9 @@
     
 }
 p {
-    /* Note the use of OUTLINE properties here instead of BORDER properties.  This prevents adjacent borders from "doubling up" and makeing the borders appear twice as wide. */
+    /* Note the use of OUTLINE properties here instead of BORDER properties. 
+    This prevents adjacent borders from "doubling up" and makeing the borders 
+    appear twice as wide. */
     outline-width: 2px;
     outline-color: black;
     outline-style: solid;

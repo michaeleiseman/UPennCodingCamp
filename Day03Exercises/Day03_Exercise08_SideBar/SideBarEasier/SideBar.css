@@ -6,9 +6,6 @@ nav {
     width: 150px;
     height: 100vh;
     min-height: 450px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     background-color: blue;
 }
 li {

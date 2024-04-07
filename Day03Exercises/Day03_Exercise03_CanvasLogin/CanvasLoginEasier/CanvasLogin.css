@@ -1,0 +1,36 @@
+body {
+    background-color: #394B58;
+}
+#container {
+    width: 370px;
+    color: white;
+}
+#logo {
+     
+}
+label {
+    
+}
+input {
+    
+}
+a {
+    color:white
+}
+.nav {
+    
+}
+#login {
+    
+}
+#forgotPassword {
+    /* making this inline-block will keep it on
+    the same line as the log in button and still
+    allow you to give this link a width */
+}
+button {
+    background-color: transparent;
+}
+#instructure {
+    
+}

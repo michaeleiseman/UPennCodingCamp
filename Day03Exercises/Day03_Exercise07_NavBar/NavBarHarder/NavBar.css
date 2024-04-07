@@ -3,3 +3,6 @@ header {
     height: 300px;
     background-color: yellow;
 }
+li {
+    list-style-type: none;
+}
