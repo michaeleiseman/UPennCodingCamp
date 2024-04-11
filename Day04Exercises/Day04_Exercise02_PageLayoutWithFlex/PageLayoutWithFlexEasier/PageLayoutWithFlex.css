@@ -2,12 +2,7 @@ body {
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     background-color: azure;
 }
-/* Note that this css formats the page for a narrow page width.
-Insert your media query here so when the width of the page
-is 800 pixels or greater, the container uses a grid for the 
-page layout.  Use the commented code below in your media query*/
-
-/* .container {
+.container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-areas: 
@@ -17,9 +12,6 @@ page layout.  Use the commented code below in your media query*/
         "rr re re cr"
         "ft ft ft ft";
 }
-.vertical {
-    flex-direction: column;
-} */
 img {
     width: 100%
 }
@@ -29,22 +21,23 @@ img {
 }
 nav {
     grid-area: nv;
-    display: flex;
-    justify-content: space-around;
+    /* This should be a flexbox */
+    
     background-color: rgb(155, 224, 225);
-    align-items: center;
 }
 .navLink {
     font-size: 1.5em;
     font-weight: bold;
 }
 .description {
-    display: flex;
-    justify-content: space-between;
+    /* All descriptions should be a flexbox */
     padding: 20px
 }
 .horizontal {
-    align-items: center;
+    /* horizontal flexboxes should align items by center */
+}
+.vertical {
+    /* vertical flexboxes should specify the flex-direction to be column */
 }
 p {
     margin: 0px;

@@ -1,0 +1,16 @@
+#container {
+    position: relative;
+    max-width: 1000px;
+}
+img {
+    width: 100%
+}
+#heresWaldo {
+    width: 20%;
+    /* Use absolute positioning to circle Waldo. 
+    Waldo should remain circled regardless of the
+    width of the viewing window. Hint: it will be
+    better to specify the location for the circle
+    using PERCENTAGES rather than pixels.*/
+    
+}

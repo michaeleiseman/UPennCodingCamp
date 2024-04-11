@@ -21,9 +21,10 @@
             align-items: center;
             justify-content: center;
             border: 2px solid black;
-            /* add animation properties here to allow a card to shrink and turn blue*/
-
-
+            /* note these animation properties */
+            animation-name: shrink;
+            animation-duration: 0.5s;
+            animation-fill-mode: forwards;
         }
         p {
             font-family: sans-serif;
@@ -31,33 +32,28 @@
             color: white;
         }
         .card:hover {
-            /* add animation properties to allow a card to grow and turn red*/
-
-
+            /* note these animation properties */
+            animation-name: grow;
+            animation-duration: 0.5s;
+            animation-fill-mode: forwards;
         }
+
         /* add @keyframes for the grow animation here */
         /* the card should start with a width of 37.5px and height of 50px */
         /* the card should end the animation with a width of 150px and a height of 200px */
-       
+        @keyframes grow {
+           
+            
+        }
         
-
-
-
-
-
 
         /* add @keyframes for the shrink animation here */
         /* the card should start with a width of 150px and height of 200px */
         /* the card should end the animation with a width of 37.5px and a height of 50px */
-        
-        
+        @keyframes shrink {
+            
 
-
-
-
-
-
-        
+        }
     </style>
 </head>
 <body>

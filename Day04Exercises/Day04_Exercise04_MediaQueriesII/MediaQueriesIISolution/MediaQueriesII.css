@@ -47,7 +47,6 @@ button:hover {
 @media (min-width: 650px) {
     #gameBoard {
         display: flex;
-        flex-direction: row;
         gap: 10px
     }
     .category {

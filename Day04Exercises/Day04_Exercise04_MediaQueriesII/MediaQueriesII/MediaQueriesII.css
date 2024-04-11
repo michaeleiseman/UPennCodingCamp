@@ -44,6 +44,7 @@ button:hover {
     gap: 10px;
     margin-bottom: 10px;
 }
+/* When the page is wide enough, the gameBoard should become a flexbox. */
 
 .catHeading {
     color: white;
