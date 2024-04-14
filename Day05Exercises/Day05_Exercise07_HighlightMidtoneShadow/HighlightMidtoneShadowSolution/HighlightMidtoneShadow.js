@@ -9,6 +9,7 @@ function generateColor() {
     colorBox.style.setProperty("background-color", "rgb(" + r + ", " + g + ", " + b + ")");
     //make a variable named "sum" that is the sum of red, green and blue values.
     let sum = r + g + b;
+    //the default will be a shadow color
     let text = "shadow";
     //if sum is greater than 510
     if(sum > 510) {
@@ -19,6 +20,5 @@ function generateColor() {
         //label the color as a midtone color in the output span
         text = "midtone";
     }
-    //otherwize label the color as a shadow color in the output span.
     document.getElementById("output").textContent = "a " + text + " color.";
 }

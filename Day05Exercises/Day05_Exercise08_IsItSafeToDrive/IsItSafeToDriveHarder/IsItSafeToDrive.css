@@ -1,0 +1,13 @@
+#container {
+    margin: 20px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+.indent {
+    margin-left: 30px
+}
+.black {
+    color: black
+}
+.red {
+    color: red
+}
