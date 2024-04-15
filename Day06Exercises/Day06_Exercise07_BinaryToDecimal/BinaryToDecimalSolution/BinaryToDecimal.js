@@ -1,7 +1,6 @@
 //create a collection of HTML elements with the class name "bit"
 let bits = document.getElementsByClassName("bit");
 //loop through each element of this collection
-calculate();
 for(let bit of bits) {
     //attach a click event listener that turns on the bit 
     bit.addEventListener('click', turnOnBit, false);

@@ -1,31 +1,11 @@
 //create a collection of HTML elements with the class name "bit"
-
-//loop through each element of this collection
-
-    //attach a click event listener that turns on the bit 
-    
-
-//a function that turns on a bit
-function turnOnBit() {
-    //change the text content of the bit that was clicked on to "1"
-    
-    //remove the turnOnBit event listener from this bit
-    
-    //attach a click event listener that turns off this bit 
-    
-
-    calculate();
-}
-function turnOffBit() {
-    //change the text content of the bit that was clicked on to "0"
-    
-    //remove the turnOffBit event listener from this bit
-    
-    //reattach the click event listener that turns on this bit 
+let bits = document.getElementsByClassName("bit");
+//When a user clicks on a bit displaying a "0", it should change to a "1"
+//and then use the calculate() command to post the decimal result to the page.
+//When a user clicks on a bit displaying a "1", it should change to a "0".
+//and then use the calculate() command to post the decimal result to the page.
 
 
-    calculate();
-}
 //a function that looks at the current state of the bits,
 //calculates the decimal number equivalent while
 //creating a text string showing the calculation.

@@ -1,0 +1,21 @@
+#container {
+    max-width:600px;
+    margin: auto
+}
+.title {
+    display: inline-block;
+    width: 67%;
+    text-align: center;
+    font-size: 18px;
+    font-family: sans-serif;
+    font-weight: bold
+}
+.rating {
+    width: 27%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+.star {
+    width: 20px;
+}
