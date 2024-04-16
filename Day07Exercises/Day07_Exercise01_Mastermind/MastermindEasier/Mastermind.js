@@ -15,6 +15,9 @@ function resetGame() {
 //For example, a valid value for secretCode could be ["blue", "red", "green", "blue"]
 
     //first make sure there is nothing in the secretCode array by making it an empty array
-
+    secretCode = [];
     //push 4 random strings from the colors array into the secretCode array
+    for(let i = 0; i < 4; i++) {
+        secretCode.push(colors[Math.floor(colors.length * Math.random())]);
+    }
     

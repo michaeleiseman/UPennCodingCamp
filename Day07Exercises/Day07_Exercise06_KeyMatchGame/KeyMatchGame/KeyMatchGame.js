@@ -67,8 +67,11 @@ function postRandomLetter() {
 
 //You can get the letter that the user pressed by listing the event as the parameter in the callback
 //function and accessing the event.key property.
-//The letter that the computer has posted to the web page is stored in the variable named letter.
-//The user's score is stored in the variable named score
-//The user's score is displayed in the textContent property of the element variable named scoreDisplay
+//The letter that the computer has posted to the web page is stored in the variable named 
+letter
+//The user's score is stored in the variable named 
+score
+//The user's score is displayed in the textContent property of the element variable named 
+scoreDisplay
 //You can use the function postRandomLetter() provided to pick a new letter, display it on the page,
 //and post it on the page

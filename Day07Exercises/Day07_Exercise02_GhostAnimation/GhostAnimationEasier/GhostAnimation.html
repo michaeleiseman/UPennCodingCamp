@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghost Animation</title>
+</head>
+<body>
+    <svg id="canvas" viewbox="0 0 2000 1000">
+        <use id="redGhost" x="200" y="200" href="#ghost" fill="red"/>
+        <defs>
+            <g id="ghost">
+                <circle cx="60" cy="60" r="60"/>
+                <rect  x="0" y="60" width="120" height="100"/>
+                <circle cx="20" cy="160" r="20"/>
+                <circle cx="60" cy="160" r="20"/>
+                <circle cx="100" cy="160" r="20"/>
+                <circle cx="35" cy="60" r="10" fill="white" />
+                <circle cx="85" cy="60" r="10" fill="white" />
+                <circle cx="40" cy="60" r="5" fill="blue" />
+                <circle cx="90" cy="60" r="5" fill="blue" />
+            </g>
+        </defs>
+    </svg>
+    <script>
+        let ghost = document.getElementById("redGhost");
+        //set an Interval timer to move the ghost. You'll need to reference a callback
+        //function here.
+        
+        //create a call back function that changes the "x" attribute of the ghost every
+        //time it is called.
+
+        /*You can use the following statement in your setInterval callback 
+        //function which will advance the ghost by 10 pixels every time it
+        executes.*/
+
+        ghost.setAttribute("x", (Number(ghost.getAttribute("x")) + 10).toString());
+
+        /*Can you clear the setInterval timer when the ghost reaches the right-hand
+        side of the canvas ("x" attribute > 1870)?*/
+
+
+        
+    </script>
+</body>
+</html>

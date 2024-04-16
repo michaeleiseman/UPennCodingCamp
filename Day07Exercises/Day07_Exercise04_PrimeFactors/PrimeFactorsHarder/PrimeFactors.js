@@ -25,11 +25,11 @@ function primeFactorize() {
         //divide the number by the prime number
         number = number / primeNumber;
     }
-    //change the text content of output by calling the getOutputText function
-    //and provide the primeFactors array as a parameter.
-
     //  ****** YOU NEED TO PUT A LINE OF CODE HERE **********
+    //to change the text content of output by calling the getOutputText function
+    //and providing the primeFactors array as a parameter.
 
+    
 }
 //This function returns the smallest prime factor of number that is greater
 //or equal to the divisor provided. If the number is composite, the divisor
@@ -46,28 +46,16 @@ function smallestPrimeFactor(number, divisor) {
     }
     return number;
 }
-//create a function here called getOutputText that takes an array
-//as a parameter and constructs a sentence that describes what 
-//the prime factors of the number are.
+/*create a function here called getOutputText that takes an array
+of prime factors as a parameter and returns a sentence that describes 
+what the prime factors of the number are.
 
-//******** START YOU FUNCTION HERE   *********
+If there is only one number in the array the function should return
+a sentence like "13 is a prime number.""
 
-    //if there is only 1 element in the primeFactors array
-   
-        //return text indicating this number is a prime number
-        
+If there are exactly 2 prime factors in the array, the function should
+return a sentence like "The prime factors of 6 are 2 and 3."
 
-    //Start the output.
-    let text = "The prime factors of " + numberElement.value + " are ";
-    //Iterate through each prime factor (hint: use an INDEXED loop).
-    //Make a sentence that lists the prime factors of the number.
-    //For example, if the primeFactors array is [2, 3, 7], the sentence
-    //should be "The prime factors of 42 are 2, 3, and 7."
-    
-
-
-
-
-
-    //return the text
+If there are more than 2 prime factors in the array, the function should
+return a sentence like "The prime factors of 100 are 2, 2, 5, and 5."*/
 

@@ -19,6 +19,6 @@ function pickRandomCode() {
     secretCode = [];
     //push 4 random strings from the colors array into the secretCode array
     for(let i = 0; i < 4; i++) {
-        secretCode.push(colors[Math.floor(6 * Math.random())]);
+        secretCode.push(colors[Math.floor(colors.length * Math.random())]);
     }
 }
