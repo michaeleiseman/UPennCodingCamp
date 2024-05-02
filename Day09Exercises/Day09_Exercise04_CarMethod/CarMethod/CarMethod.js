@@ -36,7 +36,7 @@ let myCar = {
 
 
 
-    //CREATE A METHOD HERE THAT TURNS OF myCar's LIGHTS
+    //CREATE A METHOD HERE THAT TURNS OFF myCar's LIGHTS
     
 
 

@@ -47,29 +47,18 @@ let chemArray = [
 let chemicalDivs = document.getElementsByClassName("element");
 
 //initialize this periodic table by filling in atomic numbers and symbols for our objects
-//and put an event listener on each element.
-//An INDEXED for loop is your best bet here.  For each div that contains a chemical symbol:
+//and put a 'mouseenter' event listener on each chemicalDiv element that publishes the proper
+//information in the appropriate element inside the #elementInfo div.
 
-    //add the atomic number as a property to its corresponding chemical object
+//Hint: for each div, it will be helpful to make its corresponding object a PROPERTY of
+//the div so that when a user hovers over the div, it will be easy to gain access to the
+//object where all of the information lies to be published.
 
-    //add the elemental symbol as a property to its corresponding chemical object
-
-    //provide an easy way to access the chemical object that corresponds to the div
-    //by making the object a PROPERTY of the div.
-
-
-    //add a 'mouseenter' listener to the div whose callback publishes the properties of the chemical element
+//Note that the objects above are listed in order of atomic number.  The atomic number for
+//hydrogen is 1.  The atomic number for helium is 2. The atomic number for lithium is 3, and
+//so on...
 
 
-//define a callback function here that publishes the data for a chemical object
-
-    // remember that 'this' is the div that the mouse is floating over and our page
-    // initialization process made it so the correct chemical object is now a property of 'this'.
-    // Therefore we can easily gain access to the correct chemical object
-
-    //We can use this chemical object as it has all of the properties we need to publish
-    //Namely, atomic number, atomic weight, symbol, and name
-    
     
 
 

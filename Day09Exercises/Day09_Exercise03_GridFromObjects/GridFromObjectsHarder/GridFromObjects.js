@@ -29,4 +29,5 @@ let grid = document.getElementById("grid");
 //You want to iterate through each book OF books.
 //Within each book, you want to iterate through each property IN that book
 //For each property in each book, you want to create a div whose text content
-//is the value for that property
+//is the value for that property. Give it a class name of "item" and then append
+//the grid with the newly-created div

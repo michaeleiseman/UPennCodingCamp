@@ -1,0 +1,47 @@
+#flex {
+    display: flex;
+    width: 800px;
+    margin: auto;
+    margin-top: 20px;
+}
+#periodicTable {
+    display: grid;
+    grid-template-columns: repeat(18, 1fr);
+    flex: 4;
+    font-family: sans-serif;
+
+}
+#elementInfo {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex: 1;
+    border: 2px solid black
+}
+.element {
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid black;
+    padding: 5px;
+    background-color: lightblue
+}
+#atomicNumber {
+    font-size: 12px;
+    float: left;
+    padding: 5px
+}
+#atomicWeight {
+    font-size: 12px;
+    float:right;
+    padding: 5px
+}
+#symbol {
+    font-Size: 36px;
+    font-weight: bold;
+    text-align:center;
+    margin: 0px
+}
+#name {
+    text-align: center;
+    font-size: 12px
+}
