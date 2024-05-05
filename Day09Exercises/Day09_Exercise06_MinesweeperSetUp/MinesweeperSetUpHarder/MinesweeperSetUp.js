@@ -4,7 +4,7 @@ class GameBoard {
         this.height = height;
         this.htmlGrid = htmlGrid;
         //this sets the width of the css grid 
-        htmlGrid.style.setProperty("grid-template-columns", "repeat(" + width + ", 30px)")
+        htmlGrid.style.setProperty("grid-template-columns", "repeat(" + width + ", 30px)");
         this.cells = this.constructCells(htmlGrid);
     }
     //construct the cell objects and put them in a 2-dimensional array
@@ -29,21 +29,12 @@ class GameBoard {
         }
         return cells;
     }
-    publishBombCounts() {
-        //for every row of the game board
-        for(let row of this.cells) {
-            //and for every cell in each row
-            for(let cell of row) {
-                /***** CALL A METHOD ON THE CELL HERE THAT DETERMINES THE BOMB COUNT FOR THIS CELL ******/
-                /***** AND STORES THE BOMB COUNT IN cell.bombCount  *****/
+    /******WRITE A METHOD FOR THE GAMEBOARD HERE THAT CALLS A CELL METHOD THAT
+    WILL DETERMINE THE BOMB COUNT FOR EACH CELL IN THE GRID. IF THE BOMB COUNT
+    IS GREATER THAN 0, IT SHOULD PUBLISH THE BOMB COUNT IN THAT CELL USING THE
+    cell.publishBombCount() method.*******/
+    
 
-                /***** IF THE BOMB COUNT FOR THIS CELL IS GREATER THAN 0, ******/
-                    /****** CALL THE cell.publishBombCount() METHOD BELOW TO WRITE THE BOMB COUNT ON THE GRID ******/
-
-
-            }
-        }
-    }
     //this function returns the cell specified by the indicies row, col
     //if either row or col are out of range for the board, it will return false
     getCell(row, col) {
@@ -63,12 +54,14 @@ class Cell {
         if(this.hasBomb) {this.placeBomb();}
         this.bombCount = 0;
     }
+    //This method places the html element representing a bomb into this cell
     placeBomb() {
         let bomb = document.createElement("p");
         bomb.className = "bomb";
         bomb.textContent = "•";
         this.element.appendChild(bomb);
     }
+    //This method places the html element for this cell into the grid
     publishCell() {
         let element = document.createElement("div");
         element.className = "cell";
@@ -76,32 +69,11 @@ class Cell {
         element.cell = this;
         return element;
     }
-    /***** WRITE YOUR METHOD TO DETERMINE THE BOMB COUNT IN A CELL HERE *********/
+    /***** WRITE YOUR METHOD TO DETERMINE THE BOMB COUNT IN THIS CELL HERE *********/
+    /***** NOTE THAT bombCount AND hasBomb ARE PROPERTIES OF THIS CELL AND
+    ALL OF ITS NEIGHBORING CELLS*********/
     
-        //if this cell has a bomb (note that this cell has a "hasBomb" property)
 
-            /* just return - don't do anything - we don't need to determine a bomb count
-            for any cell that contains a bomb */
-        
-        // start by getting the row index and column index for this cell using the rowIndex and colIndex properties of this cell
-        
-        
-        /* check every cell that neighbors this cell.  Note that you can get a specific cell using the
-        gameBoard.getCell(row, col) method 
-         _____________________________________________________________________________________________________________
-        |                                     |                                 |                                     |
-        | gameBoard.getCell(row - 1, col - 1) | gameBoard.getCell(row - 1, col) | gameBoard.getCell(row - 1, col + 1) |
-        |_____________________________________|_________________________________|_____________________________________|
-        |                                     |                                 |                                     |
-        |   gameBoard.getCell(row, col - 1)   |   gameBoard.getCell(row, col)   |   gameBoard.getCell(row, col + 1)   |
-        |_____________________________________|_________________________________|_____________________________________|
-        |                                     |                                 |                                     |
-        | gameBoard.getCell(row + 1, col - 1) | gameBoard.getCell(row + 1, col) | gameBoard.getCell(row + 1, col + 1) |
-        |_____________________________________|_________________________________|_____________________________________|
-
-        */ 
-                
-        //increase the bomb count for this cell (note that bombCount is a property of this cell) for every neighboring cell that has a bomb
 
         
 
@@ -113,4 +85,5 @@ class Cell {
     }
 }
 let gameBoard = new GameBoard(20, 20, document.getElementById("grid"));
-gameBoard.publishBombCounts();
+/****** CALL YOUR GAMEBOARD METHOD HERE THAT WRITES THE BOMB COUNTS FOR ALL CELLS IN THE
+GAME BOARD THAT ARE WITHIN 1 CELL OF AT LEAST 1 BOMB *******/

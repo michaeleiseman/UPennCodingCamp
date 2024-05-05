@@ -3,7 +3,7 @@ class GameBoard {
         this.width = width;
         this.height = height;
         this.htmlGrid = htmlGrid;
-        htmlGrid.style.setProperty("grid-template-columns", "repeat(" + width + ", 30px)")
+        htmlGrid.style.setProperty("grid-template-columns", "repeat(" + width + ", 30px)");
         this.cells = this.constructCells(htmlGrid);
     }
     //construct the cell objects and put them in a 2-dimensional array
