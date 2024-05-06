@@ -20,7 +20,7 @@ for(let i = 0; i < height / (brickHeight + gap); i++) {
     /* Here we need an inner loop moves us ACROSS the wall.
     This loop should control the horizontal position of each brick for each row.
     It should initially set the x position to be at gap + xOffset.  For each
-    brick, the horizontal position should increase by gap + brickWidth.4
+    brick, the horizontal position should increase by gap + brickWidth.
     The x position should be no greater than width. */
 
         //In this loop you'll need to fill a rectangle into the ctx.  It's upper-left-hand

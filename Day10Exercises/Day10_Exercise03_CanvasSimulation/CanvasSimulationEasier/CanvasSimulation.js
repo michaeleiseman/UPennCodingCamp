@@ -57,7 +57,7 @@ function fire() {
 }
 /*** YOU'LL NEED TO FILL IN THIS FUNCTION THAT CONTROLS THE MOVEMENT OF THE MISSILE ***/
 function moveMissile() {
-    /***** CLEAR THE ENTIRE CANVAS *******/
+    /* CLEAR THE ENTIRE CANVAS */
 
 
     //gravity should increase the vertical component of the velocity of the missile
@@ -72,7 +72,8 @@ function moveMissile() {
     displayVector();
     //draw the missile
     missile.draw();
-    //if the missile hits the bottom wall of the canvas while traveling downward or the right wall of the canvas
+    //if the missile hits the bottom wall of the canvas ( y > canvas.height) while
+    //traveling downward (missle.dy > 0) or the right wall of the canvas (x > canvas.width)
     
         //stop requesting animation frames
         

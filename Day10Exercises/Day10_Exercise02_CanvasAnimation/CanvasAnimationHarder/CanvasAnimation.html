@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Animation</title>
+</head>
+<body>
+    <canvas id="canvas" style="border: 1px solid black" width="300" height="300"></canvas>
+    <script>
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext("2d");
+        let ballRadius = 20;
+        class Ball {
+            //These are the ball properties
+            constructor(x, y, radius, color) {
+                this.x = x;
+                this.y = y;
+                this.radius = radius;
+                this.color = color;
+            }
+            //This method will draw the ball on the canvas as specified by its properties
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+        }
+        let balls = [];
+        //create 20 random balls and put them in the balls array
+        for(let i = 0; i < 20; i++) {
+            balls.push(createRandomBall());
+        }
+        //this function returns a randomly colored ball in a random position on the canvas
+        //and draws it on the canvas
+        function createRandomBall() {
+            let x = Math.floor((canvas.width - 2 * ballRadius) * Math.random() + 20);
+            let y = Math.floor((canvas.height - 2 * ballRadius) * Math.random() + 20);
+            let r = Math.floor(256 * Math.random());
+            let g = Math.floor(256 * Math.random());
+            let b = Math.floor(256 * Math.random());
+            let ball = new Ball(x, y, ballRadius, "rgb(" + r + ", " + g + ", " + b + ")");
+            ball.draw();
+            return ball;
+        }
+
+        /* You'll need to write code below that responds to the user pressing
+        arrow keys.  All of the 20 balls should move in the direction of the
+        arrow that the user presses. When a ball goes off the side of the canvas, it should
+        reappear on the opposite side of the canvas.*/
+
+
+        
+    </script> 
+</body>
+</html>

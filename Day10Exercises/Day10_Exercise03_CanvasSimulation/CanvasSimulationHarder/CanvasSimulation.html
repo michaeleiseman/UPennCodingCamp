@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Simulation</title>
+    <style>
+        #flex {
+            display:flex;
+            gap: 10px
+        }
+        #fire {
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            background-color: red;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            border-radius: 10px;
+            padding: 20px
+        }
+        #fire:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+    <div id="flex">
+        <canvas id="canvas" style="border: 1px solid black" width="800" height="600"></canvas>
+        <div>
+            <div>
+                <label>Initial Velocity Factor</label>
+                <input id="velocity" type="number" max="200" min="1" step="1" value="100">
+            </div>
+            <div>
+                <label>Angle in Degrees</label>
+                <input id="angle" type="number" max="90" min="0" step="1" value="45">
+            </div>
+            <div>
+                <label>Gravity Factor</label>
+                <input id="gravity" type="number" max="500" min="0" step="1" value="100">
+            </div>
+            <div>
+                <button id="fire">Fire</button>
+            </div>
+        </div>
+    
+    </div>
+    <script src="CanvasSimulation.js"></script>
+</body>
+</html>

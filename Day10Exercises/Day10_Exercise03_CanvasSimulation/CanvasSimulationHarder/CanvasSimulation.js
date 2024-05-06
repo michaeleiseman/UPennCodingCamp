@@ -57,26 +57,22 @@ function fire() {
 }
 /*** YOU'LL NEED TO FILL IN THIS FUNCTION THAT CONTROLS THE MOVEMENT OF THE MISSILE ***/
 function moveMissile() {
-    /***** CLEAR THE ENTIRE CANVAS *******/
-
+    //clear the entire canvas
 
     //gravity should increase the vertical component of the velocity of the missile
     //by a constant amount every animation frame
     missile.dy = missile.dy + Number(gravityInput.value) / 1000;
-    //for every new animation frame, the vertical coordinate of the missile
-    //changes by an amount that is proportional to its current vertical velocity.
-    missile.y = missile.y + missile.dy;
-    //the horizontal coordinate of the missile changes by a constant amount every animation frame.
-    missile.x = missile.x + missile.dx;
-    //display the vector (arrow)
-    displayVector();
-    //draw the missile
-    missile.draw();
-    //if the missile hits the bottom wall of the canvas while traveling downward or the right wall of the canvas
+
+    //for every new animation frame (every time this function is called),
     
-        //stop requesting animation frames
-        
-    //otherwise request a new animation frame   
+        //the vertical coordinate of the missile changes by missile.dy
+        //the horizontal coordinate of the missile changes by missle.dx
+        //redraw the vector (arrow)
+        //redraw the missile according to its new x and y position
+    
+        //if the missile hits the bottom wall of the canvas while traveling downward
+        // or the right wall of the canvas, stop requesting animation frames
+        //otherwise request a new animation frame   
     
 }
    
