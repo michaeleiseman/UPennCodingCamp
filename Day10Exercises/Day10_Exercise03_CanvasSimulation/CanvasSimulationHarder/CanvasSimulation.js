@@ -63,16 +63,16 @@ function moveMissile() {
     //by a constant amount every animation frame
     missile.dy = missile.dy + Number(gravityInput.value) / 1000;
 
-    //for every new animation frame (every time this function is called),
+    //every time this function is called,
     
-        //the vertical coordinate of the missile changes by missile.dy
-        //the horizontal coordinate of the missile changes by missle.dx
-        //redraw the vector (arrow)
+        //the vertical coordinate of the missile should change by missile.dy
+        //the horizontal coordinate of the missile should changes by missle.dx
+        //the vector (arrow) should redraw (use displayVector() defined above)
         //redraw the missile according to its new x and y position
     
         //if the missile hits the bottom wall of the canvas while traveling downward
         // or the right wall of the canvas, stop requesting animation frames
-        //otherwise request a new animation frame   
+        //otherwise request a new animation frame
     
 }
    

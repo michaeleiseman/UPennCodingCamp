@@ -37,4 +37,7 @@ function convertToBraille() {
       //3. Map each character to its corresponding Braille symbol which can be found using BrailleMap[character]
       //4. Join the mapped characters together in a single string
       //5. Make the textContent of the output div equal to this single string.
+
+    /*** IF YOU WANT A CHALLENGE, CAN YOU MAKE convertToBraille()
+    DO ALL 5 OF THESE THINGS IN ONE LINE OF CODE?*/
 }
