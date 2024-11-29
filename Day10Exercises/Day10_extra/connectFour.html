@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect Four</title>
+    <style>
+        #flex {
+            display:flex;
+            flex-direction: column;
+            justify-content: space-around;
+            margin:auto;
+            gap:5px;
+            width: fit-content;
+        }
+        #container {
+            position:relative;
+        }
+        button {
+            display:block;
+            margin: auto;
+            font-size: 36px;
+            background-color: blue;
+            padding: 10px;
+            color:white;
+            border-radius: 20%
+        }
+        .enabled:hover {
+            background-color: darkblue;
+        }
+        .disabled {
+            background-color: darkgray;
+            color:gray
+        }
+        #turn {
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            font-family: sans-serif;
+            margin-top:0px;
+            margin-bottom: 0px;
+            height: 36px
+        }
+        .red {
+            background-color: rgba(255, 0, 0, 0.50);
+            color:white
+        }
+        .yellow {
+            background-color: rgba(255, 255, 0, 0.50);
+            color:black
+        }
+        #board {
+            background-color: blue;
+            padding: 10px;
+            display:flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .row {
+            display: flex;
+            justify-content: space-around;
+            gap: 10px;
+        }
+        #winner {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top: 40%;
+            font-size: 5em;
+            font-family: sans-serif;
+            font-weight: bold;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+        .visible {
+            display: static;
+        }
+        .cell {
+            width: 75px;
+            height: 75px;
+            background-color: white;
+            border-radius: 50%
+        }
+        label {
+            font-size: 18px;
+            font-family: sans-serif;
+        }
+        #inputsContainer {
+            display:flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div id="flex">
+        <button class="disabled">Reset</button>
+        <p id="turn" class="red">It's red's turn.</p>
+        <div id="container">
+            <div id="winner" class="hidden">Wins</div>
+            <span id="board"></span>
+        </div>
+        <div id="inputsContainer">
+            <div>
+                <label>Number of Rows</label>
+                <select id="rows">
+                    <option value="5">5</option>
+                    <option value="6" selected>6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                </select>
+            </div>
+            <div>
+                <label>Number of Columns</label>
+                <select id="cols">
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7" selected>7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                </select>
+            </div>
+            
+        </div>
+    </div>
+    
+    
+    <script>
+        let gameNotStarted = true;
+        let reset = document.getElementsByTagName("button")[0];
+        let color = "red";
+        let rowInput = document.getElementById("rows")
+        let numRows = Number(rowInput.value);
+        let colInput = document.getElementById("cols")
+        let numCols = Number(colInput.value);
+        class Board {
+            constructor(element, numRows, numCols) {
+                this.element = element;
+                this.numRows = numRows;
+                this.numCols = numCols;
+                element.boardObject = this;
+                this.rows = this.constructRows();
+            }
+            constructRows() {
+                let rows = [];
+                for(let index = 0; index < this.numRows; index++) {
+                    let rowDiv = document.createElement("div");
+                    rowDiv.className = "row";
+                    this.element.appendChild(rowDiv);
+                    rows.push(new Row(rowDiv, index, this));
+                }
+                return rows;
+            }
+            getCell(row, col) {
+                return this.rows[row].cells[col];
+            }
+            dropPiece() {
+                let col = this.cellObject.colIndex;
+                let row = this.cellObject.board.numRows - 1;
+                if(gameNotStarted) {
+                    board.enableReset();
+                    gameNotStarted = false;
+                }
+                while(row >= 0 && board.getCell(row, col).color != null) {row--}
+                if(row < 0) {
+                    return;
+                }
+                let cell = board.getCell(row, col);
+                cell.color = color;
+                cell.element.style.setProperty("background-color", color);
+                let winningColor = board.checkForWin(cell);
+                if(winningColor){
+                    board.publishWinner(winningColor);
+                } else {
+                    board.switchPlayers();
+                };
+            }
+            checkForWin(cell) {
+                //check for a horizontal win
+                let row = cell.rowIndex;
+                let start = cell.colIndex;
+                let end = cell.colIndex;
+                while(start - 1 >=0 && this.getCell(row, start - 1).color == color) {start--;}
+                while(end + 1 < this.numCols && this.getCell(row, end + 1).color == color) {end++;}
+                if(end - start >= 3) {
+                    return color;
+                }
+                //check for a vertical win
+                let col = cell.colIndex;
+                start = cell.rowIndex;
+                end = cell.rowIndex;
+                while(start - 1 >= 0 && this.getCell(start - 1, col).color == color) {start--;}
+                while(end + 1 < this.numRows && this.getCell(end + 1, col).color == color) {end++;}
+                if(end - start >= 3) {
+                    return color;
+                }
+                //check for an upward sloping diagonal win
+                let rowStart = cell.rowIndex;
+                let rowEnd = cell.rowIndex;
+                let colStart = cell.colIndex;
+                let colEnd = cell.colIndex;
+                while(rowStart + 1 < this.numRows && colStart - 1 >= 0 && this.getCell(rowStart + 1, colStart - 1).color == color) {
+                    rowStart++;
+                    colStart--;
+                }
+                while(rowEnd - 1 >= 0 && colEnd + 1 < this.numCols && this.getCell(rowEnd - 1, colEnd + 1).color == color) {
+                    rowEnd--;
+                    colEnd++;
+                }
+                if(colEnd - colStart >= 3) {
+                    return color;
+                }
+                //check for a downward sloping diagonal win
+                rowStart = cell.rowIndex;
+                rowEnd = cell.rowIndex;
+                colStart = cell.colIndex;
+                colEnd = cell.colIndex;
+                while(rowStart - 1 >= 0 && colStart - 1 >= 0 && this.getCell(rowStart - 1, colStart - 1).color == color) {
+                    rowStart--;
+                    colStart--;
+                }
+                while(rowEnd + 1 < this.numRows && colEnd + 1 < this.numCols && this.getCell(rowEnd + 1, colEnd + 1).color == color) {
+                    rowEnd++;
+                    colEnd++;
+                }
+                if(colEnd - colStart >= 3) {
+                    return color;
+                }
+                return false;
+            }
+            switchPlayers() {
+                if(color == "red") {
+                    color = "yellow";
+                    document.getElementById("turn").textContent = "It's yellow's turn."
+                } else {
+                    color = "red";
+                    document.getElementById("turn").textContent = "It's red's turn."
+                }
+                document.getElementById("turn").className = color;
+            }
+            publishWinner(color) {
+                let notice = document.getElementById("winner");
+                notice.className = "visible " + color;
+                let text = "Red won!";
+                if(color == "yellow") {
+                    text = "Yellow won!";
+                }
+                notice.textContent = text;
+                for(let row of this.rows) {
+                    for(let cell of row.cells) {
+                        cell.element.removeEventListener("click", this.dropPiece, false);
+                    }
+                }
+                document.getElementById("turn").textContent = "Game Over";
+            }
+            enableReset(){
+                let button = document.getElementsByTagName("button")[0]
+                button.addEventListener('click', this.reset, false);
+                button.className = "enabled";
+            }
+            reset() {
+                this.removeEventListener('click', board.reset, false);
+                document.getElementsByTagName("button")[0].className = "disabled";
+                gameNotStarted = true;
+                for(let row of board.rows) {
+                    for(let cell of row.cells) {
+                        cell.row.element.removeChild(cell.element);
+                    }
+                    board.element.removeChild(row.element);
+                }
+                numRows = Number(rowInput.value);
+                numCols = Number(colInput.value);
+                board = new Board(document.getElementById("board"), numRows, numCols);
+                color = "red";
+                document.getElementById("turn").textContent = "It's red's turn.";
+                document.getElementById("turn").className = "red";
+                document.getElementById("winner").className = "hidden";
+                reset.board = board;
+                rowInput.addEventListener('change', board.reset, false);
+                colInput.addEventListener('change', board.reset, false);
+            }
+        }
+        class Row {
+            constructor(element, index, board) {
+                this.element = element;
+                this.index = index;
+                this.board = board;
+                element.rowObject = this;
+                this.cells = this.constructCells()
+            }
+            constructCells() {
+                let numCols = this.board.numCols;
+                let cells = []
+                for(let index = 0; index < numCols; index++) {
+                    let cellDiv = document.createElement("div");
+                    cellDiv.className = "cell";
+                    this.element.appendChild(cellDiv);
+                    cells.push(new Cell(cellDiv, index, this));
+                }
+                return cells;
+            }
+        }
+        class Cell {
+            constructor(element, col, row) {
+                this.element = element;
+                this.colIndex = col;
+                element.cellObject = this;
+                this.row = row;
+                this.rowIndex = row.index;
+                this.board = this.row.board;
+                this.color = null;
+                element.addEventListener("click", this.board.dropPiece, false);
+            }
+        }
+        let board = new Board(document.getElementById("board"), numRows, numCols);
+        rowInput.addEventListener('change', board.reset, false);
+        colInput.addEventListener('change', board.reset, false);
+        reset.board = board;
+    </script>
+</body>
+</html>

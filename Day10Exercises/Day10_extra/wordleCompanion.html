@@ -395,7 +395,7 @@
                                 //If the letter in this input is in the word
                                 if(lettersInWord.some(let => let == letter)) {
                                     //The number of times this letter appears in a word must match the number of times the letter is in the word in this row
-                                    choices = choices.filter(word => determineOccurrencesInWord(word, letter) == numberOfThisLetter);
+                                    choices = choices.filter(word => determineOccurrencesInWord(word, letter) == numberOfThisLetter && letter != word.slice(inputIndex, inputIndex + 1));
                                 //If the letter in this input is not in the word
                                 } else {
                                     //This letter cannot appear in the list of possible words
