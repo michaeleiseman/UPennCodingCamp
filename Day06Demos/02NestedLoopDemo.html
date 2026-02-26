@@ -30,28 +30,28 @@
     <script>
         document.getElementById("build").addEventListener('click', build, false);
         function build() {
-            // This single-loop code doesn't work.
-            // for(let i = 0; i < 64; i++) {
-            //     let newSquare = document.createElement("div");
-            //     let color = "black";
-            //     if(i % 2 == 0) {
-            //         color = "red";
-            //     }
-            //     newSquare.className = color + " square";
-            //     document.getElementById("container").appendChild(newSquare);
-            // }
-            //This nested loop code works.
-            for(let row = 0; row < 8; row++) {
-                for(let col = 0; col < 8; col++) {
-                    let newSquare = document.createElement("div");
-                    let color = "black";
-                    if((row + col) % 2 == 0) {
-                        color = "red";
-                    }
-                    newSquare.className = color + " square";
-                    document.getElementById("container").appendChild(newSquare);
+            //This single-loop code doesn't work.
+            for(let i = 0; i < 64; i++) {
+                let newSquare = document.createElement("div");
+                let color = "black";
+                if(i % 2 == 0) {
+                    color = "red";
                 }
+                newSquare.className = color + " square";
+                document.getElementById("container").appendChild(newSquare);
             }
+            //This nested loop code works.
+            // for(let row = 0; row < 8; row++) {
+            //     for(let col = 0; col < 8; col++) {
+            //         let newSquare = document.createElement("div");
+            //         let color = "black";
+            //         if((row + col) % 2 == 0) {
+            //             color = "red";
+            //         }
+            //         newSquare.className = color + " square";
+            //         document.getElementById("container").appendChild(newSquare);
+            //     }
+            // }
         }
     </script>
 </body>
